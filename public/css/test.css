@@ -1,0 +1,16 @@
+.breadcrumb_bgg {
+    /* background-image: url("../img/images__2_-removebg-preview.png") !important; */
+    /* background-position: 1000px; */
+
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+.breadcrumb_bgg2 {
+    /* background-image: url("../img/GUEST_9bae6d4e-6e3f-4d70-bd4c-4661bfa24cdb-removebg-preview.png") !important; */
+width: 40px !important;
+height: 30px !important;
+    background-position: right;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
