@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\designer;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -31,7 +32,7 @@ class ProductFactory extends Factory
             'desinger'=>fake()->name(),
             'bestSeller'=>fake()->name(),
             'image'=>fake()->imageUrl(),
-            'designer_id' => Designer::inRandomOrder()->first()->id,
+            'designer_id' => User::inRandomOrder()->first()->id,
             'Category_id' => Category::inRandomOrder()->first()->id,
           ];
     }

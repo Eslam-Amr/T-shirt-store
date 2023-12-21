@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,7 +36,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
-
+    static function boot(){
+        parent::boot();
+        static::addGlobalScope('user',function(Builder $bulder){
+            $bulder->where('role','user');
+        });
+    }
     /**
      * The attributes that should be cast.
      *

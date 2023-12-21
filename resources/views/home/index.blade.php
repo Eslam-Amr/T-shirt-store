@@ -63,7 +63,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <a class="dropdown-item" href="{{ route('login.index') }}">user login</a>
-                                        {{-- <a class="dropdown-item" href="{{ route('designer.index') }}">designer login</a> --}}
+                                        <a class="dropdown-item" href="{{ route('designer.index') }}">designer login</a>
                                         <a class="dropdown-item" href="tracking.html">tracking</a>
                                         <a class="dropdown-item" href="checkout.html">product checkout</a>
                                         <a class="dropdown-item" href="cart.html">shopping cart</a>

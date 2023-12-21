@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('desinger');
             $table->string('bestSeller');
             $table->string('image');
-            $table->foreignUuid('designer_id')->constrained('designers')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('designer_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
