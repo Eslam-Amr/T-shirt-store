@@ -20,9 +20,10 @@ class loginController extends Controller
 
     function login(loginRequest $request)
     {
-        // dd($request->all());
+        // dd("wqjklndf");
         // $validator = $this->validateLogin($request->all());
         $validator = $request->validated();
+        // dd($request->all());
         $guards = array_keys(array_slice(config('auth.guards'), 0, -1));
         // dd($validator);
         // dd($guards[1]=='admin');
@@ -40,14 +41,14 @@ class loginController extends Controller
         // dd(Auth::guard("designer"));
         // dd(Auth::guard("designer"));
         if (Auth::guard("admin")->attempt($validator)) {
-            // dd("admin");
             return redirect()->route('admin.index');
+            // dd("admin");
         }
         if (Auth::guard("designer")->attempt($validator))
-            return redirect()->route('designer.index');
+        return redirect()->route('designer.index');
+        // dd("designer");
 
-            // dd("designer");
-        
+
         if (Auth::guard("web")->attempt($validator)) {
 
             // dd("user");

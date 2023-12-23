@@ -4,13 +4,16 @@
     <div class="container mt-5">
         <div class="col-12">
             <div class="row">
-                {{-- <div class="col-6 mt-5">
+                {{-- @dd(auth('designer')->user()) --}}
+
+                {{-- {{ auth()->user() }} --}}
+                <div class="col-6 mt-5">
                     <div class="col-8 text-center p-5 bg-dark">
 
-                    <h2>add Book</h2>
-                    <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.addBook') }}"> Control </a></button>
+                    <h2>add design</h2>
+                    <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('designer.addDesign') }}"> Control </a></button>
                     </div>
-                </div> --}}
+                </div>
                 {{-- <div class="col-6 mt-5">
                     <div class="col-8 text-center p-5 bg-dark">
 

@@ -6,6 +6,7 @@ namespace App\Providers;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,17 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        // Gate::define('viewAdminPanel', function ($user) {
+        //     // return $user->hasRole('admin');
+        //     return auth('admin');
+        // });
+
+        // Gate::define('viewDesignerPanel', function ($designer) {
+
+        //     // return auth('designer');
+        //     return $designer->hasRole('designer');
+        // });
+
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
                 ->subject('Verify Email Address')

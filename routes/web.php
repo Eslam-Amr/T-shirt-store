@@ -59,5 +59,7 @@ Route::middleware('auth:admin')->group(function(){
 // designer
 Route::middleware('auth:designer')->group(function(){
     Route::get('/designer/admin',[designerController::class,'index'])->name('designer.index');
+    Route::get('/designer/admin/addDesign',[designerController::class,'addDesign'])->name('designer.addDesign');
 
 });
+

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\userDataUpdateRequest;
 use App\Models\designer;
+use App\Models\Portfolio;
 use App\Models\ToBeDesigner;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -95,6 +96,9 @@ class adminController extends Controller
     {
         // dd($id);
         User::where('id', $id)->update(['role' => 'designer']);
+        $Portfolio=ToBeDesigner::select('Portfolio')->where('user_id', $id)->first()['Portfolio'];
+        // dd($Portfolio);
+        Portfolio::create(['user_id'=> $id,'Portfolio'=>$Portfolio]);
         ToBeDesigner::where('user_id', $id)->delete();
         return redirect()->back()->with('message', 'confirmed successfly');
 

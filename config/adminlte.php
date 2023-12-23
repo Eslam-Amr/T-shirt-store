@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
+
 return [
 
     /*
@@ -198,6 +201,7 @@ return [
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
+
     /*
     |--------------------------------------------------------------------------
     | Sidebar
@@ -307,28 +311,100 @@ return [
         //     'text' => 'search',
         // ],
         // [
-        //     'text' => 'blog',
-        //     'url'  => 'admin/blog',
-        //     'can'  => 'manage-blog',
-        // ],
-        // [
-        //     'text'        => 'pages',
+            //     'text' => 'blog',
+            //     'url'  => 'admin/blog',
+            //     'can'  => 'manage-blog',
+            // ],
+            // [
+                //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
         //     'icon'        => 'far fa-fw fa-file',
         //     'label'       => 4,
         //     'label_color' => 'success',
         // ],
         // ['header' => 'account_settings'],
-        [
-            'text' => 'user',
-            'url'  => 'admin/user',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'designer',
-            'url'  => 'admin/designer',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+        // if(Auth::guard('admin')){
+            // (auth('designer')->user())?
+
+
+
+
+
+
+
+        //     // can('viewAdminPanel', auth()->user())
+        //     // <!-- Admin Panel -->
+        //     [
+        //         'text' => 'Admin',
+        //         'url'  => 'admin',
+        //         'icon' => 'fas fa-fw fa-cogs',
+        //         'can'  => 'viewAdminPanel',
+        //     ],
+        // // endcan
+
+        // // can('viewDesignerPanel', auth('designer')->user())
+        //     // <!-- Designer Panel -->
+        //     [
+        //         'text' => 'Designer',
+        //         'url'  => 'admin/designer',
+        //         'icon' => 'fas fa-fw fa-lock',
+        //     ],
+        // // endcan
+
+        // // <!-- Common User Panel -->
+        // [
+        //     'text' => 'User',
+        //     'url'  => 'admin/user',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                [
+                    'text' => 'user',
+                    'url'  => 'admin/user',
+                    'icon' => 'fas fa-fw fa-user',
+                    // 'can'  => 'viewAdminPanel',
+
+                ],
+                // }
+                [
+                    'text' => 'designer',
+                    'url'  => 'admin/designer',
+                    'icon' => 'fas fa-fw fa-lock',
+                    // 'can'  => 'viewAdminPanel',
+                    // 'can'  => 'viewDesignerPanel',
+                ],
+        //         [
+        //             'text' => 'designer',
+        //             'url'  => 'admin/designer',
+        //             'icon' => 'fas fa-fw fa-lock',
+        //             // 'can'  => 'viewAdminPanel',
+        //             'can'  => 'viewDesignerPanel',
+        // ]
+        // ,[
+        //     'text' => 'user',
+        //     'url'  => 'admin/user',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ]
         // [
         //     'text'    => 'multilevel',
         //     'icon'    => 'fas fa-fw fa-share',
@@ -539,3 +615,4 @@ return [
 
     'livewire' => false,
 ];
+
