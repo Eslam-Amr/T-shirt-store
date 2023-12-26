@@ -48,6 +48,8 @@ Route::middleware('auth:admin')->group(function(){
     // Route::get('/admin/logout',[adminController::class,'logout'])->name('admin.logout');
     Route::get('/admin',[adminController::class,'index'])->name('admin.index');
     Route::get('/admin/user',[adminController::class,'displayUser'])->name('admin.displayUser');
+    Route::get('/admin/designRequest',[adminController::class,'displayDesignRequest'])->name('admin.displayDesignsRequest');
+    Route::get('/admin/designRequest/{id}/show',[adminController::class,'showSpecificDesign'])->name('admin.showSpecificDesign');
     Route::get('/admin/designer',[adminController::class,'displayDesigner'])->name('admin.displayDesigner');
     Route::get('/admin/designer/request',[adminController::class,'displayDesignerRequest'])->name('admin.displayDesignerRequest');
     Route::get('/admin/designer/request/confirmed/{id}',[adminController::class,'designerConfirmed'])->name('admin.designerConfirmed');
@@ -60,6 +62,7 @@ Route::middleware('auth:admin')->group(function(){
 Route::middleware('auth:designer')->group(function(){
     Route::get('/designer/admin',[designerController::class,'index'])->name('designer.index');
     Route::get('/designer/admin/addDesign',[designerController::class,'addDesign'])->name('designer.addDesign');
+    Route::post('/designer/admin/addDesign/send',[designerController::class,'sendDesignRequest'])->name('designer.sendDesignRequest');
 
 });
 

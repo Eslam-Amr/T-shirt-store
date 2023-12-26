@@ -197,19 +197,19 @@
                                         placeholder="name">
                                 </div> --}}
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="email" value=""
+                                    <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}"
                                         placeholder="email">
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="password" value=""
+                                    <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}"
                                         placeholder="Password">
                                 </div>
                                 {{-- <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="phone" name="phone" value=""
+                                    <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}"
                                         placeholder="phone">
                                 </div> --}}
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="url" class="form-control" id="portfolio" name="portfolio" value=""
+                                    <input type="url" class="form-control" id="portfolio" name="portfolio" value="{{ old('portfolio') }}"
                                         placeholder="portfolio (Behance)">
                                 </div>
                                 {{-- <div class="col-md-4 form-group">

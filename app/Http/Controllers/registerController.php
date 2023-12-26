@@ -78,6 +78,7 @@ class registerController extends Controller
         // dd($users);
 
     }
+
 }
 
 

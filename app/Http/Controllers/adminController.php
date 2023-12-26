@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\userDataUpdateRequest;
+use App\Models\admin_design_request;
 use App\Models\designer;
 use App\Models\Portfolio;
 use App\Models\ToBeDesigner;
@@ -110,5 +111,16 @@ class adminController extends Controller
         //     $user=User::where('id',$userId['user_id'])->first();
         //     $users.append($user);
         // }
+    }
+    function displayDesignRequest(){
+        // designRequest
+        $designs = admin_design_request::paginate(5);
+        return view('admin.designRequest',['designs'=>$designs]);
+    }
+    function showSpecificDesign($id){
+        // dd($id);
+        $design=admin_design_request::where('id',$id)->first();
+// dd($design);
+return view('admin.showSpecificDesign',['design'=>$design]);
     }
 }
