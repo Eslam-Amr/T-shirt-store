@@ -17,6 +17,9 @@
             <th>user id</th>
             <th>name</th>
             <th>portfolio</th>
+            <th>price</th>
+            <th>discount</th>
+            <th>description</th>
             <th>show</th>
             {{-- <th>email</th>
             <th>phone</th>
@@ -31,6 +34,9 @@
             <th>{{ $design->user_id }}</th>
             <th>{{ $design->design_name }}</th>
             <th>{{ $design->design_category }}</th>
+            <th>{{ $design->price }}</th>
+            <th>{{ $design->discount }}</th>
+            <th>{{ $design->description }}</th>
             {{-- <th>{{ $design->design_name }}</th> --}}
             {{-- <th>{{ $design->phone }}</th>
             <th>{{ $design->status }}</th> --}}

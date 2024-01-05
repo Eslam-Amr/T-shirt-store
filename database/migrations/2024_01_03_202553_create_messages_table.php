@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_design_requests', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('design_name');
-            $table->string('design_category');
-            $table->string('price');
-            $table->string('discount');
-            $table->string('description');
-            $table->string('design');
+
+            $table->string('message');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_design_requests');
+        Schema::dropIfExists('messages');
     }
 };

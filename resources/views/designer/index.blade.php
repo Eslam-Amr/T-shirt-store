@@ -14,6 +14,13 @@
                     <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('designer.addDesign') }}"> Control </a></button>
                     </div>
                 </div>
+                <div class="col-6 mt-5">
+                    <div class="col-8 text-center p-5 bg-dark">
+
+                    <h2>message</h2>
+                    <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('designer.message') }}"> Control </a></button>
+                    </div>
+                </div>
                 {{-- <div class="col-6 mt-5">
                     <div class="col-8 text-center p-5 bg-dark">
 

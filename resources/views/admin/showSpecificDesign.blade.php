@@ -12,7 +12,7 @@
     </script>
 @endif
 <div>
-    <button>back</button>
+    <a href="{{ route('admin.displayDesignsRequest') }}"><button>back</button></a>
 </div>
 <h2 class="text-center py-5">Design</h2>
 <div class=" alert-danger text-center my-5">
@@ -27,7 +27,7 @@
     {{ $message }}
     @enderror
 </div>
-<div class="container w-25 border m-auto ">
+<div class="container w-25  m-auto ">
     {{-- <form action="{{ route('designer.sendDesignRequest') }}" method="POST" class="form-group" enctype="multipart/form-data" > --}}
        {{-- { !!  csrf_field()  !!} --}}
 {{-- @csrf --}}
@@ -56,9 +56,17 @@
         </div>
     </form> --}}
     {{-- @dd(asset('uplode')) --}}
+    {{-- @dd($design) --}}
+    {{-- @dd($description) --}}
     <img  style="border: 50px white solid" src="{{asset('uplode')}}/RequestDesign/{{ $design['design'] }}" alt="">
-    <div ><button>Add</button>
-    <button>reject</button>
+    <p>{{ $description }}</p>
+    <div >
+        <form action="{{route('admin.addSpecificDesign',$design->id)}}">
+<input type="number" name="stock" id="stock" placeholder="stock">
+<input type="submit" value="Add">
+        </form>
+        {{-- <a href="{{route('admin.addSpecificDesign',$design->id)}}"><button>Add</button></a> --}}
+        <a href="{{ route('admin.rejectSpecificDesign',$design->id) }}"><button>reject</button></a>
     </div>
     {{-- @dd($design['design']) --}}
 </div>

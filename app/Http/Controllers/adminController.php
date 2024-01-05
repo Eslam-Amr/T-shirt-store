@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Str;
 
 use App\Http\Requests\userDataUpdateRequest;
 use App\Models\admin_design_request;
 use App\Models\designer;
+use App\Models\Message;
 use App\Models\Portfolio;
+use App\Models\Product;
 use App\Models\ToBeDesigner;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -97,9 +100,9 @@ class adminController extends Controller
     {
         // dd($id);
         User::where('id', $id)->update(['role' => 'designer']);
-        $Portfolio=ToBeDesigner::select('Portfolio')->where('user_id', $id)->first()['Portfolio'];
+        $Portfolio = ToBeDesigner::select('Portfolio')->where('user_id', $id)->first()['Portfolio'];
         // dd($Portfolio);
-        Portfolio::create(['user_id'=> $id,'Portfolio'=>$Portfolio]);
+        Portfolio::create(['user_id' => $id, 'Portfolio' => $Portfolio]);
         ToBeDesigner::where('user_id', $id)->delete();
         return redirect()->back()->with('message', 'confirmed successfly');
 
@@ -112,15 +115,79 @@ class adminController extends Controller
         //     $users.append($user);
         // }
     }
-    function displayDesignRequest(){
+    function displayDesignRequest()
+    {
         // designRequest
         $designs = admin_design_request::paginate(5);
-        return view('admin.designRequest',['designs'=>$designs]);
+        // dd($designs);
+        return view('admin.designRequest', ['designs' => $designs]);
     }
-    function showSpecificDesign($id){
+    function showSpecificDesign($id)
+    {
         // dd($id);
+        $design = admin_design_request::where('id', $id)->first();
+        $description = admin_design_request::select('description')->where('id', $id)->first()['description'];
+        // dd($description);
+        return view('admin.showSpecificDesign', ['design' => $design, 'description' => $description]);
+    }
+    function rejectSpecificDesign($id){
+        // (sdafasafdfsahuuuuuuuuuuuuuuuuu);
+        // dd('kk');
+        // dd($id);
+        // dd(admin_design_request::select('user_id')->where('id',$id)->first()['user_id']);
+        // admin
+        Message::create([
+            'user_id'=>admin_design_request::select('user_id')->where('id',$id)->first()['user_id'],
+            'message'=>'your design has been reject'
+        ]);
+        admin_design_request::where('id',$id)->delete();
+        return redirect()->to('admin/designRequest')->with('message', 'deleted successfly');
+
+    }
+    function addSpecificDesign(Request $request, $id){
         $design=admin_design_request::where('id',$id)->first();
 // dd($design);
-return view('admin.showSpecificDesign',['design'=>$design]);
+        // (sdafasafdfsahuuuuuuuuuuuuuuuuu);
+        $request->validate([
+            'stock' => 'required',
+        ]);
+        // $x = auth()->user();
+// dd($x['id']);
+// dd($design['user_id']);
+// $user = auth()->user();
+// $numericId = Str::uuid($user['id'])->getHex();
+// // dd($numericId);
+// $numericId = hexdec($numericId);
+// dd($numericId);
+        $stock=$request->all()['stock'];
+        // dd($request->all()['stock']);
+        // dd($design);
+        Product::create([
+            'stock'=>$stock,
+            'discount'=>$design['discount'],
+            'price'=>$design['price'],
+            'price_after_discount'=>$design['price']*(1-($design['discount']/100)),
+            'name'=>$design['design_name'],
+            'desinger'=>$design['design_name'],
+            'bestSeller'=>0,
+            'image'=>$design['design'],
+            // 'category'=>$design['design_category'],
+            'category_id'=>1,
+            'designer_id'=>$design['user_id'],
+            'status'=>'pending',
+            'description'=>$design['description'],
+// 'designer_id'=>
+            ]);
+            Message::create([
+                'user_id'=>$design['user_id'],
+                'message'=>'congratulation 🎉 your design have been approved'
+            ]);
+            admin_design_request::where('id',$id)->delete();
+            return redirect()->to('admin/designRequest')->with('message', 'added successfly');
+            // dd($id);
+        // admin_design_request::where('id',$id)->delete();
+        // return redirect()->to('admin/designRequest')->with('message', 'deleted successfly');
+
     }
+
 }
