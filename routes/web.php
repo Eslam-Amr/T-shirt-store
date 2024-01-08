@@ -33,6 +33,9 @@ Route::middleware([
     });
 
 Route::get('/home',[homeController::class,'index'])->name('home.index');
+Route::get('/home/{id}/productDetails',[homeController::class,'productDetails'])->name('home.productDetails');
+Route::get('/home/{id}/productDetails/addComment',[homeController::class,'addComment'])->name('home.addComment');
+Route::post('/home/{id}/productDetails/addReview',[homeController::class,'addReview'])->name('home.addReview');
 // Route::get('/loginDesigner',[loginController::class,'designerLogin'])->name('designer.login');
 Route::get('/login',[loginController::class,'index'])->name('login.index');
 Route::post('/login/logic',[loginController::class,'login'])->name('login');

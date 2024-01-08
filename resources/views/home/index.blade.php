@@ -47,7 +47,8 @@
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
                                         Shop
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
@@ -58,7 +59,8 @@
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
                                         pages
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
@@ -73,7 +75,8 @@
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
                                         blog
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
@@ -268,7 +271,50 @@
                     <div class="product_list_slider owl-carousel">
                         <div class="single_product_list_slider">
                             <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-3 col-sm-6">
+                                @for ($i = 0; $i < 8; $i++)
+                                    {{-- <div class="col-lg-3 col-sm-6">
+                                     <div class="single_product_item">
+                                         <img src="img/product/product_1.png" alt="">
+                                         <div class="single_product_text">
+                                             <h4>Quartz Belt Watch</h4>
+                                             <h3>$150.00</h3>
+                                             <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                         </div>
+                                     </div>
+                                 </div> --}}
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="single_product_item">
+                                            {{-- <img src="img/product/product_1.png" alt=""> --}}
+                                            <a href="{{ route('home.productDetails',$products[$i]->id) }}">
+
+                                                <img class="product__img w-100 h-100 object-fit-cover"
+                                                src="{{ $products[$i]->image[0] == 'h' ? $products[$i]->image : asset('uplode') . '/RequestDesign/' . $products[$i]->image }}"
+                                                data-id="white">
+                                            </a>
+
+                                            <div class="single_product_text">
+                                                <h4>{{ $products[$i]['name'] }}</h4>
+                                                {{-- <h3>$150.00</h3> --}}
+                                                <h3 style="text-decoration: line-through;">{{ $products[$i]['price'] }}
+                                                    EGP</h3>
+                                                <h3>{{ $products[$i]['price_after_discount'] }} EGP</h3>
+                                                <a href="#" class="add_cart">+ add to cart<i
+                                                        class="ti-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endfor
+                                {{-- <div class="col-lg-3 col-sm-6">
+                                    <div class="single_product_item">
+                                        <img src="img/product/product_1.png" alt="">
+                                        <div class="single_product_text">
+                                            <h4>Quartz Belt Watch</h4>
+                                            <h3>$150.00</h3>
+                                            <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                                {{-- <div class="col-lg-3 col-sm-6">
                                     <div class="single_product_item">
                                         <img src="img/product/product_1.png" alt="">
                                         <div class="single_product_text">
@@ -347,12 +393,44 @@
                                             <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="single_product_list_slider">
                             <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-3 col-sm-6">
+                                @for ($i = 8; $i < 13; $i++)
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="single_product_item">
+                                            {{-- <img src="img/product/product_1.png" alt=""> --}}
+                                            <img class="product__img w-100 h-100 object-fit-cover"
+                                                src="{{ $products[$i]->image[0] == 'h' ? $products[$i]->image : asset('uplode') . '/RequestDesign/' . $products[$i]->image }}"
+                                                data-id="white">
+
+                                            <div class="single_product_text">
+                                                <h4>{{ $products[$i]['name'] }}</h4>
+                                                {{-- <h3>$150.00</h3> --}}
+                                                <h3 style="text-decoration: line-through;">{{ $products[$i]['price'] }}
+                                                    EGP</h3>
+                                                <h3>{{ $products[$i]['price_after_discount'] }} EGP</h3>
+                                                <a href="#" class="add_cart">+ add to cart<i
+                                                        class="ti-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="single_product_item"> --}}
+                                    {{-- <img src="{{$product['image']}}" alt=""> --}}
+                                    {{-- {{-- asset('uplode')}}/RequestDesign/ -- --}}
+                                    {{-- <img class="product__img w-100 h-100 object-fit-cover" src="{{$products[$i]->image[0]=='h' ? $products[$i]->image : asset('uplode') . '/RequestDesign/' . $products[$i]->image   }}" data-id="white"> --}}
+
+                                    {{-- <img src="{{asset('uplode')}}/RequestDesign/{{ $products[$i]['image'] }}" alt=""> --}}
+                                    {{-- <div class="single_product_text"> --}}
+                                    {{-- <h4>{{ $products[$i]['name'] }}</h4> --}}
+                                    {{-- <h3 style="text-decoration: line-through;">{{ $products[$i]['price'] }} EGP</h3> --}}
+                                    {{-- <h3 >{{ $products[$i]['price_after_discount'] }} EGP</h3> --}}
+                                    {{-- </div>
+                                </div> --}}
+                                @endfor
+                                {{--    <div class="col-lg-3 col-sm-6">
                                     <div class="single_product_item">
                                         <img src="img/product/product_1.png" alt="">
                                         <div class="single_product_text">
@@ -411,8 +489,8 @@
                                             <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
+                                </div> --}}
+                                {{-- <div class="col-lg-3 col-sm-6">
                                     <div class="single_product_item">
                                         <img src="img/product/product_7.png" alt="">
                                         <div class="single_product_text">
@@ -421,8 +499,8 @@
                                             <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
+                                </div> --}}
+                                {{-- <div class="col-lg-3 col-sm-6">
                                     <div class="single_product_item">
                                         <img src="img/product/product_8.png" alt="">
                                         <div class="single_product_text">
@@ -431,7 +509,7 @@
                                             <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -442,7 +520,7 @@
     <!-- product_list part start-->
 
     <!-- awesome_shop start-->
-    <section class="our_offer section_padding">
+    {{-- <section class="our_offer section_padding">
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6 col-md-6">
@@ -473,10 +551,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- awesome_shop part start-->
 
     <!-- product_list part start-->
+    {{-- @dd($products) --}}
     <section class="product_list best_seller section_padding">
         <div class="container">
             <div class="row justify-content-center">
@@ -489,14 +568,30 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-12">
                     <div class="best_product_slider owl-carousel">
-                        <div class="single_product_item">
+                        @foreach ($products as $product)
+                            <div class="single_product_item">
+                                {{-- <img src="{{$product['image']}}" alt=""> --}}
+                                {{-- {{-- asset('uplode')}}/RequestDesign/ -- --}}
+                                <img class="product__img w-100 h-100 object-fit-cover"
+                                    src="{{ $product->image[0] == 'h' ? $product->image : asset('uplode') . '/RequestDesign/' . $product->image }}"
+                                    data-id="white">
+
+                                {{-- <img src="{{asset('uplode')}}/RequestDesign/{{ $product['image'] }}" alt=""> --}}
+                                <div class="single_product_text">
+                                    <h4>{{ $product['name'] }}</h4>
+                                    <h3 style="text-decoration: line-through;">{{ $product['price'] }} EGP</h3>
+                                    <h3>{{ $product['price_after_discount'] }} EGP</h3>
+                                </div>
+                            </div>
+                        @endforeach
+                        {{-- <div class="single_product_item">
                             <img src="img/product/product_1.png" alt="">
                             <div class="single_product_text">
                                 <h4>Quartz Belt Watch</h4>
                                 <h3>$150.00</h3>
                             </div>
-                        </div>
-                        <div class="single_product_item">
+                        </div> --}}
+                        {{-- <div class="single_product_item">
                             <img src="img/product/product_2.png" alt="">
                             <div class="single_product_text">
                                 <h4>Quartz Belt Watch</h4>
@@ -523,7 +618,7 @@
                                 <h4>Quartz Belt Watch</h4>
                                 <h3>$150.00</h3>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -652,9 +747,9 @@
                             <form target="_blank"
                                 action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
                                 method="get" class="subscribe_form relative mail_part">
-                                <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
-                                    class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = ' Email Address '">
+                                <input type="email" name="email" id="newsletter-form-email"
+                                    placeholder="Email Address" class="placeholder hide-on-focus"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = ' Email Address '">
                                 <button type="submit" name="submit" id="newsletter-submit"
                                     class="email_icon newsletter-submit button-contactForm">subscribe</button>
                                 <div class="mt-10 info"></div>
@@ -671,17 +766,27 @@
                     <div class="col-lg-8">
                         <div class="copyright_text">
                             <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
+                                Copyright &copy;
+                                <script>
+                                    document.write(new Date().getFullYear());
+                                </script> All rights reserved | This template is made with <i
+                                    class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                                    target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </P>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="footer_icon social_icon">
                             <ul class="list-unstyled">
-                                <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
-                                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
+                                <li><a href="#" class="single_social_icon"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a>
+                                </li>
+                                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
