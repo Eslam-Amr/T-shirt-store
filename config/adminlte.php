@@ -379,27 +379,62 @@ return [
 
 
                 [
+                    'text' => 'Home',
+                    'url'  => 'admin',
+                    'icon' => 'fas fa-fw fa-home',
+                    'can'  => 'viewAdminPanel',
+
+                ],
+                [
                     'text' => 'user',
                     'url'  => 'admin/user',
                     'icon' => 'fas fa-fw fa-user',
-                    // 'can'  => 'viewAdminPanel',
+                    'can'  => 'viewAdminPanel',
 
                 ],
-                // }
+                // // }
                 [
                     'text' => 'designer',
                     'url'  => 'admin/designer',
-                    'icon' => 'fas fa-fw fa-lock',
-                    // 'can'  => 'viewAdminPanel',
+                    'icon' => 'fas fa-fw fa-circle',
+                    'can'  => 'viewAdminPanel',
                     // 'can'  => 'viewDesignerPanel',
                 ],
-        //         [
-        //             'text' => 'designer',
-        //             'url'  => 'admin/designer',
-        //             'icon' => 'fas fa-fw fa-lock',
-        //             // 'can'  => 'viewAdminPanel',
-        //             'can'  => 'viewDesignerPanel',
-        // ]
+                [
+                    'text' => 'designer request',
+                    'url'  => 'admin/designer/request',
+                    'icon' => 'fas fa-fw fa-circle',
+                    'can'  => 'viewAdminPanel',
+                    // 'can'  => 'viewDesignerPanel',
+                ],
+                [
+                    'text' => 'designer requestes',
+                    'url'  => 'admin/designRequest',
+                    'icon' => 'fas fa-fw fa-circle',
+                    'can'  => 'viewAdminPanel',
+                    // 'can'  => 'viewDesignerPanel',
+                ],
+                [
+                    'text' => 'Home',
+                    'url'  => 'designer/admin',
+                    'icon' => 'fas fa-fw fa-home',
+                    // 'can'  => 'viewAdminPanel',
+                    'can'  => 'viewDesignerPanel',
+                ],
+                [
+                    'text' => 'designer',
+                    'url'  => 'designer/admin/addDesign',
+                    'icon' => 'fas fa-fw fa-circle',
+                    // 'can'  => 'viewAdminPanel',
+                    'can'  => 'viewDesignerPanel',
+                ],
+                [
+                    'text' => 'message',
+                    'url'  => 'designer/admin/message',
+                    'icon' => 'fas fa-fw fa-circle',
+                    // 'can'  => 'viewAdminPanel',
+                    'can'  => 'viewDesignerPanel',
+                ],
         // ,[
         //     'text' => 'user',
         //     'url'  => 'admin/user',

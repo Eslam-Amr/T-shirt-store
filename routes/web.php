@@ -34,6 +34,7 @@ Route::middleware([
 
 Route::get('/home',[homeController::class,'index'])->name('home.index');
 Route::get('/home/{id}/productDetails',[homeController::class,'productDetails'])->name('home.productDetails');
+Route::get('/home/{id}/productDetails/addToCart',[homeController::class,'addToCart'])->name('home.addToCart');
 Route::get('/home/{id}/productDetails/addComment',[homeController::class,'addComment'])->name('home.addComment');
 Route::post('/home/{id}/productDetails/addReview',[homeController::class,'addReview'])->name('home.addReview');
 // Route::get('/loginDesigner',[loginController::class,'designerLogin'])->name('designer.login');

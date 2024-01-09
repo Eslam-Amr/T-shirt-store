@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,8 +23,12 @@ class CartFactory extends Factory
             // "id"=>fake()->id(),
             "status"=>'show',
             "total"=>fake()->numberBetween(1,1000),
+            "quantity"=> fake()->numberBetween(1,10),
 
+            'designer_id' =>  User::inRandomOrder()->first()->id,
             'user_id' =>  User::inRandomOrder()->first()->id,
+            'product_id' => Product::inRandomOrder()->first()->id
+            // 'product_id' => '2',
         ];
     }
 }

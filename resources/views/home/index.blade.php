@@ -271,7 +271,7 @@
                     <div class="product_list_slider owl-carousel">
                         <div class="single_product_list_slider">
                             <div class="row align-items-center justify-content-between">
-                                @for ($i = 0; $i < 8; $i++)
+                                @for ($i = 0; $i < 3; $i++)
                                     {{-- <div class="col-lg-3 col-sm-6">
                                      <div class="single_product_item">
                                          <img src="img/product/product_1.png" alt="">
@@ -398,7 +398,7 @@
                         </div>
                         <div class="single_product_list_slider">
                             <div class="row align-items-center justify-content-between">
-                                @for ($i = 8; $i < 13; $i++)
+                                @for ($i = 4; $i < 6; $i++)
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="single_product_item">
                                             {{-- <img src="img/product/product_1.png" alt=""> --}}

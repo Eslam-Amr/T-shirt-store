@@ -193,23 +193,27 @@
             <ul class="list">
               <li>
                 <a class="active" href="#">
-                  <span>Category</span> : Household</a>
+                  <span>Category</span> : {{ $product['category']  }}</a>
               </li>
               <li>
-                <a href="#"> <span>Availibility</span> : In Stock</a>
+                <a href="#"> <span>Availibility</span> :  {{ $product['status']  }}</a>
               </li>
             </ul>
-            <p>
+            {{-- <p>
               First replenish living. Creepeth image image. Creeping can't, won't called.
               Two fruitful let days signs sea together all land fly subdue
-            </p>
-            <div class="card_area d-flex justify-content-between align-items-center">
-              <div class="product_count">
-                <span class="inumber-decrement"> <i class="ti-minus"></i></span>
-                <input class="input-number" type="text" value="1" min="0" max="10">
-                <span class="number-increment"> <i class="ti-plus"></i></span>
-              </div>
-              <a href="#" class="btn_3">add to cart</a>
+            </p> --}}
+            <form action="{{ route('home.addToCart', $product['id'] ) }}">
+
+                <div class="card_area d-flex justify-content-between align-items-center">
+                    <div class="product_count">
+                        <span class="inumber-decrement"> <i class="ti-minus"></i></span>
+                        <input class="input-number" name="quantity" type="text" value="1" min="0" max="10">
+                        <span class="number-increment"> <i class="ti-plus"></i></span>
+                    </div>
+                    {{-- <a href="" class="btn_3">add to cart</a> --}}
+                    <input type="submit" class="btn_3"  value="add to cart">
+                </form>
               <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
             </div>
           </div>

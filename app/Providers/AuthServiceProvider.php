@@ -27,14 +27,34 @@ class AuthServiceProvider extends ServiceProvider
         //
         // Gate::define('viewAdminPanel', function ($user) {
         //     // return $user->hasRole('admin');
-        //     return auth('admin');
+        //     if ($user['role'] == 'admin')
+        //         return true;
+        //     // return auth('admin');
         // });
+        Gate::define('viewAdminPanel', function ($user) {
+            // return $user->hasRole('admin');
+            // if ($user['role'] == 'admin')
+            //     return true;
+            return  $user['role'] == 'admin';
+            // return auth('admin');
+        });
 
+        // Gate::define('viewDesignerPanel', function ($user) {
+        //     if ($user['role'] == 'designer')
+        //         return true;
+
+        // });
+        Gate::define('viewDesignerPanel', function ($user) {
+            return  $user['role'] == 'designer';
+
+        });
+
+        // return $user->hasRole('designer');
         // Gate::define('viewDesignerPanel', function ($designer) {
 
-        //     // return auth('designer');
-        //     return $designer->hasRole('designer');
+        //     return auth('designer');
         // });
+        // return $designer->hasRole('designer');
 
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
