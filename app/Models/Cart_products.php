@@ -10,5 +10,8 @@ class Cart_products extends Model
 
     use HasFactory;
     protected $guarded =[];
+    protected $primaryKey = ['cart_id', 'product_id'];
+
+    public $incrementing = false;
 
 }

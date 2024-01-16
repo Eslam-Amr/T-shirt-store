@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string("first_name")->default('eslam');
+            $table->string("last_name")->default('amr');
             $table->string("email");
             $table->string("total");
             $table->string("status");
@@ -23,6 +25,7 @@ return new class extends Migration
 
 
 
+            $table->foreignUuid('designer_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();

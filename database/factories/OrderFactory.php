@@ -28,6 +28,7 @@ class OrderFactory extends Factory
             'phone'=>fake()->phoneNumber(),
             'address'=>fake()->address(),
             'user_id' =>  User::inRandomOrder()->first()->id,
+            'designer_id' =>  User::inRandomOrder()->first()->id,
 
         ];
     }

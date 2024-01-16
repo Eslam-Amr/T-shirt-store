@@ -130,7 +130,7 @@
     <!-- Header part end-->
 
   <!-- breadcrumb start-->
-  <section class="breadcrumb breadcrumb_bg">
+  {{-- <section class="breadcrumb breadcrumb_bg">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -143,7 +143,30 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
+  <section class="bredcrumb breadcumb_bg breacrumb_bgg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 mt-5"
+                style="display: flex; flex-direction: row; align-content: center; justify-content: space-between; align-items: center">
+                <div>
+
+                    <img src="{{ asset('img') }}/images__2_-removebg-preview.png" height="300px" alt="">
+                </div>
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Shop Single</h2>
+                        <p>Home <span>-</span> Shop Single</p>
+                    </div>
+                </div>
+                <div>
+
+                    <img src="{{ asset('img') }}/model1.png" height="300px" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
   <!-- breadcrumb start-->
   <!--================End Home Banner Area =================-->
 
@@ -153,6 +176,17 @@
       <div class="row s_product_inner justify-content-between">
         <div class="col-lg-7 col-xl-7">
           <div class="product_slider_img">
+            @if (session()->has('message'))
+            <div class="alert alert-danger" id="alert">
+
+                {{ session()->get('message') }}
+            </div>
+            <script type="text/javascript">
+                document.ready(setTimeout(function() {
+                    document.getElementById('alert').remove()
+                }, 3000))
+            </script>
+        @endif
             {{-- <div id="vertical">
               <div data-thumb="{{ asset('img') }}/product/single-product/product_1.png">
                 <img src="{{ asset('img') }}/product/single-product/product_1.png" />

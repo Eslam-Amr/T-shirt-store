@@ -27,7 +27,7 @@ class CartFactory extends Factory
 
             'designer_id' =>  User::inRandomOrder()->first()->id,
             'user_id' =>  User::inRandomOrder()->first()->id,
-            'product_id' => Product::inRandomOrder()->first()->id
+            // 'product_id' => Product::inRandomOrder()->first()->id
             // 'product_id' => '2',
         ];
     }
