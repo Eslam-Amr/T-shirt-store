@@ -132,19 +132,22 @@ class homeController extends Controller
         if (auth()->user() == null)
             return redirect()->to('/login')->with('message', 'you should login firstly ');
         else {
-            $cart = Cart_products::where('product_id', $id)->join('carts','carts.id' , '=','cart_products.cart_id' )
-                ->select('carts.*', 'cart_products.product_id')
-                ->get();
+            // $cart = Cart_products::where('product_id', $id)->join('carts','carts.id' , '=','cart_products.cart_id' )
+            //     ->select('carts.*', 'cart_products')
+            //     ->get();
+            $cart=Cart::where('product_id', $id)->where('user_id',auth()->user()->id)->first();
 
-            //     dd($cart);
+
+                // dd($cart);
             // dd($cart);
 
             $productData = Product::select('designer_id', 'stock', 'price_after_discount')->where('id', $id)->first();
             // dd($productData);
             // $cart = Cart::where('product_id', $id)->where('user_id', auth()->user()['id'])->first();
-            $allCartItem = Cart_products::where('product_id', $id)->join('carts', 'cart_products.cart_id', '=', 'carts.id')
-                ->select('carts.*', 'cart_products.product_id')
-                ->get();
+            // $allCartItem = Cart_products::where('product_id', $id)->join('carts', 'cart_products.cart_id', '=', 'carts.id')
+            //     ->select('carts.*', 'cart_products.product_id')
+            //     ->get();
+            $allCartItem=Cart::where('product_id', $id)->get();
 // dd(Cart::where('user_id',auth()->user()->id)->get());
                 // $cart->update(['quantity' => $cart->quantity + $request->all()['quantity'], 'total' => $productData['price_after_discount'] * ($cart['quantity'] + $request->all()['quantity'])]);
             $totalItem = 0;
@@ -155,9 +158,9 @@ class homeController extends Controller
             // dd($productData['stock']);
             // dd($productData['stock'] >= ($request->all()['quantity'] + $totalItem));
             if ($productData['stock'] >= $request->all()['quantity'] + $totalItem) {
-                $cart = Cart_products::where('product_id', $id)->join('carts', 'cart_products.cart_id', '=', 'carts.id')
-                    ->select('carts.*', 'cart_products.product_id')->where('user_id', auth()->user()['id'])
-                    ->first();
+                // $cart = Cart_products::where('product_id', $id)->join('carts', 'cart_products.cart_id', '=', 'carts.id')
+                //     ->select('carts.*', 'cart_products.created_at')->where('user_id', auth()->user()['id'])
+                //     ->first();
                 // dd($cart);
                 if ($cart == null) {
 
@@ -165,7 +168,7 @@ class homeController extends Controller
                         'total' => $request->all()['quantity'] * $productData['price_after_discount'],
                         'status' => 'pending',
                         'quantity' => $request->all()['quantity'],
-                        // 'product_id' => $id,
+                        'product_id' => $id,
                         'user_id' => auth()->user()['id'],
                         'designer_id' => $productData['designer_id'],
 
@@ -264,7 +267,7 @@ class homeController extends Controller
         // dd($cart);
         $totalPrice = 0;
         for ($i = 0; $i < count($cart); $i++)
-            $totalPrice += $cart[$i]['total'];
+        $totalPrice += $cart[$i]['total'];
         return view('home.checkout', ['carts' => $cart, 'total' => $totalPrice]);
     }
     public function setOreder(Request $request)
@@ -283,17 +286,18 @@ class homeController extends Controller
             'phone' => 'required|numeric|min_digits:11|max_digits:11',
         ]);
         // $product
-        $carts = Cart_products::join('carts', 'cart_products.cart_id', '=', 'carts.id')
-            ->select('carts.*', 'cart_products.product_id')->where('user_id', auth()->user()['id'])
-            ->join('products', 'cart_products.product_id', '=', 'products.id')
-            ->select('carts.*', 'products.*', 'cart_products.product_id')
-            ->get();
+        // $carts = Cart_products::join('carts', 'cart_products.cart_id', '=', 'carts.id')
+        // ->select('carts.*', 'cart_products.product_id')->where('user_id', auth()->user()['id'])
+        // ->join('products', 'cart_products.product_id', '=', 'products.id')
+        // ->select('carts.*', 'products.*', 'cart_products.product_id')
+        // ->get();
+        $carts=Cart::where('user_id', auth()->user()['id'])->get();
         $flag = false;
+        // dd($carts);
         foreach ($carts as $cart) {
             $product = Product::where('id', $cart['product_id'])->first();
             // if($product->stock < $cart['quantity'])
             //     $greaterThan=false;
-            // dd("ease");
             if ($product->stock >= $cart['quantity']) {
                 $flag = true;
 
@@ -322,21 +326,27 @@ class homeController extends Controller
                 ]);
                 $product->stock -= $cart['quantity'];
                 $product->save();
-                Cart_products::where('cart_id', $cart['id'])->where('product_id', $cart['product_id'])->delete();
+                // Cart_products::where('cart_id', $cart['id'])->where('product_id', $cart['product_id'])->delete();
                 // $cart::delete();
+                // Cart::where('product_id', $cart['product_id'])->where('user_id', auth()->user()->id)->delete();
                 Cart::where('id', $cart['id'])->delete();
-            } else {
-                $flag = false;
-                break;
+            }
+            for($i=0;$i<count($carts);$i++)
+            Cart::where('id', $carts[$i]['id'])->delete();
+            // dd($carts);
+            dd(Cart::get());
+            //     else {
+                //        $flag = false;
+        //        break;
+        //    }
             }
 
             // dump($product);
 
 
-        }
-        if ($flag) {
+        // if ($flag) {
             return redirect()->to('/home/cart/checkout/confirmation');
-        }
+        // }
         // if($greaterThan){
 
         // }

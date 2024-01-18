@@ -24,6 +24,7 @@ class CartFactory extends Factory
             "status"=>'show',
             "total"=>fake()->numberBetween(1,1000),
             "quantity"=> fake()->numberBetween(1,10),
+            'product_id' => Product::inRandomOrder()->first()->id,
 
             'designer_id' =>  User::inRandomOrder()->first()->id,
             'user_id' =>  User::inRandomOrder()->first()->id,
