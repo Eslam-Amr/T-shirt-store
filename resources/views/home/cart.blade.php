@@ -210,12 +210,12 @@
                         {{-- <img src="{{ asset('img') }}/product/single-product/cart-1.jpg" alt="" /> --}}
                       </div>
                       <div class="media-body">
-                        <p>{{ $cart['name'] }}</p>
+                        <p>{{ $cart->name }}</p>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <h5>{{ $cart['price_after_discount'] }}</h5>
+                    <h5>{{ $cart->price_after_discount }}</h5>
                   </td>
                   <td>
                     {{-- <div class="product_count">
@@ -223,10 +223,10 @@
                       <input class="input-number" type="text" value="1" min="0" max="10">
                       <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
                     </div> --}}
-                    {{ $cart['quantity'] }}
+                    {{ $cart->quantity }}
                   </td>
                   <td>
-                    <h5>{{ $cart['total'] }}</h5>
+                    <h5>{{ $cart->total }}</h5>
                   </td>
                 </tr>
                 @endforeach

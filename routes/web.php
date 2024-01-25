@@ -33,7 +33,7 @@ Route::middleware([
     });
 
 Route::get('/home',[homeController::class,'index'])->name('home.index');
-Route::get('/logout',[homeController::class,'logout'])->name('home.logout');
+Route::get('/logout',[loginController::class,'logout'])->name('home.logout');
 Route::get('/home/cart',[homeController::class,'cart'])->name('home.cart');
 Route::get('/home/cart/checkout',[homeController::class,'checkout'])->name('home.checkout');
 Route::post('/home/cart/checkout/setOreder',[homeController::class,'setOreder'])->name('home.setOreder');
