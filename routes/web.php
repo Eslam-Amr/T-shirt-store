@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\categoryController;
+use App\Http\Controllers\contactController;
 use App\Http\Controllers\desginerController;
 use App\Http\Controllers\designerController;
 use App\Http\Controllers\homeController;
@@ -33,6 +35,8 @@ Route::middleware([
     });
 
 Route::get('/home',[homeController::class,'index'])->name('home.index');
+Route::get('/category',[categoryController::class,'index'])->name('category.index');
+Route::get('/contact',[contactController::class,'index'])->name('contact.index');
 Route::get('/logout',[loginController::class,'logout'])->name('home.logout');
 Route::get('/home/cart',[homeController::class,'cart'])->name('home.cart');
 Route::get('/home/cart/checkout',[homeController::class,'checkout'])->name('home.checkout');

@@ -6,39 +6,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>aranaz</title>
-  {{-- <link rel="icon" href="img/favicon.png"> --}}
-  <link rel="icon" href="{{ asset('img') }}/favicon.png">
+  <link rel="icon" href="img/favicon.png">
   <!-- Bootstrap CSS -->
-  {{-- <link rel="stylesheet" href="css/bootstrap.min.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <!-- animate CSS -->
-  {{-- <link rel="stylesheet" href="css/animate.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/animate.css">
+  <link rel="stylesheet" href="css/animate.css">
   <!-- owl carousel CSS -->
-  {{-- <link rel="stylesheet" href="css/owl.carousel.min.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/owl.carousel.min.css">
-  <!-- nice select CSS -->
-  {{-- <link rel="stylesheet" href="css/nice-select.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/nice-select.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
   <!-- font awesome CSS -->
-  {{-- <link rel="stylesheet" href="css/all.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/all.css">
+  <link rel="stylesheet" href="css/all.css">
   <!-- flaticon CSS -->
-  {{-- <link rel="stylesheet" href="css/flaticon.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/flaticon.css">
-  {{-- <link rel="stylesheet" href="css/themify-icons.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/themify-icons.css">
+  <link rel="stylesheet" href="css/flaticon.css">
+  <link rel="stylesheet" href="css/themify-icons.css">
   <!-- font awesome CSS -->
-  {{-- <link rel="stylesheet" href="css/magnific-popup.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/magnific-popup.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
   <!-- swiper CSS -->
-  {{-- <link rel="stylesheet" href="css/slick.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/slick.css">
-  {{-- <link rel="stylesheet" href="css/price_rangs.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/price_rangs.css">
+  <link rel="stylesheet" href="css/slick.css">
   <!-- style CSS -->
-  {{-- <link rel="stylesheet" href="css/style.css"> --}}
-  <link rel="stylesheet" href="{{ asset('css') }}/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -48,7 +33,7 @@
         <div class="row align-items-center">
             <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="index.html"> <img src="{{ asset('img') }}/logo.png" alt="logo"> </a>
+                    <a class="navbar-brand" href="index.html"> <img src="img/logo.png" alt="logo"> </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -133,178 +118,139 @@
 </header> --}}
 @include('layout.navbar')
 
-<!-- Header part end-->
+  <!-- Header part end-->
 
   <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
-  {{-- <section class="breadcrumb breadcrumb_bg">
+  <section class="breadcrumb breadcrumb_bg">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2>Order Confirmation</h2>
-              <p>Home <span>-</span> Order Confirmation</p>
+              <h2>contact us</h2>
+              <p>Home <span>-</span> contact us</p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-  <section class="bredcrumb breadcumb_bg breacrumb_bgg">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10 mt-5"
-                style="display: flex; flex-direction: row; align-content: center; justify-content: space-between; align-items: center">
-                <div>
-
-                    <img src="{{ asset('img') }}/images__2_-removebg-preview.png" height="300px" alt="">
-                </div>
-                <div class="breadcrumb_iner">
-                    <div class="breadcrumb_iner_item">
-                        <h2>Order Confirmation</h2>
-                        <p>Home <span>-</span> Order Confirmation</p>
-                    </div>
-                </div>
-                <div>
-
-                    <img src="{{ asset('img') }}/model1.png" height="300px" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-  <!-- breadcrumb start-->
-
-  <!--================ confirmation part start =================-->
-  {{-- @dump($orders[0]['created_at']->format('Y-m-d H:i:s')) --}}
-  <section class="confirmation_part padding_top">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-12">
-                  <div class="confirmation_tittle">
-                      <span>Thank you. Your order has been received.</span>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-lx-4">
-          <div class="single_confirmation_details">
-            <h4>order info</h4>
-            <ul>
-              {{-- <li>
-                <p>order number</p><span>: 60235</span>
-              </li> --}}
-              <li>
-                {{-- {{ $orders[0] }} --}}
-                <p>date</p><span>: {{ $orders[0]['created_at']->format('Y-m-d H:i:s') }}</span>
-            </li>
-            <li>
-                <p>total</p><span>: {{ $total }}</span>
-              </li>
-              {{-- <li>
-                <p>mayment methord</p><span>: Check payments</span>
-              </li> --}}
-            </ul>
-        </div>
-    </div>
-        {{-- <div class="col-lg-6 col-lx-4">
-          <div class="single_confirmation_details">
-            <h4>Billing Address</h4>
-            <ul>
-              <li>
-                <p>Street</p><span>: 56/8</span>
-            </li>
-            <li>
-                <p>city</p><span>: Los Angeles</span>
-            </li>
-            <li>
-                <p>country</p><span>: United States</span>
-              </li>
-              <li>
-                  <p>postcode</p><span>: 36952</span>
-                </li>
-            </ul>
-        </div>
-        </div> --}}
-        <div class="col-lg-6 col-lx-4">
-            <div class="single_confirmation_details">
-                <h4>shipping Address</h4>
-                <ul>
-                    <li>
-                <p>governorate</p><span>: {{ $orders[0]['governorate'] }}</span>
-            </li>
-            <li>
-                <p>address</p><span>: {{ $orders[0]['address'] }}</span>
-                {{-- <p>city</p><span>: Los Angeles</span> --}}
-            </li>
-            {{-- <li>
-                <p>country</p><span>: United States</span>
-            </li>
-              <li>
-                  <p>postcode</p><span>: 36952</span>
-                </li> --}}
-            </ul>
-          </div>
-        </div>
-      </div>
-      {{-- @dump($orders) --}}
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="order_details_iner">
-            <h3>Order Details</h3>
-            <table class="table table-borderless">
-              <thead>
-                <tr>
-                  <th scope="col" colspan="2">Product</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($orders as $order)
-
-                <tr>
-                    <th colspan="2"><span>{{ $order['name'] }}</span></th>
-                    <th>x{{ $order['quantity'] }}</th>
-                    <th> <span>{{ $order['total'] }}</span></th>
-                </tr>
-                @endforeach
-                {{-- <tr>
-                  <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                  <th>x02</th>
-                  <th> <span>$720.00</span></th>
-                </tr>
-                <tr>
-                  <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                  <th>x02</th>
-                  <th> <span>$720.00</span></th>
-                </tr>
-                <tr>
-                  <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                  <th>x02</th>
-                  <th> <span>$720.00</span></th>
-                </tr> --}}
-                <tr>
-                  <th colspan="3">Subtotal</th>
-                  <th> <span>{{ $total }}</span></th>
-                </tr>
-                <tr>
-                  <th colspan="3">shipping</th>
-                  <th><span>100</span></th>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th scope="col" colspan="3">Quantity</th>
-                  <th scope="col">{{ $total+100 }}</th>
-                </tr>
-              </tfoot>
-            </table>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!--================ confirmation part end =================-->
+  <!-- breadcrumb start-->
+
+  <!-- ================ contact section start ================= -->
+  <section class="contact-section padding_top">
+    <div class="container">
+      <div class="d-none d-sm-block mb-5 pb-4">
+        <div id="map" style="height: 480px;"></div>
+        <script>
+          function initMap() {
+            var uluru = {
+              lat: -25.363,
+              lng: 131.044
+            };
+            var grayStyles = [{
+                featureType: "all",
+                stylers: [{
+                    saturation: -90
+                  },
+                  {
+                    lightness: 50
+                  }
+                ]
+              },
+              {
+                elementType: 'labels.text.fill',
+                stylers: [{
+                  color: '#ccdee9'
+                }]
+              }
+            ];
+            var map = new google.maps.Map(document.getElementById('map'), {
+              center: {
+                lat: -31.197,
+                lng: 150.744
+              },
+              zoom: 9,
+              styles: grayStyles,
+              scrollwheel: false
+            });
+          }
+        </script>
+        <script
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap">
+        </script>
+
+      </div>
+
+
+      <div class="row">
+        <div class="col-12">
+          <h2 class="contact-title">Get in Touch</h2>
+        </div>
+        <div class="col-lg-8">
+          <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm"
+            novalidate="novalidate">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+
+                  <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9"
+                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"
+                    placeholder='Enter Message'></textarea>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" name="name" id="name" type="text" onfocus="this.placeholder = ''"
+                    onblur="this.placeholder = 'Enter your name'" placeholder='Enter your name'>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" name="email" id="email" type="email" onfocus="this.placeholder = ''"
+                    onblur="this.placeholder = 'Enter email address'" placeholder='Enter email address'>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''"
+                    onblur="this.placeholder = 'Enter Subject'" placeholder='Enter Subject'>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <a href="#" class="btn_3 button-contactForm">Send Message</a>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-4">
+          <div class="media contact-info">
+            <span class="contact-info__icon"><i class="ti-home"></i></span>
+            <div class="media-body">
+              <h3>Buttonwood, California.</h3>
+              <p>Rosemead, CA 91770</p>
+            </div>
+          </div>
+          <div class="media contact-info">
+            <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+            <div class="media-body">
+              <h3>00 (440) 9865 562</h3>
+              <p>Mon to Fri 9am to 6pm</p>
+            </div>
+          </div>
+          <div class="media contact-info">
+            <span class="contact-info__icon"><i class="ti-email"></i></span>
+            <div class="media-body">
+              <h3>support@colorlib.com</h3>
+              <p>Send us your query anytime!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ contact section end ================= -->
 
   <!--::footer_part start::-->
   <footer class="footer_part">
@@ -404,62 +350,31 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
   <!-- jquery plugins here-->
   <!-- jquery -->
-  {{-- <script src="js/jquery-1.12.1.min.js"></script> --}}
-  <script src="{{ asset('js') }}/jquery-1.12.1.min.js"></script>
+  <script src="js/jquery-1.12.1.min.js"></script>
   <!-- popper js -->
-  {{-- <script src="js/popper.min.js"></script> --}}
-  <script src="{{ asset('js') }}/popper.min.js"></script>
+  <script src="js/popper.min.js"></script>
   <!-- bootstrap js -->
-  {{-- <script src="js/bootstrap.min.js"></script> --}}
-  <script src="{{ asset('js') }}/bootstrap.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <!-- easing js -->
-  {{-- <script src="js/jquery.magnific-popup.js"></script> --}}
-  <script src="{{ asset('js') }}/jquery.magnific-popup.js"></script>
+  <script src="js/jquery.magnific-popup.js"></script>
   <!-- swiper js -->
-  {{-- <script src="js/swiper.min.js"></script> --}}
-  <script src="{{ asset('js') }}/swiper.min.js"></script>
+  <script src="js/swiper.min.js"></script>
   <!-- swiper js -->
-  {{-- <script src="js/masonry.pkgd.js"></script> --}}
-  <script src="{{ asset('js') }}/masonry.pkgd.js"></script>
+  <script src="js/masonry.pkgd.js"></script>
   <!-- particles js -->
-  {{-- <script src="js/owl.carousel.min.js"></script> --}}
-  <script src="{{ asset('js') }}/owl.carousel.min.js"></script>
-  {{-- <script src="js/jquery.nice-select.min.js"></script> --}}
-  <script src="{{ asset('js') }}/jquery.nice-select.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.nice-select.min.js"></script>
   <!-- slick js -->
-  {{-- <script src="js/slick.min.js"></script> --}}
-  <script src="{{ asset('js') }}/slick.min.js"></script>
-  {{-- <script src="js/jquery.counterup.min.js"></script> --}}
-  <script src="{{ asset('js') }}/jquery.counterup.min.js"></script>
-  {{-- <script src="js/waypoints.min.js"></script> --}}
-  <script src="{{ asset('js') }}/waypoints.min.js"></script>
-  {{-- <script src="js/contact.js"></script> --}}
-  <script src="{{ asset('js') }}/contact.js"></script>
-  {{-- <script src="js/jquery.ajaxchimp.min.js"></script> --}}
-  <script src="{{ asset('js') }}/jquery.ajaxchimp.min.js"></script>
-  {{-- <script src="js/jquery.form.js"></script> --}}
-  <script src="{{ asset('js') }}/jquery.form.js"></script>
-  {{-- <script src="js/jquery.validate.min.js"></script> --}}
-  <script src="{{ asset('js') }}/jquery.validate.min.js"></script>
-  {{-- <script src="js/mail-script.js"></script> --}}
-  <script src="{{ asset('js') }}/mail-script.js"></script>
-  {{-- <script src="js/stellar.js"></script> --}}
-  <script src="{{ asset('js') }}/stellar.js"></script>
-  {{-- <script src="js/price_rangs.js"></script> --}}
-  <script src="{{ asset('js') }}/price_rangs.js"></script>
+  <script src="js/slick.min.js"></script>
+  <script src="js/jquery.counterup.min.js"></script>
+  <script src="js/waypoints.min.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/jquery.ajaxchimp.min.js"></script>
+  <script src="js/jquery.form.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <script src="js/mail-script.js"></script>
   <!-- custom js -->
-  {{-- <script src="js/custom.js"></script> --}}
-  <script src="{{ asset('js') }}/custom.js"></script>
+  <script src="js/custom.js"></script>
 </body>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
 
 </html>

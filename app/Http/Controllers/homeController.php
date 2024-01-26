@@ -134,22 +134,22 @@ class homeController extends Controller
         //     return redirect()->to('/login')->with('message', 'you should login firstly ');
         // dd($this->checkIfAuth());
         // dd(auth()->user());
-        if($this->checkIfAuth()==false)
-        return redirect()->to('/login')->with('message', 'you should login firstly ');
-// dd('fds;');
+        if ($this->checkIfAuth() == false)
+            return redirect()->to('/login')->with('message', 'you should login firstly ');
+        // dd('fds;');
 
-            // return redirect()->to('/login')->with('message', 'you should login firstly ');
+        // return redirect()->to('/login')->with('message', 'you should login firstly ');
 
-            // $this->checkIfAuth('/login','you should login firstly');
-            // dd('ioe');
+        // $this->checkIfAuth('/login','you should login firstly');
+        // dd('ioe');
         // else {
-            // $cart = Cart_products::where('product_id', $id)->join('carts','carts.id' , '=','cart_products.cart_id' )
-            //     ->select('carts.*', 'cart_products')
-            //     ->get();
-            // dd(Cart_products::where('product_id', $id)->join('carts','carts.id' , '=','cart_products.cart_id' )
-            //     ->select('carts.*', 'cart_products.cart_id')
-            //     ->toSql());
-            // dd(auth()->user());
+        // $cart = Cart_products::where('product_id', $id)->join('carts','carts.id' , '=','cart_products.cart_id' )
+        //     ->select('carts.*', 'cart_products')
+        //     ->get();
+        // dd(Cart_products::where('product_id', $id)->join('carts','carts.id' , '=','cart_products.cart_id' )
+        //     ->select('carts.*', 'cart_products.cart_id')
+        //     ->toSql());
+        // dd(auth()->user());
         //     dd( DB::table('carts')
         //     ->join('cart_products', 'carts.id', '=', 'cart_products.cart_id')
         //     ->select('carts.*', 'cart_products.product_id')
@@ -158,101 +158,101 @@ class homeController extends Controller
         //     ->get(),
         //     $cart=Cart::where('product_id', $id)->where('user_id',auth()->user()->id)->first()
         // );
-            // $cart=Cart::where('product_id', $id)->where('user_id',auth()->user()->id)->first();
-            $cart=DB::table('carts')
+        // $cart=Cart::where('product_id', $id)->where('user_id',auth()->user()->id)->first();
+        $cart = DB::table('carts')
             ->join('cart_products', 'carts.id', '=', 'cart_products.cart_id')
             ->select('carts.*', 'cart_products.product_id')
             ->where('cart_products.product_id', '=', $id)
             ->where('carts.user_id', '=', auth()->user()->id)
             ->get();
-// dd($cart);
+        // dd($cart);
 
-                // dd($cart);
-            // dd(count($cart));
+        // dd($cart);
+        // dd(count($cart));
 
-            $productData = Product::select('designer_id', 'stock', 'price_after_discount')->where('id', $id)->first();
-            // dd($productData);
-            // $cart = Cart::where('product_id', $id)->where('user_id', auth()->user()['id'])->first();
-            // $allCartItem = Cart_products::where('product_id', $id)->join('carts', 'cart_products.cart_id', '=', 'carts.id')
-            //     ->select('carts.*', 'cart_products.product_id')
-            //     ->get();
-            $allCartItem=Cart::where('product_id', $id)->get();
-// dd(Cart::where('user_id',auth()->user()->id)->get());
-                // $cart->update(['quantity' => $cart->quantity + $request->all()['quantity'], 'total' => $productData['price_after_discount'] * ($cart['quantity'] + $request->all()['quantity'])]);
-            $totalItem = 0;
-            for ($i = 0; $i < count($allCartItem); $i++)
-                $totalItem += $allCartItem[$i]['quantity'];
-            // dd($allCartItem);
-            // dd(($request->all()['quantity'] + $totalItem));
-            // dd($productData['stock']);
-            // dd($productData['stock'] >= ($request->all()['quantity'] + $totalItem));
-            if ($productData['stock'] >= $request->all()['quantity'] + $totalItem) {
-                // $cart = Cart_products::where('product_id', $id)->join('carts', 'cart_products.cart_id', '=', 'carts.id')
-                //     ->select('carts.*', 'cart_products.created_at')->where('user_id', auth()->user()['id'])
-                //     ->first();
-                // dd($cart);
-                if (count($cart) == 0) {
+        $productData = Product::select('designer_id', 'stock', 'price_after_discount')->where('id', $id)->first();
+        // dd($productData);
+        // $cart = Cart::where('product_id', $id)->where('user_id', auth()->user()['id'])->first();
+        // $allCartItem = Cart_products::where('product_id', $id)->join('carts', 'cart_products.cart_id', '=', 'carts.id')
+        //     ->select('carts.*', 'cart_products.product_id')
+        //     ->get();
+        $allCartItem = Cart::where('product_id', $id)->get();
+        // dd(Cart::where('user_id',auth()->user()->id)->get());
+        // $cart->update(['quantity' => $cart->quantity + $request->all()['quantity'], 'total' => $productData['price_after_discount'] * ($cart['quantity'] + $request->all()['quantity'])]);
+        $totalItem = 0;
+        for ($i = 0; $i < count($allCartItem); $i++)
+            $totalItem += $allCartItem[$i]['quantity'];
+        // dd($allCartItem);
+        // dd(($request->all()['quantity'] + $totalItem));
+        // dd($productData['stock']);
+        // dd($productData['stock'] >= ($request->all()['quantity'] + $totalItem));
+        if ($productData['stock'] >= $request->all()['quantity'] + $totalItem) {
+            // $cart = Cart_products::where('product_id', $id)->join('carts', 'cart_products.cart_id', '=', 'carts.id')
+            //     ->select('carts.*', 'cart_products.created_at')->where('user_id', auth()->user()['id'])
+            //     ->first();
+            // dd($cart);
+            if (count($cart) == 0) {
 
-//                     dd($lastCartRecord = Cart::select('id')->latest('id')->first()['id']
-//                 );
-//                     dd(Cart::count());
-// dd("wf");
-                    Cart::create([
-                        'total' => $request->all()['quantity'] * $productData['price_after_discount'],
-                        'status' => 'pending',
-                        'quantity' => $request->all()['quantity'],
-                        'product_id' => $id,
-                        'user_id' => auth()->user()['id'],
-                        'designer_id' => $productData['designer_id'],
+                //                     dd($lastCartRecord = Cart::select('id')->latest('id')->first()['id']
+                //                 );
+                //                     dd(Cart::count());
+                // dd("wf");
+                Cart::create([
+                    'total' => $request->all()['quantity'] * $productData['price_after_discount'],
+                    'status' => 'pending',
+                    'quantity' => $request->all()['quantity'],
+                    'product_id' => $id,
+                    'user_id' => auth()->user()['id'],
+                    'designer_id' => $productData['designer_id'],
 
-                    ]);
-                    Cart_products::create([
-                        'quantity' => $request->all()['quantity'],
-                        // 'status'=>'pending',
-                        'price' => $request->all()['quantity'] * $productData['price_after_discount'],
-                        'product_id' => $id,
-                        'cart_id' => Cart::select('id')->latest('id')->first()['id'],
-                        // 'user_id'=>auth()->user()['id'],
-                        // 'designer_id'=>$productData['designer_id'],
+                ]);
+                Cart_products::create([
+                    'quantity' => $request->all()['quantity'],
+                    // 'status'=>'pending',
+                    'price' => $request->all()['quantity'] * $productData['price_after_discount'],
+                    'product_id' => $id,
+                    'cart_id' => Cart::select('id')->latest('id')->first()['id'],
+                    // 'user_id'=>auth()->user()['id'],
+                    // 'designer_id'=>$productData['designer_id'],
 
-                    ]);
-                    return redirect()->back()->with('message', 'added sucess ');
-                } else {
-                    // Cart::where('product_id', $id)->where('user_id', auth()->user()['id'])->first()->update(['quantity'=>++$cart['quantity']]);
-                    $carts_id = Cart_products::where('product_id', $id)->get();
-                    // dd($carts_id);
-                    if ($carts_id) {
-                        foreach ($carts_id as $cart_id) {
-                            $cartItem = Cart::where('id', $cart_id['cart_id'])->where('user_id', auth()->user()['id'])->first();
-                            if ($cartItem) {
-                                // dd($request->all()['quantity']);
-                                // dd($cartItem);
-                                // dd($cartItem['quantity']);
+                ]);
+                return redirect()->back()->with('message', 'added sucess ');
+            } else {
+                // Cart::where('product_id', $id)->where('user_id', auth()->user()['id'])->first()->update(['quantity'=>++$cart['quantity']]);
+                $carts_id = Cart_products::where('product_id', $id)->get();
+                // dd($carts_id);
+                if ($carts_id) {
+                    foreach ($carts_id as $cart_id) {
+                        $cartItem = Cart::where('id', $cart_id['cart_id'])->where('user_id', auth()->user()['id'])->first();
+                        if ($cartItem) {
+                            // dd($request->all()['quantity']);
+                            // dd($cartItem);
+                            // dd($cartItem['quantity']);
 
-                                $cartItem->update(['quantity' => $cartItem['quantity'] + $request->all()['quantity'], 'total' => $productData['price_after_discount'] * ($cartItem['quantity'] + $request->all()['quantity'])]);
-                                break;
-                            }
+                            $cartItem->update(['quantity' => $cartItem['quantity'] + $request->all()['quantity'], 'total' => $productData['price_after_discount'] * ($cartItem['quantity'] + $request->all()['quantity'])]);
+                            break;
                         }
-                        return redirect()->back()->with('message', 'added sucess ');
                     }
-                    // quantity
-                    // $cart->update([
-                    //     'quantity' => $cart->quantity + $request->input('quantity'),
-                    //     'total' => $productData['price_after_discount'] * ($cart->quantity + $request->input('quantity'))
-                    // ]);
                     return redirect()->back()->with('message', 'added sucess ');
                 }
-            } else {
-                return redirect()->back()->with('message', 'no stock found ');
+                // quantity
+                // $cart->update([
+                //     'quantity' => $cart->quantity + $request->input('quantity'),
+                //     'total' => $productData['price_after_discount'] * ($cart->quantity + $request->input('quantity'))
+                // ]);
+                return redirect()->back()->with('message', 'added sucess ');
             }
-            // return redirect()->back()->with('message', 'added sucess ');
+        } else {
+            return redirect()->back()->with('message', 'no stock found ');
+        }
+        // return redirect()->back()->with('message', 'added sucess ');
         // }
     }
     public function cart()
     {
         // dd("wfd");
-        if($this->checkIfAuth()==false)
-            return redirect()->to('/login')->with('message', 'you should login firstly ');
+        // if($this->checkIfAuth()==false)
+        //     return redirect()->to('/login')->with('message', 'you should login firstly ');
         // $cart=Cart::where('user_id',auth()->user()->id)->get();
         // $cart=Cart::where('user_id',auth()->user()->id)->
         // join('products', 'carts.product_id', '=', 'products.id')
@@ -274,17 +274,28 @@ class homeController extends Controller
         // // ->where('cart_products.product_id', '=', $id)
         // ->where('carts.user_id', '=', auth()->user()->id)
         // ->get();
-        $cart = DB::table('carts')
-        ->join('cart_products', 'carts.id', '=', 'cart_products.cart_id')
-        ->join('products', 'cart_products.product_id', '=', 'products.id')
-        ->select('carts.*', 'cart_products.product_id', 'products.*')
+        if (auth()->user() != null) {
 
-        ->where('carts.user_id', '=', auth()->user()->id)
-    // ->where('cart_products.product_id', '=', 'product.id')
-    ->get();
-// dd($cart,$results);
-// dd($cart);
-            // dd($cart[0]->total);
+            $cart = DB::table('carts')
+                ->join('cart_products', 'carts.id', '=', 'cart_products.cart_id')
+                ->join('products', 'cart_products.product_id', '=', 'products.id')
+                ->select('carts.*', 'cart_products.product_id', 'products.*')
+
+                ->where('carts.user_id', '=', auth()->user()->id)
+                // ->where('cart_products.product_id', '=', 'product.id')
+                ->get();
+            $totalPrice = 0;
+            for ($i = 0; $i < count($cart); $i++)
+                $totalPrice += $cart[$i]->total;
+        }
+        else{
+            $cart = [] ;
+            $totalPrice = 0;
+        }
+        return view('home.cart', ['carts' => $cart, 'total' => $totalPrice]);
+        // dd($cart,$results);
+        // dd($cart);
+        // dd($cart[0]->total);
         // $cart = Cart_products::
         // join('carts', 'cart_products.cart_id', '=', 'carts.id')
         // ->select('carts.*', 'cart_products.product_id')
@@ -301,14 +312,12 @@ class homeController extends Controller
         // ->select('carts.*', 'products.*')
         // ->get();
         // dd($cart);
-        $totalPrice = 0;
-        for ($i = 0; $i < count($cart); $i++)
-            $totalPrice += $cart[$i]->total;
         // dd($totalPrice);
-        return view('home.cart', ['carts' => $cart, 'total' => $totalPrice]);
     }
     public function checkout()
     {
+          if($this->checkIfAuth()==false)
+            return redirect()->to('/login')->with('message', 'you should login firstly ');
         // dd(auth()->user());
         //         $c=Cart_products::join('carts', 'cart_products.cart_id', '=', 'carts.id')
         //         ->select('carts.*', 'cart_products.product_id')->get();
@@ -321,7 +330,7 @@ class homeController extends Controller
         // dd($cart);
         $totalPrice = 0;
         for ($i = 0; $i < count($cart); $i++)
-        $totalPrice += $cart[$i]['total'];
+            $totalPrice += $cart[$i]['total'];
         return view('home.checkout', ['carts' => $cart, 'total' => $totalPrice]);
     }
     public function setOreder(Request $request)
@@ -345,19 +354,19 @@ class homeController extends Controller
         // ->join('products', 'cart_products.product_id', '=', 'products.id')
         // ->select('carts.*', 'products.*', 'cart_products.product_id')
         // ->get();
-    //     $carts = DB::table('carts')
-    //     ->join('cart_products', 'carts.id', '=', 'cart_products.cart_id')
-    //     ->join('products', 'cart_products.product_id', '=', 'products.id')
-    //     ->select('carts.*', 'cart_products.product_id', 'products.*')
+        //     $carts = DB::table('carts')
+        //     ->join('cart_products', 'carts.id', '=', 'cart_products.cart_id')
+        //     ->join('products', 'cart_products.product_id', '=', 'products.id')
+        //     ->select('carts.*', 'cart_products.product_id', 'products.*')
 
-    //     ->where('carts.user_id', '=', auth()->user()->id)
-    // // ->where('cart_products.product_id', '=', 'product.id')
-    // ->get();
-    $carts = Cart_products::join('carts', 'cart_products.cart_id', '=', 'carts.id')
-    ->join('products', 'cart_products.product_id', '=', 'products.id')
-    ->select('carts.*', 'products.*', 'cart_products.*')
-    ->where('carts.user_id', '=', auth()->user()->id)
-    ->get();
+        //     ->where('carts.user_id', '=', auth()->user()->id)
+        // // ->where('cart_products.product_id', '=', 'product.id')
+        // ->get();
+        $carts = Cart_products::join('carts', 'cart_products.cart_id', '=', 'carts.id')
+            ->join('products', 'cart_products.product_id', '=', 'products.id')
+            ->select('carts.*', 'products.*', 'cart_products.*')
+            ->where('carts.user_id', '=', auth()->user()->id)
+            ->get();
         // $carts=Cart::where('user_id', auth()->user()['id'])->get();
         $flag = false;
         // dd($carts);
@@ -398,21 +407,21 @@ class homeController extends Controller
                 // Cart::where('product_id', $cart['product_id'])->where('user_id', auth()->user()->id)->delete();
                 Cart::where('id', $cart->cart_id)->delete();
             }
-            for($i=0;$i<count($carts);$i++)
-            Cart::where('id', $carts[$i]->cart_id)->delete();
+            for ($i = 0; $i < count($carts); $i++)
+                Cart::where('id', $carts[$i]->cart_id)->delete();
             // dd($`carts);
             // dd(Cart::get());
             //     else {
-                //        $flag = false;
-        //        break;
-        //    }
-            }
+            //        $flag = false;
+            //        break;
+            //    }
+        }
 
-            // dump($product);
+        // dump($product);
 
 
         // if ($flag) {
-            return redirect()->to('/home/cart/checkout/confirmation');
+        return redirect()->to('/home/cart/checkout/confirmation');
         // }
         // if($greaterThan){
 
@@ -424,10 +433,10 @@ class homeController extends Controller
     public function confirmation()
     {
         $orders = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
-        ->join('products', 'order_products.product_id', '=', 'products.id')
-        ->select('orders.*', 'products.*', 'order_products.order_id','order_products.quantity','order_products.product_id')
-        ->where('orders.user_id', '=', auth()->user()->id)
-        ->get();
+            ->join('products', 'order_products.product_id', '=', 'products.id')
+            ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.quantity', 'order_products.product_id')
+            ->where('orders.user_id', '=', auth()->user()->id)
+            ->get();
         // $orders=DB::table('orders')
         // ->join('order_products', 'orders.id', '=', 'order_products.order_id')
         // ->select('orders.*', 'order_products.*')
@@ -435,22 +444,23 @@ class homeController extends Controller
         // ->where('orders.user_id', '=', auth()->user()->id)
         // ->get();
         // dd($orders,$carts);
-        $total=0;
+        $total = 0;
         foreach ($orders as $order) {
-            $total+=$order['total'];
+            $total += $order['total'];
         }
         // dd($total);
-        return view('home.confirmation',['orders'=>$orders,'total'=>$total]);
+        return view('home.confirmation', ['orders' => $orders, 'total' => $total]);
     }
-    public function checkIfAuth(){
+    public function checkIfAuth()
+    {
         // dd('df');
         // dd(auth()->user() == null);
-        return (auth()->user() == null ? false :true);
+        return (auth()->user() == null ? false : true);
         // return false;
         // return redirect()->back();
         // if (auth()->user() == null){
 
-            // return redirect()->to($path)->with('message', $message);
+        // return redirect()->to($path)->with('message', $message);
         // }
     }
 }

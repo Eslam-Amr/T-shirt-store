@@ -43,7 +43,7 @@
 
 <body>
   <!--::header part start::-->
-  <header class="main_menu home_menu">
+  {{-- <header class="main_menu home_menu">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-12">
@@ -130,7 +130,9 @@
             </form>
         </div>
     </div>
-</header>
+</header> --}}
+@include('layout.navbar')
+
   <!-- Header part end-->
 
   <!--================Home Banner Area =================-->

@@ -28,7 +28,7 @@
 
 <body>
     <!--::header part start::-->
-    <header class="main_menu home_menu">
+    {{-- <header class="main_menu home_menu">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
@@ -104,7 +104,7 @@
                                     </div>
                                 </div> --}}
 
-                            </div>
+                            {{-- </div>
                         </div>
                     </nav>
                 </div>
@@ -119,7 +119,8 @@
                 </form>
             </div>
         </div>
-    </header>
+    </header> --}}
+    @include('layout.navbar')
     <!-- Header part end-->
 
     <!-- banner part start-->
@@ -209,7 +210,7 @@
     <!-- banner part start-->
 
     <!-- feature_part start-->
-    <section class="feature_part padding_top">
+    {{-- <section class="feature_part padding_top">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -253,7 +254,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- upcoming_event part start-->
 
     <!-- product_list start-->
@@ -401,11 +402,13 @@
                                 @for ($i = 4; $i < 6; $i++)
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="single_product_item">
+                                            <a href="{{ route('home.productDetails',$products[$i]->id) }}">
+
                                             {{-- <img src="img/product/product_1.png" alt=""> --}}
                                             <img class="product__img w-100 h-100 object-fit-cover"
                                                 src="{{ $products[$i]->image[0] == 'h' ? $products[$i]->image : asset('uplode') . '/RequestDesign/' . $products[$i]->image }}"
                                                 data-id="white">
-
+</a>
                                             <div class="single_product_text">
                                                 <h4>{{ $products[$i]['name'] }}</h4>
                                                 {{-- <h3>$150.00</h3> --}}
@@ -570,12 +573,14 @@
                     <div class="best_product_slider owl-carousel">
                         @foreach ($products as $product)
                             <div class="single_product_item">
+
                                 {{-- <img src="{{$product['image']}}" alt=""> --}}
                                 {{-- {{-- asset('uplode')}}/RequestDesign/ -- --}}
+                                <a href="{{ route('home.productDetails',$products[$i]->id) }}">
                                 <img class="product__img w-100 h-100 object-fit-cover"
-                                    src="{{ $product->image[0] == 'h' ? $product->image : asset('uplode') . '/RequestDesign/' . $product->image }}"
-                                    data-id="white">
-
+                                src="{{ $product->image[0] == 'h' ? $product->image : asset('uplode') . '/RequestDesign/' . $product->image }}"
+                                data-id="white">
+</a>
                                 {{-- <img src="{{asset('uplode')}}/RequestDesign/{{ $product['image'] }}" alt=""> --}}
                                 <div class="single_product_text">
                                     <h4>{{ $product['name'] }}</h4>
@@ -627,7 +632,7 @@
     <!-- product_list part end-->
 
     <!-- subscribe_area part start-->
-    <section class="subscribe_area section_padding">
+    {{-- <section class="subscribe_area section_padding">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
@@ -646,7 +651,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--::subscribe_area part end::-->
 
     <!-- subscribe_area part start-->
