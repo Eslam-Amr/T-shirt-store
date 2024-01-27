@@ -260,6 +260,8 @@
                 </tr>
               </thead>
               <tbody>
+                {{-- @dd(auth()->user())
+                @dd($orders) --}}
                 @foreach ($orders as $order)
 
                 <tr>

@@ -27,6 +27,7 @@
 </head>
 
 <body>
+    {{-- @dump(auth()->user()) --}}
     <!--::header part start::-->
     {{-- <header class="main_menu home_menu">
         <div class="container">
@@ -272,7 +273,7 @@
                     <div class="product_list_slider owl-carousel">
                         <div class="single_product_list_slider">
                             <div class="row align-items-center justify-content-between">
-                                @for ($i = 0; $i < 3; $i++)
+                                @for ($i = 0; $i < $numberOfProduct && $i<8; $i++)
                                     {{-- <div class="col-lg-3 col-sm-6">
                                      <div class="single_product_item">
                                          <img src="img/product/product_1.png" alt="">
@@ -299,7 +300,7 @@
                                                 <h3 style="text-decoration: line-through;">{{ $products[$i]['price'] }}
                                                     EGP</h3>
                                                 <h3>{{ $products[$i]['price_after_discount'] }} EGP</h3>
-                                                <a href="#" class="add_cart">+ add to cart<i
+                                                <a href="{{route('home.addToCart', $products[$i]['id'] )}}" class="add_cart">+ add to cart<i
                                                         class="ti-heart"></i></a>
                                             </div>
                                         </div>
@@ -399,7 +400,7 @@
                         </div>
                         <div class="single_product_list_slider">
                             <div class="row align-items-center justify-content-between">
-                                @for ($i = 4; $i < 6; $i++)
+                                @for ($i = 8; $i < $numberOfProduct -8 && $i<16; $i++)
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="single_product_item">
                                             <a href="{{ route('home.productDetails',$products[$i]->id) }}">
@@ -415,11 +416,13 @@
                                                 <h3 style="text-decoration: line-through;">{{ $products[$i]['price'] }}
                                                     EGP</h3>
                                                 <h3>{{ $products[$i]['price_after_discount'] }} EGP</h3>
-                                                <a href="#" class="add_cart">+ add to cart<i
+                                                <a href="{{route('home.addToCart', $products[$i]['id'] )}}" class="add_cart">+ add to cart<i
                                                         class="ti-heart"></i></a>
                                             </div>
                                         </div>
                                     </div>
+                                @endfor
+                            </div>
                                     {{-- <div class="single_product_item"> --}}
                                     {{-- <img src="{{$product['image']}}" alt=""> --}}
                                     {{-- {{-- asset('uplode')}}/RequestDesign/ -- --}}
@@ -432,7 +435,6 @@
                                     {{-- <h3 >{{ $products[$i]['price_after_discount'] }} EGP</h3> --}}
                                     {{-- </div>
                                 </div> --}}
-                                @endfor
                                 {{--    <div class="col-lg-3 col-sm-6">
                                     <div class="single_product_item">
                                         <img src="img/product/product_1.png" alt="">
@@ -513,7 +515,6 @@
                                         </div>
                                     </div>
                                 </div> --}}
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -576,7 +577,7 @@
 
                                 {{-- <img src="{{$product['image']}}" alt=""> --}}
                                 {{-- {{-- asset('uplode')}}/RequestDesign/ -- --}}
-                                <a href="{{ route('home.productDetails',$products[$i]->id) }}">
+                                <a href="{{ route('home.productDetails',$product->id) }}">
                                 <img class="product__img w-100 h-100 object-fit-cover"
                                 src="{{ $product->image[0] == 'h' ? $product->image : asset('uplode') . '/RequestDesign/' . $product->image }}"
                                 data-id="white">

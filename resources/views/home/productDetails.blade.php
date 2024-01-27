@@ -750,7 +750,7 @@
   <!--================End Product Description Area =================-->
 
   <!-- product_list part start-->
-  <section class="product_list best_seller">
+  {{-- <section class="product_list best_seller">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-12">
@@ -801,7 +801,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
   <!-- product_list part end-->
 
   <!--::footer_part start::-->

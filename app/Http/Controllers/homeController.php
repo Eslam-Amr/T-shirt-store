@@ -19,7 +19,9 @@ class homeController extends Controller
     {
         $products = Product::get();
         // dd($products);
-        return view('home.index', ['products' => $products]);
+        $numberOfProduct = $products->count();
+        // dd($numberOfProduct);
+        return view('home.index', ['products' => $products, 'numberOfProduct' => $numberOfProduct]);
     }
     public function productDetails($id)
     {
@@ -287,9 +289,8 @@ class homeController extends Controller
             $totalPrice = 0;
             for ($i = 0; $i < count($cart); $i++)
                 $totalPrice += $cart[$i]->total;
-        }
-        else{
-            $cart = [] ;
+        } else {
+            $cart = [];
             $totalPrice = 0;
         }
         return view('home.cart', ['carts' => $cart, 'total' => $totalPrice]);
@@ -316,7 +317,7 @@ class homeController extends Controller
     }
     public function checkout()
     {
-          if($this->checkIfAuth()==false)
+        if ($this->checkIfAuth() == false)
             return redirect()->to('/login')->with('message', 'you should login firstly ');
         // dd(auth()->user());
         //         $c=Cart_products::join('carts', 'cart_products.cart_id', '=', 'carts.id')

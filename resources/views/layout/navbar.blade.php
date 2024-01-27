@@ -22,7 +22,7 @@
                                     Shop
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                    <a class="dropdown-item" href="{{ route('category.index') }}"> shop category</a>
+                                    <a class="dropdown-item" href="{{ route('category.index','all') }}"> shop category</a>
                                     {{-- <a class="dropdown-item" href="single-product.html">product details</a> --}}
 
                                 </div>
@@ -34,11 +34,15 @@
                                     pages
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                    @guest
+                                        
+                                    <a class="dropdown-item" href="{{ route('register.index') }}">register</a>
                                     <a class="dropdown-item" href="{{ route('login.index') }}">user login</a>
-                                    <a class="dropdown-item" href="{{ route('designer.index') }}">designer login</a>
+                                    @endguest
+                                    <a class="dropdown-item" href="{{ route('register.designerRegisterView') }}">designer register</a>
                                     {{-- <a class="dropdown-item" href="tracking.html">tracking</a> --}}
-                                    <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                    <a class="dropdown-item" href="{{ route('home.cart') }}">shopping cart</a>
+                                    {{-- <a class="dropdown-item" href="checkout.html">product checkout</a> --}}
+                                    {{-- <a class="dropdown-item" href="{{ route('home.cart') }}">shopping cart</a> --}}
                                     {{-- <a class="dropdown-item" href="confirmation.html">confirmation</a> --}}
                                     {{-- <a class="dropdown-item" href="elements.html">elements</a> --}}
                                 </div>
@@ -58,6 +62,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('contact.index') }}">Contact</a>
                             </li>
+                            @auth
+                                
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home.logout') }}">logout</a>
+                            </li>
+                            @endauth
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">

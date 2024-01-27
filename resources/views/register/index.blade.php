@@ -191,19 +191,20 @@
                             <form class="row contact_form" action="{{ route('register.auth') }}" method="post" novalidate="novalidate">
                                 @csrf
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="name" value=""
-                                        placeholder="name">
+                                    <input type="text" class="form-control" id="name" name="name" 
+                                        placeholder="name" value="{{old('name')}}">
                                 </div>
+
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="email" value=""
+                                    <input type="text" class="form-control" id="name" name="email" 
                                         placeholder="email">
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="password" value=""
+                                    <input type="password" class="form-control" id="password" name="password" 
                                         placeholder="Password">
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="phone" name="phone" value=""
+                                    <input type="text" class="form-control" id="phone" name="phone" 
                                         placeholder="phone">
                                 </div>
                                 <div class="col-md-4 form-group">
