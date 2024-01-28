@@ -21,8 +21,8 @@ class Order_productsFactory extends Factory
         return [
             //
             // 'id'=>fake()->id(),
-            'quantity'=>fake()->numberBetween(1,10),
-            'price'=>fake()->numberBetween(400,10000),
+            // 'quantity'=>fake()->numberBetween(1,10),
+            // 'price'=>fake()->numberBetween(400,10000),
             'product_id' =>  Product::inRandomOrder()->first()->id,
             'order_id' =>  Order::inRandomOrder()->first()->id,
 

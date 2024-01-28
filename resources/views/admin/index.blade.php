@@ -67,6 +67,20 @@
                             <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.displayDesignsRequest') }}"> Control </a></button>
                         </div>
                 </div>
+                <div class="col-6 mt-5 ">
+                        <div class="col-8 text-center p-5 bg-dark">
+
+                            <h2>orders</h2>
+                            <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.displayOrder') }}"> Control </a></button>
+                        </div>
+                </div>
+                <div class="col-6 mt-5 ">
+                        <div class="col-8 text-center p-5 bg-dark">
+
+                            <h2>profit</h2>
+                            <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.displayProfit') }}"> Control </a></button>
+                        </div>
+                </div>
 
             </div>
         </div>

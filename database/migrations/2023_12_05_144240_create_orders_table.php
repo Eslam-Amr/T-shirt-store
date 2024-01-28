@@ -18,10 +18,13 @@ return new class extends Migration
             $table->string("email");
             $table->string("total");
             $table->string("status");
-            $table->string("notes");
+            $table->string("notes")->nullable();
             $table->string("governorate");
             $table->string("phone");
             $table->string("address");
+            $table->string("day");
+            $table->string("month");
+            $table->string("year");
 
 
 

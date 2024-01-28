@@ -22,7 +22,7 @@
                                     Shop
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                    <a class="dropdown-item" href="{{ route('category.index','all') }}"> shop category</a>
+                                    <a class="dropdown-item" href="{{ route('category.index',['all',0,500]) }}"> shop category</a>
                                     {{-- <a class="dropdown-item" href="single-product.html">product details</a> --}}
 
                                 </div>
@@ -35,7 +35,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                     @guest
-                                        
+
                                     <a class="dropdown-item" href="{{ route('register.index') }}">register</a>
                                     <a class="dropdown-item" href="{{ route('login.index') }}">user login</a>
                                     @endguest
@@ -63,7 +63,7 @@
                                 <a class="nav-link" href="{{ route('contact.index') }}">Contact</a>
                             </li>
                             @auth
-                                
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('home.logout') }}">logout</a>
                             </li>

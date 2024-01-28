@@ -35,7 +35,9 @@ Route::middleware([
 });
 
 Route::get('/home', [homeController::class, 'index'])->name('home.index');
-Route::get('/product/{key}', [categoryController::class, 'index'])->name('category.index');
+Route::get('/orderHistory', [homeController::class, 'orderHistory'])->name('home.orderHistory');
+Route::get('/product/{key}/{from}/{to}', [categoryController::class, 'index'])->name('category.index');
+Route::get('/product/{key}/{from}/{to}/filter', [categoryController::class, 'filter'])->name('category.filter');
 Route::get('/product/search', [categoryController::class, 'search'])->name('product.search');
 Route::get('/contact', [contactController::class, 'index'])->name('contact.index');
 Route::get('/logout', [loginController::class, 'logout'])->name('home.logout');
@@ -62,6 +64,11 @@ Route::controller(adminController::class)->prefix('admin')->middleware('auth:adm
     // Route::get('/admin/logout',[adminController::class,'logout'])->name('admin.logout');
     Route::get('/', 'index')->name('admin.index');
     Route::get('/user', 'displayUser')->name('admin.displayUser');
+    Route::get('/order', 'displayOrder')->name('admin.displayOrder');
+    Route::get('/profit', 'displayProfit')->name('admin.displayProfit');
+    Route::get('/profit/year', 'displayYearProfit')->name('admin.displayYearProfit');
+    Route::get('/profit/month', 'displayMonthProfit')->name('admin.displayMonthProfit');
+    Route::get('/profit/day', 'displayDayProfit')->name('admin.displayDayProfit');
     Route::get('/designRequest', 'displayDesignRequest')->name('admin.displayDesignsRequest');
     Route::get('/designRequest/{id}/show', 'showSpecificDesign')->name('admin.showSpecificDesign');
     Route::get('/designRequest/{id}/show/reject', 'rejectSpecificDesign')->name('admin.rejectSpecificDesign');

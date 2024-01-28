@@ -21,6 +21,10 @@ class OrderFactory extends Factory
             //
             // 'id'=>fake()->id(),
             'email'=>fake()->email(),
+            'day'=>now()->format('l'),
+            'month'=>now()->format('F'),
+            'year'=>now()->format('Y'),
+
             'total'=>fake()->numberBetween(100,10000),
             'status'=>'pending',
             'notes'=>fake()->paragraph(2),

@@ -1,7 +1,7 @@
 @include('layout.header')
 @include('layout.navbar')
 @include('layout.breadcrumb',['name' => 'Shop Category'])
-<form action="">
+<form action="{{ route('category.filter',['key' => 'all', 'from' => 0, 'to' => 500]) }}">
     <section class="cat_product_area section_padding">
         <div class="container">
             <div class="row">
@@ -14,26 +14,34 @@
                             <div class="widgets_inner">
                                 <ul class="list">
                                     <li>
-                                        <a href="{{ route('category.index','all') }}">all
-                                            <span>({{$numberOfProducts['menProduct']+$numberOfProducts['kidsProduct']+$numberOfProducts['womenProduct']}})</span>
-                                        </a>
+                                        <label for="all">all
+                                            <span>
+                                            ({{ $numberOfProducts['menProduct']+
+                                            $numberOfProducts['womenProduct']+
+                                            $numberOfProducts['kidsProduct'] }})
+                                            </span>
+                                        </label>
+                                        <input type="checkbox" {{ $key=='all'? 'checked' :''  }}    name="all" value="all" id="all">
                                     </li>
                                     <li>
-                                        <a href="{{ route('category.index','men') }}">men
+                                        <label for="men">men
                                             <span>({{$numberOfProducts['menProduct']}})</span>
-                                        </a>
+                                        </label>
+                                            <input type="checkbox" {{ $key[0]=='m'? 'checked' :''  }}   name="men" value="men" id="men">
                                     </li>
                                     <li>
-                                        <a href="{{ route('category.index','women') }}">women
+                                        <label for="women">women
 
                                             <span>({{$numberOfProducts['womenProduct']}})</span>
-                                        </a>
+                                        </label>
+                                        <input type="checkbox"  {{ $key[0]=='w'? 'checked' :''  }}  name="women" value="women" id="women">
                                     </li>
                                     <li>
-                                        <a href="{{ route('category.index','kids') }}">Kids
+                                        <label for="kids">Kids
 
                                             <span>({{$numberOfProducts['kidsProduct']}})</span>
-                                        </a>
+                                        </label>
+                                        <input type="checkbox" {{ $key[0]=='k'? 'checked' :''  }}   name="kids" value="kids" id="kids">
                                     </li>
 
                                 </ul>
@@ -46,15 +54,15 @@
                             <div class="widgets_inner">
                                 <div class="range_item">
                                     <!-- <div id="slider-range"></div> -->
-                                    <input type="text" class="js-range-slider" value="" />
+                                    <input type="text" class="js-range-slider"  />
                                     <div class="d-flex">
                                         <div class="price_text">
                                             <p>Price :</p>
                                         </div>
                                         <div class="price_value d-flex justify-content-center">
-                                            <input type="text" class="js-input-from" id="amount" readonly />
+                                            <input type="text" class="js-input-from"  name="from" id="amount" value="{{ $from }}" />
                                             <span>to</span>
-                                            <input type="text" class="js-input-to" id="amount" readonly />
+                                            <input type="text" class="js-input-to" id="amount"  name="to" value="{{ $to }}" />
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +75,7 @@
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
                                 <div class="single_product_menu">
-                                    <p><span>{{$numberOfProducts['menProduct']+$numberOfProducts['kidsProduct']+$numberOfProducts['womenProduct']}} </span> Prodict Found</p>
+                                    <p><span>{{$totalNoOfProduct}} </span> Prodict Found</p>
                                 </div>
                                 <div class="single_product_menu d-flex">
                                     <h5>short by : </h5>
@@ -76,7 +84,7 @@
                                         <option value="1">price</option>
                                         <option value="2">product</option>
                                     </select>
-                                </div>                     
+                                </div>
                                 <div class="single_product_menu d-flex">
                                     <div class="input-group">
                                         <input type="text" id="search" class="form-control" placeholder="search"
@@ -90,6 +98,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="submit" value="filter">
                 </form>
 
                     <div class="row align-items-center latest_product_inner">
@@ -109,16 +118,17 @@
                                 </div>
                             </div>
                             @endforeach
-                        <div class="col-lg-12">
-                            <div class="pageination">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item">
+                            <div class="col-lg-12">
+                                <div class="pageination">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-center">
+                                            {{ $products->links() }}
+                                            {{-- <li class="page-item">
                                             <a class="page-link" href="#" aria-label="Previous">
                                                 <i class="ti-angle-double-left"></i>
                                             </a>
                                         </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="{{ url('product?page=1') }}">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                                         <li class="page-item"><a class="page-link" href="#">3</a></li>
                                         <li class="page-item"><a class="page-link" href="#">4</a></li>
@@ -128,7 +138,7 @@
                                             <a class="page-link" href="#" aria-label="Next">
                                                 <i class="ti-angle-double-right"></i>
                                             </a>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </nav>
                             </div>
@@ -142,4 +152,3 @@
 
     <!-- product_list part end-->
 @include('layout.footer')
-  

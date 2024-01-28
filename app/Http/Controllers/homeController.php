@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Cart_products;
 use App\Models\Comment;
+use App\Models\Last_orders;
 use App\Models\Order;
 use App\Models\Order_products;
 use App\Models\Product;
@@ -125,17 +126,6 @@ class homeController extends Controller
     }
     public function addToCart(Request $request, $id)
     {
-        // dd($productData=Product::select('designer_id','stock','price_after_discount')->where('id', $id)->first());
-        // dd($request->all()['quantity']);
-        //         dd( Product::count());
-        //         dd(auth()->user()['id']);
-        // dd( Product::select('designer_id')->where('id', $id)->first()['designer_id']);
-        //  dd($id);
-        // dd(Product::select('designer_id')->where('id',$id)->first()['designer_id']);
-        // if (auth()->user() == null)
-        //     return redirect()->to('/login')->with('message', 'you should login firstly ');
-        // dd($this->checkIfAuth());
-        // dd(auth()->user());
         if ($this->checkIfAuth() == false)
             return redirect()->to('/login')->with('message', 'you should login firstly ');
         // dd('fds;');
@@ -208,10 +198,11 @@ class homeController extends Controller
                     'designer_id' => $productData['designer_id'],
 
                 ]);
+                // dd('kmsld');
                 Cart_products::create([
-                    'quantity' => $request->all()['quantity'],
+                    // 'quantity' => $request->all()['quantity'],
                     // 'status'=>'pending',
-                    'price' => $request->all()['quantity'] * $productData['price_after_discount'],
+                    // 'price' => $request->all()['quantity'] * $productData['price_after_discount'],
                     'product_id' => $id,
                     'cart_id' => Cart::select('id')->latest('id')->first()['id'],
                     // 'user_id'=>auth()->user()['id'],
@@ -346,7 +337,7 @@ class homeController extends Controller
             'email' => 'required|email|unique:users,email',
             'address' => 'required|min:3|max:100',
             'governorate' => 'required|min:3|max:80',
-            'note' => 'min:3|max:900',
+            'note' => 'nullable|max:900',
             'phone' => 'required|numeric|min_digits:11|max_digits:11',
         ]);
         // $product
@@ -384,7 +375,11 @@ class homeController extends Controller
                     'email' => $request->email,
                     'total' => $cart->total,
                     'status' => 'pending',
-                    'notes' => $request->note,
+                    'year' => now()->format('Y'),
+                    'month' => now()->format('F'),
+                    'day' =>  date('j'),
+
+                    'notes' => $request->note==null ? ' ':$request->note,
                     'governorate' => $request->governorate,
                     'phone' => $request->phone,
                     'address' => $request->address,
@@ -396,10 +391,16 @@ class homeController extends Controller
 
                 // $order = Order::create
                 Order_products::create([
-                    "quantity" => $cart->quantity,
-                    'price' => $cart->total,
+                    // "quantity" => $cart->quantity,
+                    // 'price' => $cart->total,
                     "order_id" => $order->id,
                     "product_id" => $cart->product_id,
+                ]);
+                Last_orders::create([
+                    "product_id" => $cart->product_id,
+                    "order_id" => $order->id,
+                    "user_id" => auth()->user()->id
+
                 ]);
                 $product->stock -= $cart->quantity;
                 $product->save();
@@ -435,22 +436,32 @@ class homeController extends Controller
     {
         $orders = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
             ->join('products', 'order_products.product_id', '=', 'products.id')
-            ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.quantity', 'order_products.product_id')
+            ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.product_id')
             ->where('orders.user_id', '=', auth()->user()->id)
             ->get();
+    //         $results = Product::join('Last_order', 'product.id', '=', 'Last_order.product_id')
+    // ->where('user_id', auth()->user()->id)
+    // ->select('product.*', 'Last_order.product_id')
+    // ->get();
+    $results = Product::join('Last_orders', 'products.id', '=', 'Last_orders.product_id')
+    ->join('orders', 'orders.id', '=', 'Last_orders.order_id')
+    ->where('Last_orders.user_id', auth()->user()->id)
+    ->select('products.*', 'Last_orders.product_id', 'orders.*')
+    ->get();
+
         // $orders=DB::table('orders')
         // ->join('order_products', 'orders.id', '=', 'order_products.order_id')
         // ->select('orders.*', 'order_products.*')
         // // ->where('cart_products.product_id', '=', $id)
         // ->where('orders.user_id', '=', auth()->user()->id)
         // ->get();
-        // dd($orders,$carts);
+        // dd($results);
         $total = 0;
-        foreach ($orders as $order) {
+        foreach ($results as $order) {
             $total += $order['total'];
         }
         // dd($total);
-        return view('home.confirmation', ['orders' => $orders, 'total' => $total]);
+        return view('home.confirmation', ['orders' => $orders, 'total' => $total, 'results' => $results]);
     }
     public function checkIfAuth()
     {
@@ -464,4 +475,14 @@ class homeController extends Controller
         // return redirect()->to($path)->with('message', $message);
         // }
     }
+     public function orderHistory(){
+        // $order=Order::where('user_id',auth()->user()->id)->get();
+        $orders = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
+            ->join('products', 'order_products.product_id', '=', 'products.id')
+            ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.quantity', 'order_products.product_id')
+            ->where('orders.user_id', '=', auth()->user()->id)
+            ->get();
+        // dd($orders);
+        return view('home.allOrder',['orders'=>$orders]);
+     }
 }

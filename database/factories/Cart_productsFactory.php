@@ -23,8 +23,8 @@ class Cart_productsFactory extends Factory
             // "id"=>fake()->id(),
             // 'product_id' =>  Product::inRandomOrder()->first()->id,
             // 'cart_id' =>  Cart::inRandomOrder()->first()->id,
-            "quantity"=> fake()->numberBetween(1,10),
-            "price"=> fake()->numberBetween(100,90000),
+            // "quantity"=> fake()->numberBetween(1,10),
+            // "price"=> fake()->numberBetween(100,90000),
             'cart_id' => Cart::inRandomOrder()->first()->id,
             'product_id' => Product::inRandomOrder()->first()->id,
         ];
