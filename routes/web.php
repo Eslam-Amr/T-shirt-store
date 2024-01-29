@@ -84,6 +84,10 @@ Route::controller(adminController::class)->prefix('admin')->middleware('auth:adm
 // designer
 Route::controller(designerController::class)->prefix('designer/admin')->middleware('auth:designer')->group(function () {
     Route::get('/','index')->name('designer.index');
+    Route::get('/profit','displayProfit')->name('designer.displayProfit');
+    Route::get('/profit/yaer','displayYearProfit')->name('designer.displayYearProfit');
+    Route::get('/profit/month','displayMonthProfit')->name('designer.displayMonthProfit');
+    Route::get('/profit/day','displayDayProfit')->name('designer.displayDayProfit');
     Route::get('/message','message')->name('designer.message');
     Route::get('/addDesign','addDesign')->name('designer.addDesign');
     Route::post('/addDesign/send','sendDesignRequest')->name('designer.sendDesignRequest');
