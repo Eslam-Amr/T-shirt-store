@@ -43,11 +43,17 @@
             <input type="text" name="designName"  class="form-control" id="exampleFormControlInput1" placeholder="Enter design name">
 
         </div>
-       <div class="mb-3">
+       {{-- <div class="mb-3">
             <label for="exampleFormControlInput2" class="form-label">design category</label>
             <input type="text" name="designCategory"  class="form-control" id="exampleFormControlInput2" placeholder="Enter design category">
 
-        </div>
+        </div> --}}
+        <select name="designCategory" class="w-100">
+            <option value="" selected disabled>Select Category</option>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Kids">Kids</option>
+        </select>
        <div class="mb-3">
             <label for="exampleFormControlInput3" class="form-label">price</label>
             <input type="number" name="price"  class="form-control" id="exampleFormControlInput3" placeholder="Enter design price">

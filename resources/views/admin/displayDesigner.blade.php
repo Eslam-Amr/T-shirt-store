@@ -14,27 +14,28 @@
 <table class="table border-dark">
     <thead>
         <tr>
-            <th>id</th>
+            {{-- <th>id</th> --}}
             <th>name</th>
             <th>portfolio</th>
             <th>email</th>
             <th>phone</th>
-            <th>status</th>
+            {{-- <th>status</th> --}}
             <th>delete</th>
             <th>update</th>
         </tr>
     </thead>
     <tbody>
+        {{-- @dd($designers[0]['id']) --}}
         @foreach ($designers as $designer )
         <tr>
-            <th>{{ $designer->id }}</th>
+            {{-- <th>{{ $designer->id }}</th> --}}
             <th>{{ $designer->name }}</th>
             <th>{{ $designer->portfolio }}</th>
             <th>{{ $designer->email }}</th>
             <th>{{ $designer->phone }}</th>
-            <th>{{ $designer->status }}</th>
+            {{-- <th>{{ $designer->status }}</th> --}}
             <th>
-               {{-- <button class="btn btn-danger "><a class="text-white" href="{{ route('admin.deletedesigner',$designer->id) }}">Delete</a></button> --}}
+               <button class="btn btn-danger "><a class="text-white" href="{{ route('admin.deleteDesigner',$designer->name) }}">Delete</a></button>
 
             </th>
             <th>

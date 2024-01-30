@@ -14,34 +14,30 @@
 <table class="table border-dark">
     <thead>
         <tr>
-            <th>id</th>
+
             <th>name</th>
-            {{-- <th>role</th> --}}
-            <th>email</th>
-            <th>phone</th>
-            <th>delete</th>
-            <th>update</th>
+            <th>total profit</th>
+
+
         </tr>
     </thead>
     <tbody>
-        @foreach ($users as $user )
+        @foreach ($profits as $profit )
         <tr>
-            <th>{{ $user->id }}</th>
-            <th>{{ $user->name }}</th>
-            {{-- <th>{{ $user->role }}</th> --}}
-            <th>{{ $user->email }}</th>
-            <th>{{ $user->phone }}</th>
-            <th>
+            <th>{{ $profit->name }}</th>
+            <th>{{ $profit->total_sum }}</th>
+
+            {{-- <th>
                <button class="btn btn-danger "><a class="text-white" href="{{ route('admin.deleteUser',$user->id) }}">Delete</a></button>
 
             </th>
             <th>
                 <button class="btn btn-warning "><a class="text-white" href="{{ route('admin.updateUserForm',$user->id) }}"> Update</a></button>
-            </th>
+            </th> --}}
         </tr>
 
         @endforeach
     </tbody>
 </table>
-{{ $users->links() }}
+{{ $profits->links() }}
 @endsection

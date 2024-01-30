@@ -60,12 +60,17 @@ Route::get('/register/verified', [registerController::class, 'verified'])->name(
 // Route::post('/register/verified/verifiedNumber',[registerController::class,'verifiedNumber'])->name('register.verifiedNumber');
 // designerConfirmed
 // displayDesignerRequest
+// designer_id
 Route::controller(adminController::class)->prefix('admin')->middleware('auth:admin')->group(function () {
     // Route::get('/admin/logout',[adminController::class,'logout'])->name('admin.logout');
     Route::get('/', 'index')->name('admin.index');
     Route::get('/user', 'displayUser')->name('admin.displayUser');
     Route::get('/order', 'displayOrder')->name('admin.displayOrder');
+    Route::get('/order/{id}/reject', 'rejectOrder')->name('admin.rejectOrder');
+    Route::get('/order/{id}/Shipping', 'ShippingOrder')->name('admin.ShippingOrder');
+    Route::get('/order/{id}/complete', 'completeOrder')->name('admin.completeOrder');
     Route::get('/profit', 'displayProfit')->name('admin.displayProfit');
+    Route::get('/profit/designerProfit', 'designerProfit')->name('admin.designerProfit');
     Route::get('/profit/year', 'displayYearProfit')->name('admin.displayYearProfit');
     Route::get('/profit/month', 'displayMonthProfit')->name('admin.displayMonthProfit');
     Route::get('/profit/day', 'displayDayProfit')->name('admin.displayDayProfit');
@@ -74,6 +79,7 @@ Route::controller(adminController::class)->prefix('admin')->middleware('auth:adm
     Route::get('/designRequest/{id}/show/reject', 'rejectSpecificDesign')->name('admin.rejectSpecificDesign');
     Route::get('/designRequest/{id}/show/add', 'addSpecificDesign')->name('admin.addSpecificDesign');
     Route::get('/designer', 'displayDesigner')->name('admin.displayDesigner');
+    Route::get('/designer/{id}/delete', 'deleteDesigner')->name('admin.deleteDesigner');
     Route::get('/designer/request', 'displayDesignerRequest')->name('admin.displayDesignerRequest');
     Route::get('/designer/request/confirmed/{id}', 'designerConfirmed')->name('admin.designerConfirmed');
     Route::get('/user/{id}/deleteUser', 'deleteUser')->name('admin.deleteUser');

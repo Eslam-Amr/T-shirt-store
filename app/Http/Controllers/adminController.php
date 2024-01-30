@@ -6,8 +6,9 @@ use App\Models\Order;
 use Illuminate\Support\Str;
 
 use App\Http\Requests\userDataUpdateRequest;
+use App\Models\Admin;
 use App\Models\admin_design_request;
-use App\Models\designer;
+use App\Models\Designer;
 use App\Models\Message;
 use App\Models\Order_products;
 use App\Models\Portfolio;
@@ -15,6 +16,7 @@ use App\Models\Product;
 use App\Models\ToBeDesigner;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class adminController extends Controller
 {
@@ -35,14 +37,66 @@ class adminController extends Controller
     }
     function displayDesigner()
     {
-        $designers = designer::paginate(5);
+        // $designers = designer::paginate(5);
+    //     $designers = Portfolio::join('users', 'users.id', '=', 'portofolios.user_id')
+    // ->select('users.name', 'portofolios.portfolio','portofolios.user_id', 'users.email', 'users.phone')
+    // ->paginate(12);
+    $designers = Portfolio::join('users', 'users.id', '=', 'portofolios.user_id')
+    ->where('users.role', '=', 'designer')
+    ->select('users.name', 'portofolios.portfolio', 'users.id', 'users.email', 'users.phone')
+    ->paginate(12);
         // $designers = designer::where('role', 'user')->paginate(
         //     $perPage = 5, $columns = ['*'], $pageName = 'designers'
         // );
+        // dd($designers);
+        // dd($results);
         return view('admin.displayDesigner', ['designers' => $designers]);
     }
+    // public function deleteDesigner($id){
+
+    //     // dd(Designer::where('role','designer')->first());
+    //     $designer = User::where('id', $id)->first();
+    //     dd($id);
+    //     $designer->role = 'user';
+    //     $designer->save();
+    //     // dd($id);
+    //     return redirect()->back()->with('message', 'status edited successfully');
+
+    //     dd($id);
+    // }
+
+
+
+    public function deleteDesigner($id){
+        // Retrieve the designer by ID
+        // dd($id);
+        $designer = Designer::where('name','=', $id)->first();
+        // dd($designer['id']);
+
+        // Dump the designer variable to see its details
+        // dd(Portfolio::where('user_id',$designer['id'])->get());
+        Portfolio::where('user_id',$designer['id'])->delete();
+        // Check if the designer exists
+        if ($designer) {
+            // Update the role to 'user'
+            $designer->role = 'user';
+            $designer->save();
+
+            // Redirect back with a success message
+            return redirect()->back()->with('message', 'Designer status edited successfully');
+        } else {
+            // Redirect back with an error message if the designer is not found
+            return redirect()->back()->with('message', 'Designer not found');
+        }
+    }
+
+
+
+
+
     function deleteUser($id)
     {
+        // dd($id);
         User::find($id)->delete();
         return redirect()->to('/admin/user')->with('message', 'deleted successfly');
     }
@@ -155,6 +209,14 @@ class adminController extends Controller
         $request->validate([
             'stock' => 'required',
         ]);
+        $category_id=0;
+        if($design['design_category']=='men')
+        $category_id=1;
+        else if($design['design_category']=='women')
+        $category_id=2;
+        else if($design['design_category']=='kids')
+        $category_id=3;
+        // dd($design['design_category']);
         // $x = auth()->user();
         // dd($x['id']);
         // dd($design['user_id']);
@@ -176,7 +238,7 @@ class adminController extends Controller
             'bestSeller' => 0,
             'image' => $design['design'],
             // 'category'=>$design['design_category'],
-            'category_id' => 1,
+            'category_id' => $category_id,
             'designer_id' => $design['user_id'],
             'status' => 'pending',
             'description' => $design['description'],
@@ -195,10 +257,15 @@ class adminController extends Controller
     }
     public function displayOrder()
     {
+        // $orders = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
+        //     ->join('products', 'order_products.product_id', '=', 'products.id')
+        //     ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.product_id')
+        //     ->get();
         $orders = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
             ->join('products', 'order_products.product_id', '=', 'products.id')
-            ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.product_id')
-            ->paginate(5);
+            ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.product_id', 'orders.status as orderStatus')
+            ->paginate(12);
+
         //     dd($currentMonth = now()->format('F')
         // ,$currentYear = now()->format('Y'),$currentDayOfWeek = now()->format('l'));
         // dd($orders);
@@ -206,7 +273,35 @@ class adminController extends Controller
     }
     public function displayProfit()
     {
-        return view('admin.displayProfit');
+        //     $result = DB::table('orders')
+        // ->join('users', 'orders.designer_id', '=', 'users.id')
+        // ->orderBy('users.name')
+        // ->select(DB::raw('SUM(orders.total) as total_sum'), 'orders.total', 'orders.designer_id', 'users.name')
+        // ->groupBy('orders.total', 'orders.designer_id', 'users.name')
+        // ->get();
+        // $result = DB::table('orders')
+        // ->join('users', 'orders.designer_id', '=', 'users.id')
+        // ->where('orders.status', '=', 'completed')
+        // ->orderBy('users.name')
+        // ->select(DB::raw('SUM(orders.total) as total_sum'), 'orders.total', 'orders.designer_id', 'users.name')
+        // ->groupBy('orders.total', 'orders.designer_id', 'users.name')
+        // ->get();
+        $totalProfit = Order::where('status', 'completed')->sum('total');
+        return view('admin.displayProfit', ['totalProfit' => $totalProfit]);
+    }
+    public function designerProfit()
+    {
+        $result = DB::table('orders')
+            ->join('users', 'orders.designer_id', '=', 'users.id')
+            ->where('orders.status', '=', 'completed')
+            ->where('users.role', '=', 'designer')
+            ->orderBy('users.name')
+            ->select(DB::raw('SUM(orders.total) as total_sum'), 'orders.total', 'orders.designer_id', 'users.name')
+            ->groupBy('orders.total', 'orders.designer_id', 'users.name')
+            ->paginate(12);
+
+        // dd($result);
+        return view('admin.designerProfit', ['profits' => $result]);
     }
     public function displayYearProfit()
     {
@@ -255,8 +350,30 @@ class adminController extends Controller
         // dd($monthProfit);
         return view('admin.displayDayProfit', ['monthProfit' => $monthProfit]);
     }
-    function calculateProfitForDay( $day) {
+    function calculateProfitForDay($day)
+    {
 
         return Order::where('day', $day)->where('status', 'completed')->sum('total');
+    }
+    public function rejectOrder($id)
+    {
+        $this->editOrderStatus($id, 'rejected');
+        return redirect()->back()->with('message', 'status edited successfully');
+    }
+    public function shippingOrder($id)
+    {
+        $this->editOrderStatus($id, 'shipping');
+        return redirect()->back()->with('message', 'status edited successfully');
+    }
+    public function completeOrder($id)
+    {
+        $this->editOrderStatus($id, 'completed');
+        return redirect()->back()->with('message', 'status edited successfully');
+    }
+    public function editOrderStatus($id, $status)
+    {
+        $order = Order::where('id', $id)->first();
+        $order->status = $status;
+        $order->save();
     }
 }

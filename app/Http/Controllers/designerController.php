@@ -40,7 +40,7 @@ class designerController extends Controller
         // dd($designerIds);
 
         $x = auth()->user();
-        // dd($x);
+        // dd($x['id']);
 // dd( implode('-',$x->id));
 
         // $x = auth()->user();
@@ -56,10 +56,11 @@ class designerController extends Controller
     // }
     // die;
 // dd($x['id']);
+// dd($request['designCategory']);
 
     $request->validate([
         'designName' => 'required|min:3|max:30',
-        'designCategory' => 'required|min:3|max:30',
+        'designCategory' => 'required',
         'design' => 'required|image|mimes:png,jpg,jpeg,gif|mimetypes:image/jpeg,image/png,image/gif',
         'price'=>'required',
         'discount'=>'required',
@@ -69,7 +70,7 @@ class designerController extends Controller
         $imageName = $this->imageProcessing($request, 'RequestDesign');
         admin_design_request::create([
             // 'user_id' => Designer::where('email',$x->email)->first()['id'],
-            'user_id' =>'16dff78c-f4cb-3818-9de2-3cccf6492265',
+            'user_id' =>$x['id'],
             'design_name' => $request->designName,
             'design_category' => $request->designCategory,
             'price' => $request->price,

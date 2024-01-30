@@ -43,13 +43,21 @@ transform: scale(1.1);
                 </a>
                 </div>
             <div  class="col-6 mt-5 ">
-                    <a style="display: block" href="">
+                    <a style="display: block" href="{{ route('admin.designerProfit') }}">
                     <div class="col-8 text-center p-5 bg-success c">
 
-                        <h2>sumtion profit </h2>
+                        <h2>designer profit</h2>
                         {{-- <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.displayProfit') }}"> Control </a></button> --}}
                     </div>
                 </a>
+                </div>
+            <div  class="col-12 mt-5 ">
+                    <div class="col-10 text-center p-5 bg-success c">
+
+                        <h2>sumtion of profit is {{ $totalProfit }} EGP </h2>
+                        {{-- <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.displayProfit') }}"> Control </a></button> --}}
+                    </div>
+
                 </div>
 
         </div>

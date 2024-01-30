@@ -392,6 +392,13 @@ return [
                     'can'  => 'viewAdminPanel',
 
                 ],
+                [
+                    'text' => 'order',
+                    'url'  => 'admin/order',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can'  => 'viewAdminPanel',
+
+                ],
                 // // }
                 [
                     'text' => 'designer',
@@ -414,13 +421,13 @@ return [
                     'can'  => 'viewAdminPanel',
                     // 'can'  => 'viewDesignerPanel',
                 ],
-                [
-                    'text' => 'profit',
-                    'url'  => 'admin/profit',
-                    'icon' => 'fas fa-fw fa-circle',
-                    'can'  => 'viewAdminPanel',
-                    // 'can'  => 'viewDesignerPanel',
-                ],
+                // [
+                //     'text' => 'profit',
+                //     'url'  => 'admin/profit',
+                //     'icon' => 'fas fa-fw fa-circle',
+                //     'can'  => 'viewAdminPanel',
+                //     // 'can'  => 'viewDesignerPanel',
+                // ],
                 [
                     'text' => 'Home',
                     'url'  => 'designer/admin',
@@ -447,44 +454,67 @@ return [
         //     'url'  => 'admin/user',
         //     'icon' => 'fas fa-fw fa-user',
         // ]
-        // [
-        //     'text'    => 'multilevel',
-        //     'icon'    => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text'    => 'level_one',
-        //             'url'     => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url'  => '#',
-        //                 ],
-        //                 [
-        //                     'text'    => 'level_two',
-        //                     'url'     => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //     ],
-        // ],
+        [
+            'text'    => 'profit',
+            'url'  => 'admin/profit',
+                    'icon' => 'fas fa-fw fa-circle',
+                    'can'  => 'viewAdminPanel',
+            // 'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'year',
+                    'url'  => 'admin/profit/year',
+                    'can'  => 'viewAdminPanel',
+
+                ],
+                [
+                    'text' => 'month',
+                    'url'  => 'admin/profit/month',
+                    'can'  => 'viewAdminPanel',
+
+                ],
+                [
+                    'text' => 'day',
+                    'url'  => 'admin/profit/day',
+                    'can'  => 'viewAdminPanel',
+
+                ],
+                [
+                    'text' => 'designer profit',
+                    'url'  => 'admin/profit/designerProfit',
+                    'can'  => 'viewAdminPanel',
+
+                ],
+                // [
+                //     'text'    => 'level_one',
+                //     'url'     => '#',
+                //     'submenu' => [
+                //         [
+                //             'text' => 'level_two',
+                //             'url'  => '#',
+                //         ],
+                //         [
+                //             'text'    => 'level_two',
+                //             'url'     => '#',
+                //             'submenu' => [
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url'  => '#',
+                //                 ],
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url'  => '#',
+                //                 ],
+                //             ],
+                //         ],
+                //     ],
+                // ],
+                // [
+                //     'text' => 'level_one',
+                //     'url'  => '#',
+                // ],
+            ],
+        ],
         // ['header' => 'labels'],
         // [
         //     'text'       => 'important',
