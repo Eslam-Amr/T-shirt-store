@@ -1,13 +1,18 @@
 <?php
 
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\desginerController;
 use App\Http\Controllers\designerController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\registerController;
+use App\Http\Controllers\VerificationController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,22 +38,37 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->name('verification.notice');
+// Route::post('/email/verify/{id}', function () {
+//     return view('auth.verify-email');
+// })->name('verification.verify');
+// Auth::routes([
+//     'verify'=>true
+// ]);
+// productDetailscheckout  orderHistory confirmOrder
+// In routes/web.php
+// Route::get('/verify-email/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
+// Route::get('/verify-email/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
 
+Route::get('/email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::get('/home', [homeController::class, 'index'])->name('home.index');
-Route::get('/orderHistory', [homeController::class, 'orderHistory'])->name('home.orderHistory');
+Route::get('/orderHistory', [OrderController::class, 'orderHistory'])->name('home.orderHistory');
 Route::get('/product/{key}/{from}/{to}', [categoryController::class, 'index'])->name('category.index');
 Route::get('/product/{key}/{from}/{to}/filter', [categoryController::class, 'filter'])->name('category.filter');
 Route::get('/product/search', [categoryController::class, 'search'])->name('product.search');
 Route::get('/contact', [contactController::class, 'index'])->name('contact.index');
 Route::get('/logout', [loginController::class, 'logout'])->name('home.logout');
-Route::get('/home/cart', [homeController::class, 'cart'])->name('home.cart');
-Route::get('/home/cart/checkout', [homeController::class, 'checkout'])->name('home.checkout');
-Route::post('/home/cart/checkout/setOreder', [homeController::class, 'setOreder'])->name('home.setOreder');
-Route::get('/home/cart/checkout/confirmation', [homeController::class, 'confirmation'])->name('home.confirmation');
-Route::get('/home/{id}/productDetails', [homeController::class, 'productDetails'])->name('home.productDetails');
-Route::get('/home/{id}/productDetails/addToCart', [homeController::class, 'addToCart'])->name('home.addToCart');
-Route::get('/home/{id}/productDetails/addComment', [homeController::class, 'addComment'])->name('home.addComment');
-Route::post('/home/{id}/productDetails/addReview', [homeController::class, 'addReview'])->name('home.addReview');
+Route::get('/home/cart', [CartController::class, 'cart'])->name('cart.index');
+Route::get('/home/cart/checkout', [OrderController::class, 'checkout'])->name('home.checkout');
+Route::post('/home/cart/checkout/setOreder', [OrderController::class, 'setOreder'])->name('home.setOreder');
+Route::get('/home/cart/checkout/confirmation', [OrderController::class, 'confirmation'])->name('home.confirmation');
+Route::get('/home/cart/checkout/confirmation/confirmOrder', [OrderController::class, 'confirmOrder'])->name('home.confirmOrder');
+Route::get('/home/{id}/productDetails', [ProductController::class, 'productDetails'])->name('home.productDetails');
+Route::get('/home/{id}/productDetails/addToCart', [CartController::class, 'addToCart'])->name('home.addToCart');
+Route::get('/home/{id}/productDetails/addComment', [ProductController::class, 'addComment'])->name('home.addComment');
+Route::post('/home/{id}/productDetails/addReview', [ProductController::class, 'addReview'])->name('home.addReview');
 // Route::get('/loginDesigner',[loginController::class,'designerLogin'])->name('designer.login');
 Route::get('/login', [loginController::class, 'index'])->name('login.index');
 Route::post('/login/logic', [loginController::class, 'login'])->name('login');

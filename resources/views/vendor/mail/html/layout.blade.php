@@ -25,7 +25,10 @@ width: 100% !important;
 </style>
 </head>
 <body>
-
+    <form class="d-inline" method="POST" action="{{ route('verification.verify', auth()->id()) }}">
+        @csrf
+        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+    </form>
 <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
 <tr>
 <td align="center">

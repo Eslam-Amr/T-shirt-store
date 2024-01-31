@@ -133,6 +133,7 @@
 
 
     <!-- breadcrumb start-->
+
     <section class="bredcrumb breadcumb_bg breacrumb_bgg">
         <div class="container">
             <div class="row justify-content-center">
@@ -157,6 +158,27 @@
             </div>
         </div>
     </section>
+    {{-- @if (session()->has('message'))
+    <div class="alert alert-danger" id="alert">
+
+        {{ session()->get('message') }}
+    </div>
+    <script type="text/javascript">
+        document.ready(setTimeout(function() {
+            document.getElementById('alert').remove()
+        }, 3000))
+    </script>
+@endif --}}
+<div class="" id="error-messages">
+    @error('email')
+        {{ $message }}
+        <br>
+    @enderror
+
+    @error('password')
+        {{ $message }}
+    @enderror
+</div>
     <!-- breadcrumb start-->
 
     <!--================login_part Area =================-->

@@ -11,25 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('billing_details', function (Blueprint $table) {
             $table->id();
             $table->string("first_name")->default('eslam');
             $table->string("last_name")->default('amr');
             $table->string("email");
-            $table->string("total");
-            $table->string("status");
-            $table->string("notes")->nullable();
-            $table->string("governorate");
             $table->string("phone");
+            $table->string("notes")->nullable();
+
+            $table->string("governorate");
+
             $table->string("address");
-            $table->string("day");
-            $table->string("month");
-            $table->string("year");
-            $table->string("quantity");
-
-
-
-            $table->foreignUuid('designer_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();
@@ -41,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('billing_details');
     }
 };

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\loginRequest;
+use Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,65 +21,22 @@ class loginController extends Controller
 
     function login(loginRequest $request)
     {
-        // dd("wqjklndf");
-        // $validator = $this->validateLogin($request->all());
         $validator = $request->validated();
-        // dd($request->all());
         $guards = array_keys(array_slice(config('auth.guards'), 0, -1));
-        // dd($validator);
-        // dd($guards[1]=='admin');
-        // dd($guards);
-        // foreach ($guards as $guard) {
-        //     if (Auth::guard($guard)->attempt($validator)) {
-        //         if ($guard == 'admin')
-        //         return redirect()->route('admin.index');
-        //    else if ($guard == 'web')
-        //     return redirect()->route('home.index');
-
-        //     // dd($validator);
-
-        //     }
-        // dd(Auth::guard("designer"));
-        // dd(Auth::guard("designer"));
         if (Auth::guard("admin")->attempt($validator)) {
+            Helper::rememberMe($request);
             return redirect()->route('admin.index');
-            // dd("admin");
         }
-        if (Auth::guard("designer")->attempt($validator))
-        return redirect()->route('designer.index');
-        // dd("designer");
-
-
+        if (Auth::guard("designer")->attempt($validator)){
+            Helper::rememberMe($request);
+            return redirect()->route('designer.index');
+        }
         if (Auth::guard("web")->attempt($validator)) {
-
-            // dd("user");
+            Helper::rememberMe($request);
             return redirect()->route('home.index');
         }
-        // foreach ($guards as $guard) {
-        //     if (Auth::guard("admin")->attempt($validator)) {
-        //         if ($guard == 'admin')
-        //         return redirect()->route('admin.index');
-        //     if ($guard == 'web')
-        //     return redirect()->route('home.index');
-
-        //     // dd($validator);
-
-        //     }
-        // }
         return back()->with('message', 'invalid email or password');
     }
-
-
-
-
-
-
-
-
-
-
-
-
     function logout()
     {
         Auth::logout();

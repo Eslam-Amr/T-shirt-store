@@ -123,22 +123,6 @@
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination justify-content-center">
                                             {{ $products->links() }}
-                                            {{-- <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                                <i class="ti-angle-double-left"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="{{ url('product?page=1') }}">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                                <i class="ti-angle-double-right"></i>
-                                            </a>
-                                        </li> --}}
                                     </ul>
                                 </nav>
                             </div>
@@ -148,7 +132,4 @@
             </div>
         </div>
     </section>
-    <!--================End Category Product Area =================-->
-
-    <!-- product_list part end-->
 @include('layout.footer')

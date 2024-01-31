@@ -24,6 +24,7 @@ class OrderFactory extends Factory
             'day'=>now()->format('l'),
             'month'=>now()->format('F'),
             'year'=>now()->format('Y'),
+            'quantity'=>fake()->numberBetween(1,10),
 
             'total'=>fake()->numberBetween(100,10000),
             'status'=>'pending',

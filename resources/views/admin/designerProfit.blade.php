@@ -13,6 +13,12 @@
 @endif
 <table class="table border-dark">
     <thead>
+        <tr class="bg-success">
+            <th>Best Seller is : {{ $bestSeller->name }}</th>
+            <th>total profit : {{ $bestSeller->total_sum }}</th>
+
+
+        </tr>
         <tr>
 
             <th>name</th>

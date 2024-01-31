@@ -272,12 +272,23 @@
                                 @csrf
                                 <div class="col-md-12 form-group p_star">
                                     <input type="email" class="form-control" id="email" name="email"
-                                        value="{{ old('email') }}" placeholder="email">
+                                        value=" {{ isset($_COOKIE['email']) == 1 ? $_COOKIE['email'] : old('email') }}"
+                                        placeholder="email">
                                 </div>
                                 <div class="col-md-12 form-group p_star">
                                     <input type="password" class="form-control" id="password" name="password"
-                                        value="" placeholder="Password">
+                                        @if(isset($_COOKIE['Password'])==1) value="{{ $_COOKIE['Password'] }}" @endif
+                                        placeholder="Password">
+                                    <div
+                                        class="creat_account d-flex align-items-center justify-content-end float-right">
+                                        <label for="f-option">Remember me <span> </span></label>
+                                        <input type="checkbox" @if (isset($_COOKIE['Password'])) checked @endif
+                                            id="f-option" name="remember">
+                                    </div>
                                 </div>
+                                <button type="submit" value="submit" class="btn_3">
+                                    log in
+                                </button>
                                 {{-- <div class="col-md-12 form-group">
                                     <div class="creat_account d-flex align-items-center">
                                         <input type="checkbox" id="f-option" name="selector">
@@ -288,9 +299,6 @@
                                     </button>
                                     <a class="lost_pass" href="#">forget password?</a>
                                 </div> --}}
-                                <button type="submit" value="submit" class="btn_3">
-                                    log in
-                                </button>
                             </form>
                         </div>
                     </div>

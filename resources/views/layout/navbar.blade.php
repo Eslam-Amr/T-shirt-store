@@ -74,9 +74,9 @@
                         {{-- <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a> --}}
                         <a href=""><i class="ti-heart"></i></a>
                         <div class="dropdown cart">
-                            <a class="dropdown-toggle" href="{{ route('home.cart') }}" id="navbarDropdown3" role="button"
+                            <a class="dropdown-toggle" href="{{ route('cart.index') }}" id="navbarDropdown3" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               <a href="{{ route('home.cart') }}"><i class="fas fa-cart-plus"></i></a>
+                               <a href="{{ route('cart.index') }}"><i class="fas fa-cart-plus"></i></a>
                             </a>
                              {{-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <div class="single_product">

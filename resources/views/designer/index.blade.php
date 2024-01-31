@@ -1,7 +1,15 @@
 @extends('adminlte::page')
 
 @section('content')
-    <div class="container mt-5">
+@if ($bestSeller)
+
+<div class="col-12 pt-2">
+    <div class="col-12 text-center p-5 bg-success">
+        <h2>congratulations you are best seller 🎉🎉 keep going</h2>
+    </div>
+</div>
+@endif
+    <div class="container pt-2">
         <div class="col-12">
             <div class="row">
                 {{-- @dd(auth('designer')->user()) --}}

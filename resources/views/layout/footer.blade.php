@@ -95,6 +95,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 <!-- jquery plugins here-->
 <script src="{{ asset('js') }}/jquery-1.12.1.min.js"></script>
+<script src="{{ asset('js') }}/lightslider.min.js"></script>
+<script src="{{ asset('js') }}/contact.js"></script>
+<script src="{{ asset('js') }}/theme.js"></script>
+<script src="{{ asset('js') }}/custom.js"></script>
 <!-- popper js -->
 <script src="{{ asset('js') }}/popper.min.js"></script>
 <!-- bootstrap js -->
@@ -144,6 +148,10 @@ var search=$(this).val();
 });
        });
 </script>
+
+
+
+
 </body>
 
 </html>
