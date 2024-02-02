@@ -58,7 +58,7 @@
     {{-- @dd(asset('uplode')) --}}
     {{-- @dd($design) --}}
     {{-- @dd($description) --}}
-    <img  style="border: 50px white solid" src="{{asset('uplode')}}/RequestDesign/{{ $design['design'] }}" alt="">
+    <img  style="border: 50px white solid; width: 700px; transform: translate(-25%)" src="{{asset('uplode')}}/RequestDesign/{{ $design['design'] }}" alt="">
     <p>{{ $description }}</p>
     <div >
         <form action="{{route('admin.addSpecificDesign',$design->id)}}">

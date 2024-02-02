@@ -6,7 +6,9 @@ use App\Models\admin_design_request;
 use App\Models\Designer;
 use App\Models\Message;
 use App\Models\Order;
+use App\Models\Order_products;
 use App\Models\User;
+use Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -28,15 +30,19 @@ class designerController extends Controller
         $bestSellerFlag=false;
         if($bestSeller->designer_id==auth()->user()->id)
         $bestSellerFlag=true;
-
-        // dd($bestSeller);
-        return view('designer.index',['bestSeller'=>$bestSellerFlag]);
+    $numberOfMessage=Helper::getNumberOfMessage();
+    // dd($numberOfMessage);        // dd($bestSeller);
+        return view('designer.index',['bestSeller'=>$bestSellerFlag,'numberOfMessage'=>$numberOfMessage]);
     }
     function addDesign()
     {
         return view('designer.addDesign');
     }
-
+function readMessage($id){
+    // dd($id); // dd($id);
+    Message::find($id)->delete();
+return  redirect()->back()->with('message','message deleted successfully'); 
+}
     function imageProcessing($data, $folderName)
     {
         $image = $data->file('design');
@@ -75,7 +81,15 @@ class designerController extends Controller
     }
     public function displayProfit()
     {
-        return view('designer.displayProfit');
+        $profit = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
+    ->join('products', 'order_products.product_id', '=', 'products.id')
+    ->selectRaw('SUM(orders.total) as totalSum') // Selecting the sum of the total column
+    ->where('orders.designer_id', auth()->user()->id)
+    ->where('orders.status','completed')
+    ->where('products.designer_id', auth()->user()->id)
+    ->first();
+// dd($profit);
+        return view('designer.displayProfit',['totalProfit'=>$profit['totalSum']]);
     }
     public function displayYearProfit()
     {
@@ -116,5 +130,22 @@ class designerController extends Controller
     function calculateProfitForDay($day)
     {
         return Order::where('day', $day)->where('status', 'completed')->where('designer_id', auth('designer')->user()->id)->sum('total');
+    }
+    public function displayOrder()
+    {
+        // $orders = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
+        //     ->join('products', 'order_products.product_id', '=', 'products.id')
+        //     ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.product_id', 'orders.status as orderStatus')
+        //     ->paginate(12);
+        $orders = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
+        ->join('products', 'order_products.product_id', '=', 'products.id')
+        ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.product_id', 'orders.status as orderStatus')
+        ->where('orders.designer_id', auth()->user()->id) // Adding the condition here
+        ->where('products.designer_id', auth()->user()->id) // Adding the condition here
+        ->paginate(12);
+        // dd($orders);        $totalProfit = Order::where('status', 'completed')->sum('total');
+
+        
+        return view('designer.displayOrder', ['orders' => $orders]);
     }
 }

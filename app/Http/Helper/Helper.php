@@ -148,11 +148,11 @@ class Helper
     }
     public static function getCategoryId($data)
     {
-        if ($data == 'men')
+        if (strtolower($data) == 'men')
             return 1;
-        else if ($data == 'women')
+        else if (strtolower($data) == 'women')
             return 2;
-        else if ($data == 'kids')
+        else if (strtolower($data) == 'kids')
             return 3;
     }
 
@@ -227,7 +227,9 @@ class Helper
         }
     }
 
-
+public static function getNumberOfMessage(){
+    return Message::where('user_id',auth()->user()->id)->count();
+}
 
 
 

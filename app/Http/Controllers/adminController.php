@@ -118,6 +118,7 @@ class adminController extends Controller
     {
         $design = admin_design_request::where('id', $id)->first();
         $category_id = Helper::getCategoryId($design['design_category']);
+        // dd($design['design_category'],$category_id);
         $stock = $request->all()['stock'];
         Helper::setProduct($stock, $design, $category_id);
         admin_design_request::where('id', $id)->delete();
