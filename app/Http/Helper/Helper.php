@@ -10,6 +10,8 @@ use App\Models\Order_products;
 use App\Models\Product;
 use App\Models\Review;
 
+use function PHPUnit\Framework\isEmpty;
+
 class Helper
 {
 
@@ -86,12 +88,12 @@ class Helper
         }
         return $total;
     }
-    public static function setCartItems($request, $productData, $id)
+    public static function setCartItems($quantity, $productData, $id)
     {
         Cart::create([
-            'total' => $request->all()['quantity'] * $productData['price_after_discount'],
+            'total' => $quantity * $productData['price_after_discount'],
             'status' => 'pending',
-            'quantity' => $request->all()['quantity'],
+            'quantity' => $quantity,
             'product_id' => $id,
             'user_id' => auth()->user()['id'],
             'designer_id' => $productData['designer_id'],
@@ -227,53 +229,76 @@ class Helper
         }
     }
 
-public static function getNumberOfMessage(){
-    return Message::where('user_id',auth()->user()->id)->count();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static function getAllProduct($key, $from, $to)
+    public static function getNumberOfMessage()
     {
-        if ($key == 'men') {
+        return Message::where('user_id', auth()->user()->id)->count();
+    }
 
-            $product = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 1)->paginate(12);
-            // $totalNoOfProduct = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 1)->count();
-        }
-        if ($key == 'all') {
 
-            $product = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->paginate(12);
-            // $totalNoOfProduct = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->count();
-        }
-        if ($key == 'kids') {
 
-            $product = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 2)->paginate(12);
-            // $totalNoOfProduct = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 2)->count();
-        }
-        if ($key == 'women') {
 
-            $product = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 3)->paginate(12);
-            // $totalNoOfProduct = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 3)->count();
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function getAllProduct($data)
+    {
+        // dd($data);
+        if (count($data) == 0);
+        $product = Product::paginate(12);
+        if (!isset($data['men']) && !isset($data['men']) && !isset($data['women']) && isset($data['from']) && isset($data['to']))
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->paginate(12);
+        if (isset($data['men']))
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 1)->paginate(12);
+        if (isset($data['women']))
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 2)->paginate(12);
+        if (isset($data['kids']))
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->paginate(12);
+        if (isset($data['men']) && isset($data['women']))
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 1)->orWhere('category_id', 2)->paginate(12);
+        if (isset($data['kids']) && isset($data['women']))
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 2)->where('category_id', 3)->orWhere('category_id', 2)->paginate(12);
+        if (isset($data['kids']) && isset($data['men']))
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->orWhere('category_id', 1)->paginate(12);
+        if (isset($data['kids']) && isset($data['men']) && isset($data['women']))
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->orWhere('category_id', 1)->orWhere('category_id', 2)->paginate(12);
+        if (isset($data['all']))
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->paginate(12);
+
         return $product;
+        // if ($key == 'men') {
+
+        //     $product = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 1)->paginate(12);
+        //     // $totalNoOfProduct = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 1)->count();
+        // }
+        // if ($key == 'all') {
+
+        //     $product = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->paginate(12);
+        //     // $totalNoOfProduct = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->count();
+        // }
+        // if ($key == 'kids') {
+
+        //     $product = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 2)->paginate(12);
+        //     // $totalNoOfProduct = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 2)->count();
+        // }
+        // if ($key == 'women') {
+
+        //     $product = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 3)->paginate(12);
+        //     // $totalNoOfProduct = Product::where('price_after_discount', '>', $from - 1)->where('price_after_discount', '<', $to + 1)->where('category_id', 3)->count();
+        // }
     }
     public static function getNumberOfProduct($key, $from, $to)
     {

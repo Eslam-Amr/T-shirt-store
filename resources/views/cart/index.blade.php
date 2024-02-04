@@ -16,6 +16,7 @@
                         </thead>
                         <tbody>
                             @forelse ($carts as $cart)
+                            {{-- @dd($cart) --}}
                                 <tr>
                                     <td>
                                         <div class="media">
@@ -35,7 +36,7 @@
                                         <h5>{{ $cart->price_after_discount }}</h5>
                                     </td>
                                     <td>
-                                        {{ $cart->quantity }}
+                                        <a href="{{ route('cart.decrement', $cart->cart_id) }}" class="btn btn-danger ">-</a> {{ $cart->quantity }} <a href="{{ route('cart.cartIncrement',$cart->cart_id) }}" class="btn btn-warning">+</a>
                                     </td>
                                     <td>
                                         <h5>{{ $cart->total }}</h5>

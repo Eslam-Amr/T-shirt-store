@@ -63,7 +63,7 @@ class OrderController extends Controller
         }
         BillingDetail::where('user_id', auth()->user()->id)->delete();
 
-        return redirect()->route('home.index')->with('message', 'order set successfully');
+        return redirect()->route('home.thank')->with('message', 'order set successfully');
     }
     public function orderHistory()
     {
@@ -74,5 +74,8 @@ class OrderController extends Controller
         ->get();
         return view('home.allOrder', ['orders' => $orders]);
     }
-
+    public function thank(){
+        // dd('klsmv');
+        return view('home.thank');
+}
 }

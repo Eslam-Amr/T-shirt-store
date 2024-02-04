@@ -9,15 +9,18 @@ use Illuminate\Http\Request;
 class categoryController extends Controller
 {
     //
-    public function index(Request $request, $key, $from, $to)
+    public function index(Request $request)
     {
+        // dd($request->all());
         $numberOfProduct = Helper::countProduct();
-        $product=Helper::getAllProduct($key,$from,$to);
-        $totalNoOfProduct=Helper::getNumberOfProduct($key,$from,$to);
-        return view('category.index', ['products' => $product, 'numberOfProducts' => $numberOfProduct, 'totalNoOfProduct' => $totalNoOfProduct, 'key' => $key, 'from' => $from, 'to' => $to]);
+        $product=Helper::getAllProduct($request->all());
+        // $product=Product::all();
+        // $totalNoOfProduct=Helper::getNumberOfProduct($key,$from,$to);
+        // return view('category.index', ['products' => $product, 'numberOfProducts' => $numberOfProduct, 'totalNoOfProduct' => $totalNoOfProduct, 'key' => $key, 'from' => $from, 'to' => $to]);
+        return view('category.index', ['numberOfProducts' => $numberOfProduct,'products' => $product,'data'=>$request->all()]);
     }
 
-    public function filter(Request $request, $key, $from, $to)
+    public function filter(Request $request)
     {
         // dd($key);
 

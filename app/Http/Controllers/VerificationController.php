@@ -21,7 +21,7 @@ class VerificationController extends Controller
             // Invalid verification link
             abort(404);
         }
-$user->update(['email_verified_at' => date('Y-m-d H:i:s')]);
+// $user->update(['email_verified_at' => date('Y-m-d H:i:s')]);
         if (!$user->hasVerifiedEmail()) {
             $user->markEmailAsVerified();
             event(new Verified($user));

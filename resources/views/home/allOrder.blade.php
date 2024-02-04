@@ -34,9 +34,9 @@
                                 </tr>
                             </tbody>
                             <tfoot>
-                                <tr>
+                                {{-- <tr>
                                     <th scope="col" colspan="3">Quantity</th>
-                                </tr>
+                                </tr> --}}
                             </tfoot>
                         </table>
                     </div>

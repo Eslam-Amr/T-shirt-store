@@ -66,7 +66,7 @@
         </div>
        <div class="mb-3">
             <label for="exampleFormControlInput5" class="form-label">description</label>
-           <textarea name="description" id="exampleFormControlInput5" cols="50" rows="5" placeholder="Enter design description"></textarea>
+           <textarea name="description" id="exampleFormControlInput5" cols="38" rows="5" placeholder="Enter design description"></textarea>
 
         </div>
 

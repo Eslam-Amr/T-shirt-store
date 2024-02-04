@@ -27,7 +27,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   
+    return redirect()->route('home.index');
 });
 Route::middleware([
     'auth:sanctum',
@@ -55,16 +56,22 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::get('/home', [homeController::class, 'index'])->name('home.index');
 Route::get('/orderHistory', [OrderController::class, 'orderHistory'])->name('home.orderHistory');
-Route::get('/product/{key}/{from}/{to}', [categoryController::class, 'index'])->name('category.index');
-Route::get('/product/{key}/{from}/{to}/filter', [categoryController::class, 'filter'])->name('category.filter');
+Route::get('/product', [categoryController::class, 'index'])->name('category.index');
+Route::get('/product/filter', [categoryController::class, 'filter'])->name('category.filter');
+// Route::get('/product/{key}/{from}/{to}', [categoryController::class, 'index'])->name('category.index');
+// Route::get('/product/{key}/{from}/{to}/filter', [categoryController::class, 'filter'])->name('category.filter');
 Route::get('/product/search', [categoryController::class, 'search'])->name('product.search');
 Route::get('/contact', [contactController::class, 'index'])->name('contact.index');
+Route::post('/contact/send', [contactController::class, 'send'])->name('contact.send');
 Route::get('/logout', [loginController::class, 'logout'])->name('home.logout');
 Route::get('/home/cart', [CartController::class, 'cart'])->name('cart.index');
+Route::get('/home/cart/decrement/{id}', [CartController::class, 'cartDecrement'])->name('cart.decrement');
+Route::get('/home/cart/cartIncrement/{id}', [CartController::class, 'cartIncrement'])->name('cart.cartIncrement');
 Route::get('/home/cart/checkout', [OrderController::class, 'checkout'])->name('home.checkout');
 Route::post('/home/cart/checkout/setOreder', [OrderController::class, 'setOreder'])->name('home.setOreder');
 Route::get('/home/cart/checkout/confirmation', [OrderController::class, 'confirmation'])->name('home.confirmation');
 Route::get('/home/cart/checkout/confirmation/confirmOrder', [OrderController::class, 'confirmOrder'])->name('home.confirmOrder');
+Route::get('/home/cart/checkout/thank', [OrderController::class, 'thank'])->name('home.thank');
 Route::get('/home/{id}/productDetails', [ProductController::class, 'productDetails'])->name('home.productDetails');
 Route::get('/home/{id}/productDetails/addToCart', [CartController::class, 'addToCart'])->name('home.addToCart');
 Route::get('/home/{id}/productDetails/addComment', [ProductController::class, 'addComment'])->name('home.addComment');

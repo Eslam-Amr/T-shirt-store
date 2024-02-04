@@ -436,7 +436,7 @@ return [
                     'can'  => 'viewDesignerPanel',
                 ],
                 [
-                    'text' => 'designer',
+                    'text' => ' add design',
                     'url'  => 'designer/admin/addDesign',
                     'icon' => 'fas fa-fw fa-circle',
                     // 'can'  => 'viewAdminPanel',
@@ -449,11 +449,86 @@ return [
                     // 'can'  => 'viewAdminPanel',
                     'can'  => 'viewDesignerPanel',
                 ],
+                [
+                    'text' => 'order',
+                    'url'  => 'designer/admin/order',
+                    'icon' => 'fas fa-fw fa-circle',
+                    // 'can'  => 'viewAdminPanel',
+                    'can'  => 'viewDesignerPanel',
+                ],
+                // [
+                //     'text' => 'designer',
+                //     'url'  => 'designer/admin/addDesign',
+                //     'icon' => 'fas fa-fw fa-circle',
+                //     // 'can'  => 'viewAdminPanel',
+                //     'can'  => 'viewDesignerPanel',
+                // ],
         // ,[
         //     'text' => 'user',
         //     'url'  => 'admin/user',
         //     'icon' => 'fas fa-fw fa-user',
         // ]
+        [
+            'text'    => 'profit',
+            'url'  => 'designer/admin/profit',
+                    'icon' => 'fas fa-fw fa-circle',
+                    'can'  => 'viewDesignerPanel',
+            // 'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'year',
+                    'url'  => 'designer/admin/profit/year',
+                    'can'  => 'viewDesignerPanel',
+
+                ],
+                [
+                    'text' => 'month',
+                    'url'  => 'designer/admin/profit/month',
+                    'can'  => 'viewDesignerPanel',
+
+                ],
+                [
+                    'text' => 'day',
+                    'url'  => 'designer/admin/profit/day',
+                    'can'  => 'viewDesignerPanel',
+
+                ],
+                // [
+                //     'text' => 'designer profit',
+                //     'url'  => 'designer/profit/designerProfit',
+                //     'can'  => 'viewAdminPanel',
+
+                // ],
+                // [
+                //     'text'    => 'level_one',
+                //     'url'     => '#',
+                //     'submenu' => [
+                //         [
+                //             'text' => 'level_two',
+                //             'url'  => '#',
+                //         ],
+                //         [
+                //             'text'    => 'level_two',
+                //             'url'     => '#',
+                //             'submenu' => [
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url'  => '#',
+                //                 ],
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url'  => '#',
+                //                 ],
+                //             ],
+                //         ],
+                //     ],
+                // ],
+                // [
+                //     'text' => 'level_one',
+                //     'url'  => '#',
+                // ],
+            ],
+        ],
         [
             'text'    => 'profit',
             'url'  => 'admin/profit',

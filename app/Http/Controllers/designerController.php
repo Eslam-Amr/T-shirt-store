@@ -28,8 +28,12 @@ class designerController extends Controller
         ->limit(1)
         ->first();
         $bestSellerFlag=false;
-        if($bestSeller->designer_id==auth()->user()->id)
-        $bestSellerFlag=true;
+        // dd($bestSeller);
+        if($bestSeller!=null){
+
+            if($bestSeller->designer_id==auth()->user()->id)
+            $bestSellerFlag=true;
+        }
     $numberOfMessage=Helper::getNumberOfMessage();
     // dd($numberOfMessage);        // dd($bestSeller);
         return view('designer.index',['bestSeller'=>$bestSellerFlag,'numberOfMessage'=>$numberOfMessage]);

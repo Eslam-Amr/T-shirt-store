@@ -3,7 +3,8 @@
         <div class="row align-items-center">
             <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="{{ route('home.index') }}"> <img src="{{ asset('img') }}/logo.png" alt="logo"> </a>
+                    <a class="navbar-brand" href="{{ route('home.index') }}"> <img src="{{ asset('img') }}/logo.png"
+                            alt="logo"> </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -15,19 +16,26 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('home.index') }}">Home</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                            @auth
+                                
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home.orderHistory') }}">Order History</a>
+                            </li>
+                            @endauth
+                            <li class="nav-item">
+                                {{-- <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
                                     Shop
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                    <a class="dropdown-item" href="{{ route('category.index',['all',0,500]) }}"> shop category</a>
-                                    {{-- <a class="dropdown-item" href="single-product.html">product details</a> --}}
+                                </a> --}}
+                                {{-- <div class="dropdown-menu" aria-labelledby="navbarDropdown_1"> --}}
+                                {{-- <a class="dropdown-item" href="{{ route('category.index',['all',0,500]) }}"> shop category</a> --}}
+                                <a class="nav-link" href="{{ route('category.index') }}"> shop</a>
+                                {{-- <a class="dropdown-item" href="single-product.html">product details</a> --}}
 
-                                </div>
+                                {{-- </div> --}}
                             </li>
-                            <li class="nav-item dropdown">
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
                                     role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
@@ -39,15 +47,29 @@
                                     <a class="dropdown-item" href="{{ route('register.index') }}">register</a>
                                     <a class="dropdown-item" href="{{ route('login.index') }}">user login</a>
                                     @endguest
-                                    <a class="dropdown-item" href="{{ route('register.designerRegisterView') }}">designer register</a>
-                                    {{-- <a class="dropdown-item" href="tracking.html">tracking</a> --}}
-                                    {{-- <a class="dropdown-item" href="checkout.html">product checkout</a> --}}
-                                    {{-- <a class="dropdown-item" href="{{ route('home.cart') }}">shopping cart</a> --}}
-                                    {{-- <a class="dropdown-item" href="confirmation.html">confirmation</a> --}}
-                                    {{-- <a class="dropdown-item" href="elements.html">elements</a> --}}
-                                </div>
-                            </li>
-                            {{-- <li class="nav-item dropdown">
+                                    <a class="dropdown-item" href="{{ route('register.designerRegisterView') }}">designer register</a> --}}
+                            {{-- <a class="dropdown-item" href="tracking.html">tracking</a> --}}
+                            {{-- <a class="dropdown-item" href="checkout.html">product checkout</a> --}}
+                            {{-- <a class="dropdown-item" href="{{ route('home.cart') }}">shopping cart</a> --}}
+                            {{-- <a class="dropdown-item" href="confirmation.html">confirmation</a> --}}
+                            {{-- <a class="dropdown-item" href="elements.html">elements</a> --}}
+                            {{-- </div>
+                            </li> --}}
+                            @guest
+
+                                <li class="nav-item">
+
+                                    <a class="nav-link" href="{{ route('register.index') }}">register</a>
+                                </li>
+                                <li class="nav-item">
+
+                                    <a class="nav-link" href="{{ route('login.index') }}">user login</a>
+                            </li> @endguest
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="{{ route('register.designerRegisterView') }}">designer
+                                    register</a>
+                            </li> {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
                                     role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
@@ -64,9 +86,9 @@
                             </li>
                             @auth
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home.logout') }}">logout</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('home.logout') }}">logout</a>
+                                </li>
                             @endauth
                         </ul>
                     </div>
@@ -74,11 +96,11 @@
                         {{-- <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a> --}}
                         <a href=""><i class="ti-heart"></i></a>
                         <div class="dropdown cart">
-                            <a class="dropdown-toggle" href="{{ route('cart.index') }}" id="navbarDropdown3" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               <a href="{{ route('cart.index') }}"><i class="fas fa-cart-plus"></i></a>
+                            <a class="dropdown-toggle" href="{{ route('cart.index') }}" id="navbarDropdown3"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a href="{{ route('cart.index') }}"><i class="fas fa-cart-plus"></i></a>
                             </a>
-                             {{-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {{-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <div class="single_product">
 
                                 </div>

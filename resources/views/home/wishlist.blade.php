@@ -21,7 +21,7 @@
         }
 </style>
 @include('layout.navbar')
-@include('layout.breadcrumb',['name' => 'Shop Category'])
+@include('layout.breadcrumb',['name' => 'wishlist'])
 {{-- <form action="{{ route('category.filter',['key' => 'all', 'from' => 0, 'to' => 500]) }}"> --}}
 <form action="{{ route('category.index') }}">
     <section class="cat_product_area section_padding">

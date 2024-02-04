@@ -14,8 +14,11 @@
 <table class="table border-dark">
     <thead>
         <tr class="bg-success">
+            @if ($bestSeller!=null)
+                
             <th>Best Seller is : {{ $bestSeller->name }}</th>
             <th>total profit : {{ $bestSeller->total_sum }}</th>
+            @endif
 
 
         </tr>
