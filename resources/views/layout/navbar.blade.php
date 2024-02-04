@@ -17,7 +17,7 @@
                                 <a class="nav-link" href="{{ route('home.index') }}">Home</a>
                             </li>
                             @auth
-                                
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('home.orderHistory') }}">Order History</a>
                             </li>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="hearer_icon d-flex">
                         {{-- <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a> --}}
-                        <a href=""><i class="ti-heart"></i></a>
+                        <a href="{{ route('wishlist.index') }}"><i class="ti-heart"></i></a>
                         <div class="dropdown cart">
                             <a class="dropdown-toggle" href="{{ route('cart.index') }}" id="navbarDropdown3"
                                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

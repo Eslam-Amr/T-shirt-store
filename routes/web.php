@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\registerController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-   
+
     return redirect()->route('home.index');
 });
 Route::middleware([
@@ -55,6 +56,9 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::get('/home', [homeController::class, 'index'])->name('home.index');
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
+Route::get('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 Route::get('/orderHistory', [OrderController::class, 'orderHistory'])->name('home.orderHistory');
 Route::get('/product', [categoryController::class, 'index'])->name('category.index');
 Route::get('/product/filter', [categoryController::class, 'filter'])->name('category.filter');

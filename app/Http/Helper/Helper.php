@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Order_products;
 use App\Models\Product;
 use App\Models\Review;
+use App\Models\Wishlist;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -160,6 +161,7 @@ class Helper
 
     public static function setProduct($stock, $design, $category_id)
     {
+
         Product::create([
             'stock' => $stock,
             'discount' => $design['discount'],
@@ -242,8 +244,29 @@ class Helper
 
 
 
+    public static function addToWishlist($id)
+    {
+        Wishlist::create([
+            'product_id' => $id,
+            'user_id' => auth()->user()->id
+        ]);
+    }
+    public static function checkIfInWhislist($id)
+    {
+        if (!Helper::checkIfAuth())
+            return false;
 
-
+        $product = Wishlist::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
+        if ($product)
+            return true;
+        else
+            return false;
+    }
+    public static function removeFromWishlist($id)
+    {
+        $wishlist=Wishlist::where('user_id',auth()->user()->id)->where('product_id',$id)->first();
+        $wishlist->delete();
+    }
 
 
 

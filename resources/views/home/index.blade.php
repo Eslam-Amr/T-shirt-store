@@ -57,7 +57,19 @@
                                                 EGP</h3>
                                             <h3>{{ $products[$i]['price_after_discount'] }} EGP</h3>
                                             <a href="{{ route('home.addToCart', $products[$i]['id']) }}"
-                                                class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                                class="add_cart">+ add to cart
+                                                </a>
+                                                @php
+                                                            $wishlist = Helper::checkIfInWhislist($products[$i]['id']);
+
+                                                @endphp
+                                                @if ($wishlist)
+                                                <a href="{{ route('wishlist.remove', $products[$i]['id']) }}" class="like_us"> <i style="color: red"
+                                                        class="fa-solid  fa-heart"></i> </a>
+                                            @else
+                                                <a href="{{ route('wishlist.add', $products[$i]['id']) }}" class="like_us"> <i class="ti-heart"></i>
+                                                </a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +77,7 @@
                         </div>
                     </div>
                     @if ($numberOfProduct>8)
-                        
+
                     <div class="single_product_list_slider">
                         <div class="row align-items-center justify-content-between">
                             @for ($i = 8; $i < $numberOfProduct - 8 && $i < 16; $i++)
@@ -82,7 +94,19 @@
                                                     EGP</h3>
                                                     <h3>{{ $products[$i]['price_after_discount'] }} EGP</h3>
                                                     <a href="{{ route('home.addToCart', $products[$i]['id']) }}"
-                                                class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                                    class="add_cart">+ add to cart
+                                                    </a>
+                                                    @php
+                                                                $wishlist = Helper::checkIfInWhislist($products[$i]['id']);
+
+                                                    @endphp
+                                                    @if ($wishlist)
+                                                    <a href="{{ route('wishlist.remove', $products[$i]['id']) }}" class="like_us"> <i style="color: red"
+                                                            class="fa-solid  fa-heart"></i> </a>
+                                                @else
+                                                    <a href="{{ route('wishlist.add', $products[$i]['id']) }}" class="like_us"> <i class="ti-heart"></i>
+                                                    </a>
+                                                @endif
                                         </div>
                                     </div>
                                 </div>
@@ -118,6 +142,20 @@
                                 <h4>{{ $product['name'] }}</h4>
                                 <h3 style="text-decoration: line-through;">{{ $product['price'] }} EGP</h3>
                                 <h3>{{ $product['price_after_discount'] }} EGP</h3>
+                                <a href="{{ route('home.addToCart', $product['id']) }}"
+                                class="add_cart">+ add to cart
+                                </a>
+                                @php
+                                            $wishlist = Helper::checkIfInWhislist($product['id']);
+
+                                @endphp
+                                @if ($wishlist)
+                                <a href="{{ route('wishlist.remove', $product['id']) }}" class="like_us"> <i style="color: red"
+                                        class="fa-solid  fa-heart"></i> </a>
+                            @else
+                                <a href="{{ route('wishlist.add', $product['id']) }}" class="like_us"> <i class="ti-heart"></i>
+                                </a>
+                            @endif
                             </div>
                         </div>
                     @endforeach

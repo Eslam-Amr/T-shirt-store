@@ -67,7 +67,13 @@
                             </div>
                             <input type="submit" class="btn_3" value="add to cart">
                     </form>
-                    <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+                    @if ($wishlist)
+                        <a href="{{ route('wishlist.remove', $product['id']) }}" class="like_us"> <i style="color: red"
+                                class="fa-solid  fa-heart"></i> </a>
+                    @else
+                        <a href="{{ route('wishlist.add', $product['id']) }}" class="like_us"> <i class="ti-heart"></i>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

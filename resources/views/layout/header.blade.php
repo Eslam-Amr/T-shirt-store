@@ -16,8 +16,12 @@
 <link rel="stylesheet" href="{{ asset('css') }}/magnific-popup.css">
 <link rel="stylesheet" href="{{ asset('css') }}/style.css"> --}}
         <link rel="icon" href="{{ asset('img') }}/favicon.png">
+        <!-- Add this line to include Font Awesome from CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofnP+4U5V8hX4zfuFaJY8e49+RMF5C+2Rv" crossorigin="anonymous">
+
+<link rel="stylesheet" href="{{ asset('css') }}/bootstrap.min.css">
+<link rel="stylesheet" href="{{ asset('css') }}/all.min.css">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{ asset('css') }}/bootstrap.min.css">
         <!-- animate CSS -->
         <link rel="stylesheet" href="{{ asset('css') }}/animate.css">
         <!-- owl carousel CSS -->
