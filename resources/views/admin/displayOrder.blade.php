@@ -35,7 +35,7 @@
             <th>{{ $order->orderStatus }}</th>
             <th>
                 {{-- Shipping --}}
-               <a class=" btn btn-danger text-white" href="{{ route('admin.rejectOrder',$order->order_id) }}">rejected</a>
+               {{-- <a class=" btn btn-danger text-white" href="{{ route('admin.rejectOrder',$order->order_id) }}">rejected</a> --}}
                <a class=" btn btn-warning text-white" href="{{ route('admin.ShippingOrder',$order->order_id) }}">Shipping</a>
                <a class=" btn btn-success text-white" href="{{ route('admin.completeOrder',$order->order_id) }} ">completed</a>
                {{-- <button class="btn btn-danger "><a class="text-white" href="{{ route('admin.deleteUser',$user->id) }}">Delete</a></button> --}}

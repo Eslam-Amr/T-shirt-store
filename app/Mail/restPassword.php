@@ -28,7 +28,7 @@ public $formData;
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Rest Password',
+            subject: $this->formData['subject'],
         );
     }
 

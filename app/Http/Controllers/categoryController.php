@@ -17,6 +17,7 @@ class categoryController extends Controller
     // public $to=500;
     public function index(Request $request)
     {
+        // dd($request->all());
         $numberOfProduct = Helper::countProduct();
         $product = Helper::getAllProduct($request->all());
         $data = $request->all();

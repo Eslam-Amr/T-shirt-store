@@ -1,6 +1,6 @@
 @include('layout.header')
 @include('layout.navbar')
-@include('layout.breadcrumb', ['name' => 'login '])
+@include('layout.breadcrumb', ['name' => 'rest password '])
 <section class="login_part padding_top">
     <div class="container">
         <div class="row align-items-center">
@@ -20,7 +20,7 @@
                         <h3>Welcome Back ! <br>
                             Please Sign in now</h3>
                         @if (session()->has('message'))
-                            <div class="alert alert-danger" id="alert">
+                            <div class="alert alert-success" id="alert">
 
                                 {{ session()->get('message') }}
                             </div>
@@ -90,7 +90,7 @@
                                         }
                                     });
                                 </script> --}}
-
+{{-- @dd($formData) --}}
                         <form class="row contact_form" action="{{ route('submit.forgot.password') }}" method="post">
                             @csrf
                             <div class="col-md-12 form-group p_star">
@@ -99,16 +99,14 @@
                             </div>
 
                             <button type="submit" value="submit" class="btn_3">
-                                log in
-                            </button>
+send                            </button>
                             {{-- <div class="col-md-12 form-group">
                                     <div class="creat_account d-flex align-items-center">
                                         <input type="checkbox" id="f-option" name="selector">
                                         <label for="f-option">Remember me</label>
                                     </div>
                                     <button type="submit" value="submit" class="btn_3">
-                                        log in
-                                    </button>
+send                                    </button>
                                 </div> --}}
                         </form>
                     </div>

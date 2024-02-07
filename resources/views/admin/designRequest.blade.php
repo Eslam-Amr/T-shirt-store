@@ -44,7 +44,7 @@
             <th>{{ $design->status }}</th> --}}
             <th>
                {{-- <button class="btn btn-danger "><a class="text-white" href="{{ route('admin.deletedesigner',$designer->id) }}">Delete</a></button> --}}
-               <button class="btn btn-success "><a class="text-white" href="{{ route('admin.showSpecificDesign',$design->id) }}">Show</a></button>
+               <a class="text-white btn btn-success " href="{{ route('admin.showSpecificDesign',$design->id) }}">Show</a>
                {{-- {{ route('admin.showSpecificDesign',$design->id) }} --}}
             </th>
             <th>

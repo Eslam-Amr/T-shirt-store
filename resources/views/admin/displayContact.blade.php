@@ -31,7 +31,7 @@
             <th>{{ $contact->email }}</th>
             <th>{{ $contact->message }}</th>
             <th>
-                < a class="text-white btn btn-warning " href="{{ route('admin.deleteContact',$contact->id) }}"> Update</a>
+                <a class="text-white btn btn-warning " href="{{ route('admin.deleteContact',$contact->id) }}"> delete</a>
             </th>
         </tr>
 

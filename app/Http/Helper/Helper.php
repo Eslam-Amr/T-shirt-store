@@ -81,13 +81,14 @@ class Helper
     {
         return (auth()->user() == null ? false : true);
     }
-    public static function getCategoryName($id){
-        if($id==1)
-        return 'men';
-        if($id==2)
-        return 'women';
-        if($id==3)
-        return 'kids';
+    public static function getCategoryName($id)
+    {
+        if ($id == 1)
+            return 'men';
+        if ($id == 2)
+            return 'women';
+        if ($id == 3)
+            return 'kids';
     }
     public static function getTotalOfOrder($products)
     {
@@ -190,7 +191,7 @@ class Helper
         ]);
         Message::create([
             'user_id' => $design['user_id'],
-            'message' => 'congratulation 🎉 your design have been approved'
+            'message' => "congratulation 🎉 your design $design[name] have been approved"
         ]);
     }
     public static function  calculateProfitForDay($day)
@@ -302,7 +303,7 @@ class Helper
     }
 
 
-   public static function imageProcessing($data, $folderName)
+    public static function imageProcessing($data, $folderName)
     {
         // dd($data['image']->file);
         // $image = $data->file('image');
@@ -351,26 +352,56 @@ class Helper
     public static function getAllProduct($data)
     {
         // dd($data['sort']==1);
+        // if(!isset($data['search'])){
+
         if (count($data) == 0 || count($data) == 1);
-        $product = Product::paginate(12);
-        if (!isset($data['men']) && !isset($data['men']) && !isset($data['women']) && isset($data['from']) && isset($data['to']))
-            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->paginate(12);
+        $product = Product::paginate(9)->appends($data);
+        if (!isset($data['men']) && !isset($data['men']) && !isset($data['women']) && isset($data['from']) && isset($data['to'])) {
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)
+                ->where('price_after_discount', '<', $data['to'] + 1)
+                ->when(isset($data['search']), function ($query) use ($data) {
+                    return $query->where('name', 'like', '%' . $data['search'] . '%');
+                })
+                ->paginate(9)
+                ->appends($data);
+
+            //   $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->paginate(9)->appends($data);
+        }
         if (isset($data['men']))
-            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 1)->paginate(12);
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 1)->when(isset($data['search']), function ($query) use ($data) {
+                return $query->where('name', 'like', '%' . $data['search'] . '%');
+            })->paginate(9)->appends($data);
         if (isset($data['women']))
-            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 2)->paginate(12);
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 2)->when(isset($data['search']), function ($query) use ($data) {
+                return $query->where('name', 'like', '%' . $data['search'] . '%');
+            })->paginate(9)->appends($data);
         if (isset($data['kids']))
-            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->paginate(12);
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->when(isset($data['search']), function ($query) use ($data) {
+                return $query->where('name', 'like', '%' . $data['search'] . '%');
+            })->paginate(9)->appends($data);
         if (isset($data['men']) && isset($data['women']))
-            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 1)->orWhere('category_id', 2)->paginate(12);
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 1)->orWhere('category_id', 2)->when(isset($data['search']), function ($query) use ($data) {
+                return $query->where('name', 'like', '%' . $data['search'] . '%');
+            })->paginate(9)->appends($data);
         if (isset($data['kids']) && isset($data['women']))
-            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 2)->where('category_id', 3)->orWhere('category_id', 2)->paginate(12);
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 2)->where('category_id', 3)->orWhere('category_id', 2)->when(isset($data['search']), function ($query) use ($data) {
+                return $query->where('name', 'like', '%' . $data['search'] . '%');
+            })->paginate(9)->appends($data);
         if (isset($data['kids']) && isset($data['men']))
-            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->orWhere('category_id', 1)->paginate(12);
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->orWhere('category_id', 1)->when(isset($data['search']), function ($query) use ($data) {
+                return $query->where('name', 'like', '%' . $data['search'] . '%');
+            })->paginate(9)->appends($data);
         if (isset($data['kids']) && isset($data['men']) && isset($data['women']))
-            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->orWhere('category_id', 1)->orWhere('category_id', 2)->paginate(12);
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->orWhere('category_id', 1)->orWhere('category_id', 2)->when(isset($data['search']), function ($query) use ($data) {
+                return $query->where('name', 'like', '%' . $data['search'] . '%');
+            })->paginate(9)->appends($data);
         if (isset($data['all']))
-            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->paginate(12);
+            $product = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->when(isset($data['search']), function ($query) use ($data) {
+                return $query->where('name', 'like', '%' . $data['search'] . '%');
+            })->paginate(9)->appends($data);
+        // }else{
+
+        // }
 
         // dd(($data['sort']));
         // if(isset($data['sort'])){
@@ -475,23 +506,41 @@ class Helper
         if (count($data) == 0);
         $totalNoOfProduct = Product::count();
         if (!isset($data['men']) && !isset($data['men']) && !isset($data['women']) && isset($data['from']) && isset($data['to']))
-            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->count();
+            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->when(isset($data['search']), function ($query) use ($data) {
+                      return $query->where('name', 'like', '%'.$data['search'].'%');
+                  })->count();
         if (isset($data['men']))
-            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 1)->count();
+            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 1)->when(isset($data['search']), function ($query) use ($data) {
+                      return $query->where('name', 'like', '%'.$data['search'].'%');
+                  })->count();
         if (isset($data['women']))
-            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 2)->count();
+            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 2)->when(isset($data['search']), function ($query) use ($data) {
+                      return $query->where('name', 'like', '%'.$data['search'].'%');
+                  })->count();
         if (isset($data['kids']))
-            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->count();
+            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->when(isset($data['search']), function ($query) use ($data) {
+                      return $query->where('name', 'like', '%'.$data['search'].'%');
+                  })->count();
         if (isset($data['men']) && isset($data['women']))
-            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 1)->orWhere('category_id', 2)->count();
+            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 1)->orWhere('category_id', 2)->when(isset($data['search']), function ($query) use ($data) {
+                      return $query->where('name', 'like', '%'.$data['search'].'%');
+                  })->count();
         if (isset($data['kids']) && isset($data['women']))
-            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 2)->where('category_id', 3)->orWhere('category_id', 2)->count();
+            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 2)->where('category_id', 3)->orWhere('category_id', 2)->when(isset($data['search']), function ($query) use ($data) {
+                      return $query->where('name', 'like', '%'.$data['search'].'%');
+                  })->count();
         if (isset($data['kids']) && isset($data['men']))
-            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->orWhere('category_id', 1)->count();
+            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->orWhere('category_id', 1)->when(isset($data['search']), function ($query) use ($data) {
+                      return $query->where('name', 'like', '%'.$data['search'].'%');
+                  })->count();
         if (isset($data['kids']) && isset($data['men']) && isset($data['women']))
-            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->orWhere('category_id', 1)->orWhere('category_id', 2)->count();
+            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->where('category_id', 3)->orWhere('category_id', 1)->orWhere('category_id', 2)->when(isset($data['search']), function ($query) use ($data) {
+                      return $query->where('name', 'like', '%'.$data['search'].'%');
+                  })->count();
         if (isset($data['all']))
-            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->count();
+            $totalNoOfProduct = Product::where('price_after_discount', '>', $data['from'] - 1)->where('price_after_discount', '<', $data['to'] + 1)->when(isset($data['search']), function ($query) use ($data) {
+                      return $query->where('name', 'like', '%'.$data['search'].'%');
+                  })->count();
 
         return $totalNoOfProduct;
     }
@@ -504,14 +553,14 @@ class Helper
 
 
 
-    public static function search($request)
-    {
-        if ($request->ajax()) {
-            $products = Product::where("product_name", "like", "%{$request->search}%")
-                ->orWhere("final_price", "like", "%{$request->search}%")
-                ->orderBy('id', 'asc')
-                ->paginate(6);
-            return view('category.index', compact('products'));
-        }
-    }
+    // public static function search($request)
+    // {
+    //     if ($request->ajax()) {
+    //         $products = Product::where("product_name", "like", "%{$request->search}%")
+    //             ->orWhere("final_price", "like", "%{$request->search}%")
+    //             ->orderBy('id', 'asc')
+    //             ->paginate(6);
+    //         return view('category.index', compact('products'));
+    //     }
+    // }
 }

@@ -1,6 +1,6 @@
 @include('layout.header')
 @include('layout.navbar')
-@include('layout.breadcrumb', ['name' => 'login '])
+@include('layout.breadcrumb', ['name' => 'rest password '])
 <section class="login_part padding_top">
     <div class="container">
         <div class="row align-items-center">
@@ -31,7 +31,15 @@
                             </script>
                         @endif
                         <div class="" id="error-messages">
-                            @error('email')
+                            {{-- @error('email')
+                                {{ $message }}
+                                <br>
+                            @enderror --}}
+                            @error('password')
+                                {{ $message }}
+                                <br>
+                            @enderror
+                             @error('password_confirmation')
                                 {{ $message }}
                                 <br>
                             @enderror
@@ -90,8 +98,8 @@
                                         }
                                     });
                                 </script> --}}
-
-                        <form class="row contact_form" action="{{ route('submit.forgot.password') }}" method="post">
+{{-- @dd($user) --}}
+                        <form class="row contact_form" action="{{ route('submit.reset.password',$id) }}" method="post">
                             @csrf
                             <div class="col-md-12 form-group p_star">
                                 <input type="password" class="form-control" id="password" name="password"
@@ -110,7 +118,7 @@ send                            </button>
                                         <label for="f-option">Remember me</label>
                                     </div>
                                     <button type="submit" value="submit" class="btn_3">
-                                        log in
+                                         send
                                     </button>
                                 </div> --}}
                         </form>

@@ -16,8 +16,9 @@
             <p class="card-text py-2">
                 Enter your email address and we'll send you an email with instructions to reset your password.
             </p>
-
-            <a href="{{ route('reset.password',$formData['email']->id) }}" class="btn btn-primary w-100">Reset password</a>
+{{-- {{ $formData['email']->id }} --}}
+            {{-- <a href="{{ route('reset.password',$formData['email']->id) }}" class="btn btn-primary w-100">Reset password</a> --}}
+            <a href="{{ route('reset.password2',$formData['email']->id) }}" class="btn btn-primary w-100">Reset password</a>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

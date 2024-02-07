@@ -30,6 +30,17 @@
                                     }, 3000))
                                 </script>
                             @endif
+                            @if (session()->has('success'))
+                                <div class="alert alert-success" id="alert">
+
+                                    {{ session()->get('success') }}
+                                </div>
+                                <script type="text/javascript">
+                                    document.ready(setTimeout(function() {
+                                        document.getElementById('alert').remove()
+                                    }, 3000))
+                                </script>
+                            @endif
                             <div class="" id="error-messages">
                                 @error('email')
                                     {{ $message }}
@@ -111,10 +122,10 @@
                                         <input type="checkbox" @if (isset($_COOKIE['Password'])) checked @endif
                                             id="f-option" name="remember">
                                         </div>
-                                    </div>
-                                    <div class="inline">
+                                        <div class="d-flex mt-3">
 
-                                        <a class="lost_pass" href="{{ route('forgot.password') }}">forget password?</a>
+                                            <a class="lost_pass" href="{{ route('forgot.password') }}">forget password?</a>
+                                        </div>
                                     </div>
                                 <button type="submit" value="submit" class="btn_3">
                                     log in

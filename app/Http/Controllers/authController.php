@@ -38,19 +38,27 @@ class authController extends Controller
         $formData =[
             'email' => $user,
             'subject'=>'please click here to reset your password',
-            'token'=>$token
+            // 'token'=>$token
         ];
+        // dd($formData['email']->id);
         Mail::to($request->email)->send(new restPassword($formData));
         session()->flash('message','please check your account');
         return back();
     }
     public function resetPassword($id){
-        $user=user::find($id);
-        return view('forgetpassword.restPassword',compact('user'));
+        $user=User::find($id);
+        dd($user);
+        // return view('auth.rest-Password',['user'=>$user,'id'=>$id]);
+// return $user;
+    }
+    public function restPasswordLogic($id){
+        $user=User::find($id);
+        // dd($user);reset-password
+        return view('auth.reset-password',['user'=>$user,'id'=>$id]);
     }
     public function SubmitResetPassword(request $request,$id){
         $data=$request->all();
-        $user=user::find($id);
+        $user=User::find($id);
         $request->validate([
             'password' => "required|max:255|min:8|confirmed",
         ]);
@@ -59,7 +67,7 @@ class authController extends Controller
         \DB::table('password_reset_tokens')
           ->where('email','=',$user->email)
           ->delete();
-          return redirect()->route('login')->with('success','password is reset successfully');
+          return redirect()->route('login.index')->with('success','password is reset successfully');
     }
 
     //

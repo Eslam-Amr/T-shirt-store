@@ -58,7 +58,8 @@ Route::get('/email/verify', function () {
 
 Route::get('/forgot-password',[authController::class,'forgotPassword'])->name('forgot.password');
 Route::post('/submit-forgot-password',[authController::class,'submitForgotPassword'])->name('submit.forgot.password');
-Route::get('/reset-password/{id}',[authController::class,'resetPassword'])->name('reset.password');
+// Route::get('/reset-password/{id}',[authController::class,'resetPassword'])->name('reset.password');
+Route::get('/soso/{id}',[authController::class,'restPasswordLogic'])->name('reset.password2');
 Route::post('/submit-reset-password/{id}',[authController::class,'SubmitResetPassword'])->name('submit.reset.password');
 
 

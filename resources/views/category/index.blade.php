@@ -32,7 +32,7 @@ $data['all']='all';
 @include('layout.navbar')
 @include('layout.breadcrumb', ['name' => 'Shop Category'])
 {{-- <form action="{{ route('category.filter',['key' => 'all', 'from' => 0, 'to' => 500]) }}"> --}}
-    <form action="
+<form action="
 
     {{ route('category.index') }}
     ">
@@ -40,7 +40,7 @@ $data['all']='all';
         <div class="container">
             <div class="row">
                 @if (session()->has('message'))
-                    <div class="alert alert-success col-12"  id="alert">
+                    <div class="alert alert-success col-12" id="alert">
 
                         {{ session()->get('message') }}
                     </div>
@@ -71,16 +71,18 @@ $data['all']='all';
                                             </span>
                                         </label>
                                         {{-- <input type="checkbox" {{ $key=='all'? 'checked' :''  }}    name="all" value="all" id="all"> --}}
-                                        <input type="checkbox" {{ isset($data['all']) ? 'checked' : '' }} name="all"
-                                            value="all" id="all">
+                                        <input type="checkbox" name="all" value="all"
+                                            {{ (isset($data['men']) && isset($data['women']) && isset($data['kids'])) || isset($data['all']) ? 'checked' : '' }}
+                                            {{-- {{ isset($data['all']) ? 'checked' : '' }} --}} id="all">
                                     </li>
                                     <li>
                                         <label for="men">men
                                             <span>({{ $numberOfProducts['menProduct'] }})</span>
                                         </label>
                                         {{-- <input type="checkbox" {{ $key[0]=='m'? 'checked' :''  }}   name="men" value="men" id="men"> --}}
-                                        <input type="checkbox" {{ isset($data['men']) ? 'checked' : '' }} name="men"
-                                            value="men" id="men">
+                                        <input type="checkbox"
+                                            {{ isset($data['men']) && !isset($data['all']) ? 'checked' : '' }}
+                                            name="men" value="men" id="men">
                                     </li>
                                     <li>
                                         <label for="women">women
@@ -88,8 +90,9 @@ $data['all']='all';
                                             <span>({{ $numberOfProducts['womenProduct'] }})</span>
                                         </label>
                                         {{-- <input type="checkbox"  {{ $key[0]=='w'? 'checked' :''  }}  name="women" value="women" id="women"> --}}
-                                        <input type="checkbox" {{ isset($data['women']) ? 'checked' : '' }} name="women"
-                                            value="women" id="women">
+                                        <input type="checkbox"
+                                            {{ isset($data['women']) && !isset($data['all']) ? 'checked' : '' }}
+                                            name="women" value="women" id="women">
                                     </li>
                                     <li>
                                         <label for="kids">Kids
@@ -97,8 +100,9 @@ $data['all']='all';
                                             <span>({{ $numberOfProducts['kidsProduct'] }})</span>
                                         </label>
                                         {{-- <input type="checkbox" {{ $key[0]=='k'? 'checked' :''  }}   name="kids" value="kids" id="kids"> --}}
-                                        <input type="checkbox" {{ isset($data['kids']) ? 'checked' : '' }} name="kids"
-                                            value="kids" id="kids">
+                                        <input type="checkbox"
+                                            {{ isset($data['kids']) && !isset($data['all']) ? 'checked' : '' }}
+                                            name="kids" value="kids" id="kids">
                                     </li>
 
                                 </ul>
@@ -108,7 +112,6 @@ $data['all']='all';
                             <div class="l_w_title">
                                 <h3>Price Filter</h3>
                             </div>
-                            {{-- @dd(isset($data['from'])) --}}
                             {{-- <input type="number"  style="background-color: rgba(0, 0, 0, 0.15);width: 300px" class=" form-control" name="from" id="amount"  /> --}}
                             {{-- <div class=" d-flex justify-content-center">
                                     <span>from</span>
@@ -116,7 +119,6 @@ $data['all']='all';
                                     <span>to</span>
                                     <input type="number" style="background-color: rgba(0, 0, 0, 0.15);width: 70px" value="{{ isset($data['to'])? $data['to'] :'0'  }}" class="js-input-to form-control" id="amount" name="to"  />
                               </div> --}}
-                            {{-- @dd($data) --}}
                             <div class="input-container">
                                 <span>From</span>
                                 <input type="number" class="input-field form-control" wire:model="from" name="from"
@@ -127,7 +129,6 @@ $data['all']='all';
                                     value="{{ isset($data['to']) ? $data['to'] : 500 }}">
                                 {{-- <input type="number" class="input-field form-control" wire:model="to" name="to" > --}}
                             </div>
-                            {{-- @dd($data) --}}
 
                             <div class="widgets_inner">
                                 {{-- <div class="range_item">
@@ -174,7 +175,9 @@ $data['all']='all';
                                 </div> --}}
                                 <div class="single_product_menu d-flex">
                                     <div class="input-group">
-                                        <input type="text" id="search" id="searchInput"
+                                        <input type="text" id="search" id="searchInput" name="search"
+                                            value="{{ Request::get('search') }}
+                                        "
                                             wire:model.debounce.350ms="search" class="form-control" placeholder="search"
                                             aria-describedby="inputGroupPrepend">
                                         <div class="input-group-prepend">
@@ -182,6 +185,7 @@ $data['all']='all';
                                                     class="ti-search"></i></span>
                                         </div>
                                     </div>
+                                    <input class="btn btn-primary" type="submit" value="search">
                                 </div>
                             </div>
                         </div>
@@ -199,9 +203,22 @@ $data['all']='all';
                 </a>
                 <div class="single_product_text">
                     <h4>{{ $product['name'] }}</h4>
+                    <h3 style="text-decoration: line-through">{{ $product['price'] }} EGP</h3>
                     <h3>{{ $product['price_after_discount'] }} EGP</h3>
-                    <a href="{{ route('home.addToCart', $product['id']) }}" class="add_cart">+ add to cart<i
-                            class="ti-heart"></i></a>
+                    <a href="{{ route('home.addToCart', $product['id']) }}" class="add_cart">+ add to cart</a>
+                    @php
+                    $wishlist = Helper::checkIfInWhislist($product['id']);
+
+                @endphp
+                    @if ($wishlist)
+                    <a href="{{ route('wishlist.remove', $product['id']) }}"
+                        class="like_us"> <i style="color: red"
+                            class="fa-solid  fa-heart"></i> </a>
+                @else
+                    <a href="{{ route('wishlist.add', $product['id']) }}"
+                        class="like_us"> <i class="ti-heart"></i>
+                    </a>
+                @endif
                 </div>
             </div>
         </div>
