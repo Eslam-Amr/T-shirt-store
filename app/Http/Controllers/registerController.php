@@ -8,6 +8,7 @@ use App\Mail\registerMail;
 use App\Models\ToBeDesigner;
 use App\Models\User;
 use App\Notifications\registerNotification;
+use Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 // use GuzzleHttp\Psr7\Request;
@@ -28,14 +29,11 @@ class registerController extends Controller
     {
         return view('register.index');
     }
+
     function auth(registerRequest $request)
     {
-        $validated = $request->validated();
-        $user = User::create($validated);
-        // $this->toMail('test');
-        // event(new Registered($user));
-// $user->notify(new registerNotification($user));
-Auth::login($user);
+        $user = Helper::addUser($request->all());
+        Auth::login($user);
         $user->sendEmailVerificationNotification($user);
         return redirect()->to('/register')->with('message', 'login successfully check for verification message');
     }
@@ -62,14 +60,13 @@ Auth::login($user);
         if (Hash::check($request['password'], $user['password'])) {
             if (ToBeDesigner::select('id')->where('user_id', $user['id'])->first() != null)
                 return redirect()->back()->with('message', 'this user already register with for admin confirmed ');
-                ToBeDesigner::create(['user_id' => $user['id'], 'portfolio' => $request['portfolio']]);
-                return redirect()->back()->with('message', 'your request send successfully waitig to admin confirmed');
-            }
-            return redirect()->back()->with('message', 'no user with this  email and password');
+            ToBeDesigner::create(['user_id' => $user['id'], 'portfolio' => $request['portfolio']]);
+            return redirect()->back()->with('message', 'your request send successfully waitig to admin confirmed');
         }
-        public function toMail($notifiable)
-        {
-            return (new VerifyEmail)->toMail($notifiable);
-        }
-
+        return redirect()->back()->with('message', 'no user with this  email and password');
+    }
+    public function toMail($notifiable)
+    {
+        return (new VerifyEmail)->toMail($notifiable);
+    }
 }

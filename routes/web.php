@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\authController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\contactController;
@@ -54,14 +55,29 @@ Route::get('/email/verify', function () {
 // Route::get('/verify-email/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
 // Route::get('/verify-email/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
 
+
+Route::get('/forgot-password',[authController::class,'forgotPassword'])->name('forgot.password');
+Route::post('/submit-forgot-password',[authController::class,'submitForgotPassword'])->name('submit.forgot.password');
+Route::get('/reset-password/{id}',[authController::class,'resetPassword'])->name('reset.password');
+Route::post('/submit-reset-password/{id}',[authController::class,'SubmitResetPassword'])->name('submit.reset.password');
+
+
+
+
+
 Route::get('/email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::get('/home', [homeController::class, 'index'])->name('home.index');
+Route::get('/profile', [homeController::class, 'profile'])->name('home.profile');
+Route::post('/profile/update', [homeController::class, 'updateProfile'])->name('update.profile');
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
 Route::get('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 Route::get('/orderHistory', [OrderController::class, 'orderHistory'])->name('home.orderHistory');
+// Route::get('/product/{from}/{to}/{data}', [categoryController::class, 'index'])->name('category.index');
+// Route::get('/product', [categoryController::class, 'index'])->name('category.index');
 Route::get('/product', [categoryController::class, 'index'])->name('category.index');
-Route::get('/product/filter', [categoryController::class, 'filter'])->name('category.filter');
+// Route::get('/product/filter', [categoryController::class, 'filter'])->name('category.filter');
+Route::get('/product/{from}/{to}/{data}/filter', [categoryController::class, 'filter'])->name('category.filter');
 // Route::get('/product/{key}/{from}/{to}', [categoryController::class, 'index'])->name('category.index');
 // Route::get('/product/{key}/{from}/{to}/filter', [categoryController::class, 'filter'])->name('category.filter');
 Route::get('/product/search', [categoryController::class, 'search'])->name('product.search');
@@ -95,8 +111,16 @@ Route::get('/register/verified', [registerController::class, 'verified'])->name(
 Route::controller(adminController::class)->prefix('admin')->middleware('auth:admin')->group(function () {
     // Route::get('/admin/logout',[adminController::class,'logout'])->name('admin.logout');
     Route::get('/', 'index')->name('admin.index');
+    Route::get('/Contact', 'displayContact')->name('admin.displayContact');
+    Route::get('/Contact/delete/{id}', 'deleteContact')->name('admin.deleteContact');
     Route::get('/user', 'displayUser')->name('admin.displayUser');
+    Route::get('/product', 'displayProduct')->name('admin.displayProduct');
+    Route::get('/product/stockIncrement/{id}', 'stockIncrement')->name('admin.stockIncrement');
+    Route::get('/product/control/{id}', 'control')->name('admin.control');
+    Route::get('/product/control/{id}/edit', 'edit')->name('admin.edit');
+    // Route::get('/product/control/back', 'back')->name('admin.back');
     Route::get('/order', 'displayOrder')->name('admin.displayOrder');
+    Route::get('/completedOrder', 'displayCompletedOrder')->name('admin.displayCompletedOrder');
     Route::get('/order/{id}/reject', 'rejectOrder')->name('admin.rejectOrder');
     Route::get('/order/{id}/Shipping', 'ShippingOrder')->name('admin.ShippingOrder');
     Route::get('/order/{id}/complete', 'completeOrder')->name('admin.completeOrder');
@@ -123,11 +147,14 @@ Route::controller(designerController::class)->prefix('designer/admin')->middlewa
     Route::get('/','index')->name('designer.index');
     Route::get('/order', 'displayOrder')->name('designer.displayOrder');
     Route::get('/profit','displayProfit')->name('designer.displayProfit');
-    Route::get('/profit/yaer','displayYearProfit')->name('designer.displayYearProfit');
+    Route::get('/profit/year','displayYearProfit')->name('designer.displayYearProfit');
     Route::get('/profit/month','displayMonthProfit')->name('designer.displayMonthProfit');
     Route::get('/profit/day','displayDayProfit')->name('designer.displayDayProfit');
     Route::get('/message','message')->name('designer.message');
     Route::get('/message/read/{id}','readMessage')->name('designer.readMessage');
     Route::get('/addDesign','addDesign')->name('designer.addDesign');
+    Route::get('/product', 'displayProduct')->name('designer.displayProduct');
+    Route::get('/product/show/{id}', 'showProduct')->name('designer.showProduct');
+
     Route::post('/addDesign/send','sendDesignRequest')->name('designer.sendDesignRequest');
 });

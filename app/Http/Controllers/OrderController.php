@@ -9,8 +9,11 @@ use App\Models\Cart_products;
 use App\Models\Order;
 use App\Models\Order_products;
 use App\Models\Product;
+use Exception;
 use Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -45,6 +48,7 @@ class OrderController extends Controller
     }
     public function confirmOrder()
     {
+        $tratrackingCode = str::random(5);
         $addressInfo = BillingDetail::where('user_id', auth()->user()->id)->first();
         $carts = Cart_products::join('carts', 'cart_products.cart_id', '=', 'carts.id')
             ->join('products', 'cart_products.product_id', '=', 'products.id')
@@ -54,7 +58,7 @@ class OrderController extends Controller
         foreach ($carts as $cart) {
             $product = Product::where('id', $cart->product_id)->first();
             if ($product->stock >= $cart->quantity) {
-                Helper::setOrder($addressInfo, $cart);
+                Helper::setOrder($addressInfo, $cart, $tratrackingCode);
                 Helper::editProductQuantity($cart);
                 Cart::where('id', $cart->cart_id)->delete();
             }
@@ -67,15 +71,12 @@ class OrderController extends Controller
     }
     public function orderHistory()
     {
-        $orders = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
-        ->join('products', 'order_products.product_id', '=', 'products.id')
-        ->select('orders.*', 'products.*', 'order_products.order_id',  'order_products.product_id')
-        ->where('orders.user_id', '=', auth()->user()->id)
-        ->get();
-        return view('home.allOrder', ['orders' => $orders]);
+        $orders = Helper::getOrderGroupedByTrackingCode();
+        return view('home.allOrder', ['allOrders' => $orders]);
     }
-    public function thank(){
+    public function thank()
+    {
         // dd('klsmv');
         return view('home.thank');
-}
+    }
 }

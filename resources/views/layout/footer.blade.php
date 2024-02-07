@@ -94,6 +94,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!--::footer_part end::-->
 
 <!-- jquery plugins here-->
+@livewireScripts
 <script src="{{ asset('js') }}/jquery-1.12.1.min.js"></script>
 <script src="{{ asset('js') }}/lightslider.min.js"></script>
 <script src="{{ asset('js') }}/contact.js"></script>

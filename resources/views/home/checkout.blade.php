@@ -13,6 +13,60 @@
                 }, 3000))
             </script>
         @endif
+        <div class="" id="error-messages">
+            @error('firstName')
+                {{ $message }}
+                <br>
+            @enderror
+            @error('lastName')
+                {{ $message }}
+                <br>
+            @enderror
+            @error('phone')
+                {{ $message }}
+                <br>
+            @enderror
+            @error('email')
+                {{ $message }}
+                <br>
+            @enderror
+            @error('address')
+                {{ $message }}
+                <br>
+            @enderror
+            @error('governorate')
+                {{ $message }}
+                <br>
+            @enderror
+            @error('note')
+                {{ $message }}
+                <br>
+            @enderror
+
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var errorMessages = document.getElementById('error-messages');
+
+                // Check if the error messages div exists
+                if (errorMessages) {
+                    // Check if there are error messages
+                    var hasErrors = errorMessages.innerText.trim() !== "";
+
+                    // Add the alert classes if there are errors
+                    if (hasErrors) {
+                        errorMessages.classList.add('alert', 'alert-danger', 'p-2', 'mb-3');
+
+                        // Hide the error messages after 3 seconds
+                        setTimeout(function() {
+                            errorMessages.style.display = 'none';
+                        }, 3000); // 3000 milliseconds = 3 seconds
+                    }
+                }
+            });
+        </script>
+
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-8">

@@ -40,6 +40,7 @@
         <link rel="stylesheet" href="{{ asset('css') }}/price_rangs.css">
         <!-- style CSS -->
         <link rel="stylesheet" href="{{ asset('css') }}/style.css">
+        @livewireStyles
 </head>
 
 <body>

@@ -1,28 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
+// require 'ssp.class.php';
 
 use App\Models\Product;
 use Helper;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class categoryController extends Controller
 {
+    // use withPagination;
     //
+    // public $from=0;
+    // public $to=500;
     public function index(Request $request)
     {
-        // dd($request->all());
         $numberOfProduct = Helper::countProduct();
-        $product=Helper::getAllProduct($request->all());
-        // $product=Product::all();
-        // $totalNoOfProduct=Helper::getNumberOfProduct($key,$from,$to);
-        // return view('category.index', ['products' => $product, 'numberOfProducts' => $numberOfProduct, 'totalNoOfProduct' => $totalNoOfProduct, 'key' => $key, 'from' => $from, 'to' => $to]);
-        return view('category.index', ['numberOfProducts' => $numberOfProduct,'products' => $product,'data'=>$request->all()]);
+        $product = Helper::getAllProduct($request->all());
+        $data = $request->all();
+        $totalNoOfProduct = Helper::getNumberOfProduct($request->all());
+        return view('category.index', ['numberOfProducts' => $numberOfProduct, 'totalNoOfProduct' => $totalNoOfProduct, 'products' => $product, 'data' => $data]);
     }
 
-    public function filter(Request $request)
+    public function filter(Request $request, $from, $to, $category)
     {
-        // dd($key);
+        dd($request->all());
 
         $filterdData = $request->all();
         if (isset($request->all()['all'])) {

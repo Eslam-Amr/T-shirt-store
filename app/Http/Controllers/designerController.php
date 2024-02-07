@@ -7,6 +7,7 @@ use App\Models\Designer;
 use App\Models\Message;
 use App\Models\Order;
 use App\Models\Order_products;
+use App\Models\Product;
 use App\Models\User;
 use Helper;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class designerController extends Controller
 function readMessage($id){
     // dd($id); // dd($id);
     Message::find($id)->delete();
-return  redirect()->back()->with('message','message deleted successfully'); 
+return  redirect()->back()->with('message','message deleted successfully');
 }
     function imageProcessing($data, $folderName)
     {
@@ -149,7 +150,17 @@ return  redirect()->back()->with('message','message deleted successfully');
         ->paginate(12);
         // dd($orders);        $totalProfit = Order::where('status', 'completed')->sum('total');
 
-        
+
         return view('designer.displayOrder', ['orders' => $orders]);
     }
+    public function displayProduct(){
+        $product = Product::where('designer_id',auth()->user()->id)->paginate(12);
+        return view('designer.displayProduct',['products' => $product]);
+    }
+
+    public function showProduct($id){
+        $product = Product::find($id);
+        return view('designer.showProduct',['product' => $product]);
+    }
+
 }

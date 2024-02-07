@@ -21,7 +21,7 @@
             <th>phone</th>
             {{-- <th>status</th> --}}
             <th>delete</th>
-            <th>update</th>
+            {{-- <th>update</th> --}}
         </tr>
     </thead>
     <tbody>
@@ -35,7 +35,7 @@
             <th>{{ $designer->phone }}</th>
             {{-- <th>{{ $designer->status }}</th> --}}
             <th>
-               <button class="btn btn-danger "><a class="text-white" href="{{ route('admin.deleteDesigner',$designer->name) }}">Delete</a></button>
+               <a class="text-white btn btn-danger " href="{{ route('admin.deleteDesigner',$designer->name) }}">Delete</a>
 
             </th>
             <th>

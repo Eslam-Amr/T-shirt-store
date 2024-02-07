@@ -27,6 +27,7 @@ class registerRequest extends FormRequest
             'password' => 'required|min:3|max:10',
             'name' => 'required|min:3|max:15',
             'phone' => 'required|numeric|min_digits:11|max_digits:11',
+            'gender' => 'required',
         ];
     }
 }

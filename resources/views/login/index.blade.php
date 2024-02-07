@@ -110,8 +110,12 @@
                                         <label for="f-option">Remember me <span> </span></label>
                                         <input type="checkbox" @if (isset($_COOKIE['Password'])) checked @endif
                                             id="f-option" name="remember">
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="inline">
+
+                                        <a class="lost_pass" href="{{ route('forgot.password') }}">forget password?</a>
+                                    </div>
                                 <button type="submit" value="submit" class="btn_3">
                                     log in
                                 </button>
@@ -123,7 +127,6 @@
                                     <button type="submit" value="submit" class="btn_3">
                                         log in
                                     </button>
-                                    <a class="lost_pass" href="#">forget password?</a>
                                 </div> --}}
                             </form>
                         </div>

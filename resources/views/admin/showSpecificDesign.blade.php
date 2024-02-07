@@ -12,10 +12,10 @@
     </script>
 @endif
 <div>
-    <a href="{{ route('admin.displayDesignsRequest') }}"><button>back</button></a>
+    <a href="{{ route('admin.displayDesignsRequest') }}" class="btn btn-warning">back</a>
 </div>
-<h2 class="text-center py-5">Design</h2>
-<div class=" alert-danger text-center my-5">
+<h2 class="text-center py-1">Design</h2>
+<div class=" alert-danger text-center my-2">
 
     @error('designName')
     {{ $message }}
@@ -55,18 +55,16 @@
             <input type="submit" class="btn btn-primary" value="send">
         </div>
     </form> --}}
-    {{-- @dd(asset('uplode')) --}}
-    {{-- @dd($design) --}}
-    {{-- @dd($description) --}}
-    <img  style="border: 50px white solid; width: 700px; transform: translate(-25%)" src="{{asset('uplode')}}/RequestDesign/{{ $design['design'] }}" alt="">
-    <p>{{ $description }}</p>
+
+    <img  style="border: 50px white solid; width: 500px; transform: translate(-25%)" src="{{asset('uplode')}}/RequestDesign/{{ $design['design'] }}" alt="">
+    <p> description : {{ $description }}</p>
     <div >
         <form action="{{route('admin.addSpecificDesign',$design->id)}}">
 <input type="number" name="stock" id="stock" placeholder="stock">
-<input type="submit" value="Add">
+<input type="submit" value="Add" class="btn btn-success">
         </form>
         {{-- <a href="{{route('admin.addSpecificDesign',$design->id)}}"><button>Add</button></a> --}}
-        <a href="{{ route('admin.rejectSpecificDesign',$design->id) }}"><button>reject</button></a>
+        <a href="{{ route('admin.rejectSpecificDesign',$design->id) }}" class="btn btn-danger">reject</a>
     </div>
     {{-- @dd($design['design']) --}}
 </div>

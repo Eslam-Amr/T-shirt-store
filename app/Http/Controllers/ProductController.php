@@ -19,10 +19,11 @@ class ProductController extends Controller
         $wishlist = Helper::checkIfInWhislist($id);
         $starReviews = Helper::getStarsReview($id);
         $product = Product::where('id', $id)->first();
+        $category=Helper::getCategoryName($product['category_id']);
         $reviews = Review::where('product_id', $id)->get();
         $comments = Comment::where('product_id', $id)->get();
         // dd($wishlist);
-        return view('home.productDetails', ['product' => $product,'wishlist' => $wishlist, 'starReviews' => $starReviews, 'reviews' => $reviews, 'comments' => $comments]);
+        return view('home.productDetails', ['product' => $product,'category' => $category,'wishlist' => $wishlist, 'starReviews' => $starReviews, 'reviews' => $reviews, 'comments' => $comments]);
     }
 
     public function addComment(commentRequest $request, $id)

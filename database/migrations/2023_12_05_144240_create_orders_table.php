@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string("month");
             $table->string("year");
             $table->string("quantity");
+            $table->string('tracking_code');
 
 
 

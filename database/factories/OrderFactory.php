@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
@@ -25,6 +26,7 @@ class OrderFactory extends Factory
             'month'=>now()->format('F'),
             'year'=>now()->format('Y'),
             'quantity'=>fake()->numberBetween(1,10),
+            'tracking_code'=>Str::random(5),
 
             'total'=>fake()->numberBetween(100,10000),
             'status'=>'pending',

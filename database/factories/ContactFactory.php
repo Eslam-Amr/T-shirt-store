@@ -20,8 +20,8 @@ class ContactFactory extends Factory
             //
             'name'=>fake()->name(),
             'email'=>fake()->email(),
-            'phone'=>fake()->phoneNumber(),
-            'subject'=>fake()->paragraph(1),
+            // 'phone'=>fake()->phoneNumber(),
+            // 'subject'=>fake()->paragraph(1),
             'message'=>fake()->paragraph(2),
         ];
     }

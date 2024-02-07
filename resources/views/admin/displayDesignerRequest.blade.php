@@ -20,7 +20,7 @@
             <th>email</th>
             <th>phone</th>
             <th>delete</th>
-            <th>update</th>
+            <th>confirme</th>
         </tr>
     </thead>
     <tbody>
@@ -33,11 +33,11 @@
             <th>{{ $user['email'] }}</th>
             <th>{{ $user['phone'] }}</th>
             <th>
-               <button class="btn btn-danger "><a class="text-white" href="{{ route('admin.deleteUser',$user['id']) }}">Delete</a></button>
+               <a class="text-white btn btn-danger " href="{{ route('admin.deleteUser',$user['id']) }}">Delete</a>
 
             </th>
             <th>
-                <button class="btn btn-warning "><a class="text-white" href="{{ route('admin.designerConfirmed',$user['id']) }}"> confirme</a></button>
+                <a class="text-white btn btn-warning " href="{{ route('admin.designerConfirmed',$user['id']) }}"> confirme</a>
             </th>
         </tr>
 

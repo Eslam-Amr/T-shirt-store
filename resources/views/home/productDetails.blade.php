@@ -1,16 +1,27 @@
 @include('layout.header')
 @include('layout.navbar')
-@include('layout.breadcrumb', ['name' => 'Shop Single'])
+{{-- @include('layout.breadcrumb', ['name' => 'Shop Single']) --}}
 
-<div class="product_image_area section_padding">
+<div class="product_image_area section_padding mt-5">
     <div class="container">
         <div class="row s_product_inner justify-content-between">
             <div class="col-lg-7 col-xl-7">
                 <div class="product_slider_img">
                     @if (session()->has('message'))
-                        <div class="alert alert-danger" id="alert">
+                        <div class="alert alert-success" id="alert">
 
                             {{ session()->get('message') }}
+                        </div>
+                        <script type="text/javascript">
+                            document.ready(setTimeout(function() {
+                                document.getElementById('alert').remove()
+                            }, 3000))
+                        </script>
+                    @endif
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger" id="alert">
+
+                            {{ session()->get('error') }}
                         </div>
                         <script type="text/javascript">
                             document.ready(setTimeout(function() {
@@ -50,10 +61,10 @@
                     <ul class="list">
                         <li>
                             <a class="active" href="#">
-                                <span>Category</span> : {{ $product['category'] }}</a>
+                                <span>Category</span> : {{ $category }}</a>
                         </li>
                         <li>
-                            <a href="#"> <span>Availibility</span> : {{ $product['status'] }}</a>
+                            <a href="#"> <span>number of stock</span> : {{ $product['stock'] }}</a>
                         </li>
                     </ul>
                     <form action="{{ route('home.addToCart', $product['id']) }}">

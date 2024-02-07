@@ -33,14 +33,13 @@
     <div class="container pt-2">
         <div class="col-12">
             <div class="row">
-                {{-- @dd(auth('designer')->user()) --}}
 
                 {{-- {{ auth()->user() }} --}}
                 <div class="col-6 mt-5">
                     <div class="col-8 text-center p-5 bg-dark">
 
                     <h2>add design</h2>
-                    <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('designer.addDesign') }}"> Control </a></button>
+                    <a class="text-white btn btn-secondary mt-3" href="{{ route('designer.addDesign') }}"> Control </a>
                     </div>
                 </div>
                 <div class="col-6 mt-5">
@@ -49,28 +48,35 @@
                             <h2 class="message-icon">Message</h2>
                             <div class="message-badge">{{ $numberOfMessage }}</div>
                         </div>
-                    <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('designer.message') }}"> Control </a></button>
+                    <a class="text-white btn btn-secondary mt-3" href="{{ route('designer.message') }}"> Control </a>
                     </div>
                 </div>
                 <div class="col-6 mt-5 ">
                     <div class="col-8 text-center p-5 bg-dark">
 
                         <h2>order</h2>
-                        <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('designer.displayOrder') }}"> Control </a></button>
+                        <a class="text-white btn btn-secondary mt-3" href="{{ route('designer.displayOrder') }}"> Control </a>
                     </div>
             </div>
             <div class="col-6 mt-5 ">
                 <div class="col-8 text-center p-5 bg-dark">
 
                     <h2>profit</h2>
-                    <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('designer.displayProfit') }}"> Control </a></button>
+                    <a class="text-white btn btn-secondary mt-3" href="{{ route('designer.displayProfit') }}"> Control </a>
+                </div>
+        </div>
+            <div class="col-6 mt-5 ">
+                <div class="col-8 text-center p-5 bg-dark">
+
+                    <h2>product</h2>
+                    <a class="text-white btn btn-secondary mt-3" href="{{ route('designer.displayProduct') }}"> Control </a>
                 </div>
         </div>
                 {{-- <div class="col-6 mt-5">
                     <div class="col-8 text-center p-5 bg-dark">
 
                     <h2>order</h2>
-                    <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.diplayOrder') }}"> Control </a></button>
+                    <button class="btn btn-secondary mt-3"><a class="text-white btn btn-secondary mt-3" href="{{ route('admin.diplayOrder') }}"> Control </a></button>
                     </div>
                 </div>
                 --}}
@@ -78,35 +84,35 @@
                     <div class="col-8 text-center p-5 bg-dark">
 
                     <h2>add banner</h2>
-                    <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.addBanner') }}"> Control </a></button>
+                    <button class="btn btn-secondary mt-3"><a class="text-white btn btn-secondary mt-3" href="{{ route('admin.addBanner') }}"> Control </a></button>
                     </div>
                 </div>
                 <div class="col-6 mt-5">
                     <div class="col-8 text-center p-5 bg-dark">
 
                     <h2>add slider</h2>
-                    <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.addSlider') }}"> Control </a></button>
+                    <button class="btn btn-secondary mt-3"><a class="text-white btn btn-secondary mt-3" href="{{ route('admin.addSlider') }}"> Control </a></button>
                     </div>
                 </div>
                 <div class="col-6 mt-5 ">
                         <div class="col-8 text-center p-5 bg-dark">
 
                             <h2>branch</h2>
-                            <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.Branch') }}"> Control </a></button>
+                            <button class="btn btn-secondary mt-3"><a class="text-white btn btn-secondary mt-3" href="{{ route('admin.Branch') }}"> Control </a></button>
                         </div>
                 </div> --}}
                 {{-- <div class="col-6 mt-5 ">
                         <div class="col-8 text-center p-5 bg-dark">
 
                             <h2>user</h2>
-                            <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.displayUser') }}"> Control </a></button>
+                            <button class="btn btn-secondary mt-3"><a class="text-white btn btn-secondary mt-3" href="{{ route('admin.displayUser') }}"> Control </a></button>
                         </div>
                 </div>
                 <div class="col-6 mt-5 ">
                         <div class="col-8 text-center p-5 bg-dark">
 
                             <h2>designer</h2>
-                            <button class="btn btn-secondary mt-3"><a class="text-white" href="{{ route('admin.displayDesigner') }}"> Control </a></button>
+                            <button class="btn btn-secondary mt-3"><a class="text-white btn btn-secondary mt-3" href="{{ route('admin.displayDesigner') }}"> Control </a></button>
                         </div>
                 </div> --}}
 

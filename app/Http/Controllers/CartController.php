@@ -54,7 +54,7 @@ class CartController extends Controller
                 return redirect()->back()->with('message', 'added sucess ');
             }
         } else {
-            return redirect()->back()->with('message', 'no stock found ');
+            return redirect()->back()->with('error', 'no stock found ');
         }
     }
     public function cart()

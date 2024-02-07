@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('discount');
             $table->string('price_after_discount');
             $table->string('status');
+            $table->string('numberOfSold')->default(0);
             $table->string('name');
             $table->string('description');
             $table->string('desinger');

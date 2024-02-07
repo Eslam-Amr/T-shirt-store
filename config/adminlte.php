@@ -399,6 +399,26 @@ return [
                     'can'  => 'viewAdminPanel',
 
                 ],
+                [
+                    'text' => 'contact',
+                    'url'  => 'admin/Contact',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can'  => 'viewAdminPanel',
+                ],
+                [
+                    'text' => 'products',
+                    'url'  => 'admin/product',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can'  => 'viewAdminPanel',
+
+                ],
+                [
+                    'text' => 'completed order',
+                    'url'  => 'admin/completedOrder',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can'  => 'viewAdminPanel',
+
+                ],
                 // // }
                 [
                     'text' => 'designer',
@@ -407,6 +427,7 @@ return [
                     'can'  => 'viewAdminPanel',
                     // 'can'  => 'viewDesignerPanel',
                 ],
+
                 [
                     'text' => 'designer request(portfolio)',
                     'url'  => 'admin/designer/request',
@@ -448,6 +469,13 @@ return [
                     'icon' => 'fas fa-fw fa-circle',
                     // 'can'  => 'viewAdminPanel',
                     'can'  => 'viewDesignerPanel',
+                ],
+                [
+                    'text' => 'product',
+                    'url'  => 'designer/admin/product',
+                    'icon' => 'fas fa-fw fa-circle',
+                    'can'  => 'viewDesignerPanel',
+                    // 'can'  => 'viewDesignerPanel',
                 ],
                 [
                     'text' => 'order',

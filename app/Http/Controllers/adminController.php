@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddProductRequest;
+use App\Http\Requests\EditProductRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Order;
 use Illuminate\Support\Str;
@@ -10,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Http\Requests\userDataUpdateRequest;
 use App\Models\Admin;
 use App\Models\admin_design_request;
+use App\Models\Contact;
 use App\Models\Designer;
 use App\Models\Message;
 use App\Models\Order_products;
@@ -31,7 +33,7 @@ class adminController extends Controller
     function displayUser()
     {
         $users = User::where('role', 'user')->paginate(
-            $perPage = 5,
+            $perPage = 12,
             $columns = ['*'],
             $pageName = 'users'
         );
@@ -129,9 +131,21 @@ class adminController extends Controller
         $orders = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
             ->join('products', 'order_products.product_id', '=', 'products.id')
             ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.product_id', 'orders.status as orderStatus')
+            ->where('orders.status', '!=', 'completed')
             ->paginate(12);
         return view('admin.displayOrder', ['orders' => $orders]);
     }
+
+    public function displayCompletedOrder()
+    {
+        $orders = Order_products::join('orders', 'order_products.order_id', '=', 'orders.id')
+            ->join('products', 'order_products.product_id', '=', 'products.id')
+            ->select('orders.*', 'products.*', 'order_products.order_id', 'order_products.product_id', 'orders.status as orderStatus')
+            ->where('orders.status', '=', 'completed')
+            ->paginate(12);
+        return view('admin.displayCompletedOrder', ['orders' => $orders]);
+    }
+
     public function displayProfit()
     {
         $totalProfit = Order::where('status', 'completed')->sum('total');
@@ -209,5 +223,54 @@ class adminController extends Controller
     {
         Helper::editOrderStatus($id, 'completed');
         return redirect()->back()->with('message', 'status edited successfully');
+    }
+    public function displayProduct(){
+        $product= Product::join('users', 'users.id', '=', 'products.designer_id')
+        ->select('products.*', 'users.name as designer_name')
+        ->paginate(12);
+        // dd($product);
+        return view('admin.displayProduct',['products'=>$product]);
+    }
+    public function control($id){
+        $product=Product::find($id);
+// dd($product);
+return view('admin.controlProduct',['product'=>$product]);
+    }
+    public function stockIncrement($id){
+        $product=Product::find($id);
+// dd($product);
+$product->stock++;
+$product->save();
+
+return redirect()->back()->with('message', 'stock increment successfully');
+    }
+
+    public function edit($id,EditProductRequest $request){
+        // dd($id,$request);
+        $product = Product::find($id);
+        // dd($product);
+        if($product->stock>$request->stock)
+        return redirect()->back()->with('message','we can\'t decrement stock');
+        if($request->discount>100 || $request->discount<0)
+        return redirect()->back()->with('message','discount can\'t be this value');
+        if($request->price<1)
+        return redirect()->back()->with('message','price can\'t be this value');
+    $product->stock = $request->stock;
+    $product->price = $request->price;
+    $product->discount = $request->discount;
+    $product->price_after_discount = $request->price *(1-($request->discount)/100);
+    $product->save();
+    // dd($product);
+    return redirect()->back()->with('message','data updated successfully');
+
+    }
+    public function displayContact(){
+        $contactData=Contact::paginate(12);
+        return view('admin.displayContact',['contactData'=>$contactData]);
+    }
+    public function deleteContact($id){
+        $contactData=Contact::find($id);
+        $contactData->delete();
+return redirect()->back()->with('message','contact deleted successfully');
     }
 }
